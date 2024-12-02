@@ -26,6 +26,7 @@ affiliations:
    index: 1
 date: 1 June 2024
 bibliography: paper.bib
+
 ---
 # Summary
 Large Language Models (LLMs) have been observed to exhibit bias in numerous ways, potentially creating or worsening outcomes for specific groups identified by protected attributes such as sex, race, sexual orientation, or age. The versatile capabilities of contemporary LLMs in executing a range of tasks, as highlighted in recent studies [@minaee2024large; @chatgpt_survey; @generalsurvey], pose significant challenges in assessing bias and fairness at the model level.
