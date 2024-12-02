@@ -685,39 +685,33 @@ series = {ICDM '12}
 
 
 
-@article{intrinsic_do_not,
-  author       = {Seraphina Goldfarb{-}Tarrant and
-                  Rebecca Marchant and
-                  Ricardo Mu{\~{n}}oz S{\'{a}}nchez and
-                  Mugdha Pandya and
-                  Adam Lopez},
-  title        = {Intrinsic Bias Metrics Do Not Correlate with Application Bias},
-  journal      = {CoRR},
-  volume       = {abs/2012.15859},
-  year         = {2020},
-  url          = {https://arxiv.org/abs/2012.15859},
-  eprinttype    = {arXiv},
-  eprint       = {2012.15859},
-  timestamp    = {Thu, 14 Oct 2021 09:15:29 +0200},
-  biburl       = {https://dblp.org/rec/journals/corr/abs-2012-15859.bib},
-  bibsource    = {dblp computer science bibliography, https://dblp.org}
+@misc{goldfarbtarrant2021intrinsicbiasmetricscorrelate,
+      title={Intrinsic Bias Metrics Do Not Correlate with Application Bias}, 
+      author={Seraphina Goldfarb-Tarrant and Rebecca Marchant and Ricardo Muñoz Sanchez and Mugdha Pandya and Adam Lopez},
+      year={2021},
+      eprint={2012.15859},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2012.15859}, 
 }
 
 
-@article{biased_rulers,
-  author       = {Pieter Delobelle and
-                  Ewoenam Kwaku Tokpo and
-                  Toon Calders and
-                  Bettina Berendt},
-  title        = {Measuring Fairness with Biased Rulers: {A} Survey on Quantifying Biases
-                  in Pretrained Language Models},
-  journal      = {CoRR},
-  volume       = {abs/2112.07447},
-  year         = {2021},
-  url          = {https://arxiv.org/abs/2112.07447},
-  eprinttype    = {arXiv},
-  eprint       = {2112.07447},
-  timestamp    = {Mon, 03 Jan 2022 15:45:35 +0100},
-  biburl       = {https://dblp.org/rec/journals/corr/abs-2112-07447.bib},
-  bibsource    = {dblp computer science bibliography, https://dblp.org}
+@inproceedings{delobelle-etal-2022-measuring,
+    title = "Measuring Fairness with Biased Rulers: A Comparative Study on Bias Metrics for Pre-trained Language Models",
+    author = "Delobelle, Pieter  and
+      Tokpo, Ewoenam  and
+      Calders, Toon  and
+      Berendt, Bettina",
+    editor = "Carpuat, Marine  and
+      de Marneffe, Marie-Catherine  and
+      Meza Ruiz, Ivan Vladimir",
+    booktitle = "Proceedings of the 2022 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies",
+    month = jul,
+    year = "2022",
+    address = "Seattle, United States",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2022.naacl-main.122",
+    doi = "10.18653/v1/2022.naacl-main.122",
+    pages = "1693--1706",
+    abstract = "An increasing awareness of biased patterns in natural language processing resources such as BERT has motivated many metrics to quantify {`}bias{'} and {`}fairness{'} in these resources. However, comparing the results of different metrics and the works that evaluate with such metrics remains difficult, if not outright impossible. We survey the literature on fairness metrics for pre-trained language models and experimentally evaluate compatibility, including both biases in language models and in their downstream tasks. We do this by combining traditional literature survey, correlation analysis and empirical evaluations. We find that many metrics are not compatible with each other and highly depend on (i) templates, (ii) attribute and target seeds and (iii) the choice of embeddings. We also see no tangible evidence of intrinsic bias relating to extrinsic bias. These results indicate that fairness or bias evaluation remains challenging for contextualized language models, among other reasons because these choices remain subjective. To improve future comparisons and fairness evaluations, we recommend to avoid embedding-based metrics and focus on fairness evaluations in downstream tasks.",
 }
