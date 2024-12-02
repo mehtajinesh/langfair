@@ -1,5 +1,6 @@
 ---
-title: 'LangFair: A Python Package for Assessing Bias and Fairness in Large Language Model Use Cases'
+title: >-
+    LangFair: A Python Package for Assessing Bias and Fairness in Large Language Model Use Cases
 tags:
   - Python
   - Large Language Model
@@ -8,24 +9,22 @@ tags:
 authors:
   - name: Dylan Bouchard
     orcid: 0009-0004-9233-2324
-    affiliation: 1
+    affiliation: [1]
   - name: Mohit Singh Chauhan
     orcid: 0000-0002-7817-0427
-    affiliation: 1  
+    affiliation: [1]
   - name: David Skarbrevik
     orcid: 0009-0005-0005-0408
-    affiliation: 1
+    affiliation: [1]
   - name: Viren Bajaj
     orcid: 0000-0002-9984-1293
-    affiliation: 1
+    affiliation: [1]
   - name: Zeya Ahmad
     orcid: 0009-0009-1478-2940
-    affiliation: 1
-    
+    affiliation: [1]
 affiliations:
- - name: CVS Health Corporation
-   index: 1
-
+ - index: 1
+   name: CVS Health Corporation
 date: 1 June 2024
 bibliography: paper.bib
 ---
