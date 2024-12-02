@@ -187,7 +187,7 @@ This paper details the accompanying Python library, \texttt{langfair}, which ena
 
 
 \section{Statement of Need}
-Traditional machine learning (ML) fairness toolkits like AIF360 \cite{aif360-oct-2018}, Fairlearn \cite{Weerts_Fairlearn_Assessing_and_2023}, Aequitas \cite{2018aequitas} and others \cite{lift,DBLP:journals/corr/abs-1907-04135,tensorflow-no-date,Biecek-2018-DALEX-Explainers-for-Complex-Predictive-Models-in-R} have laid crucial groundwork but are not tailored to the generative and context-dependent nature of LLMs.
+Traditional machine learning (ML) fairness toolkits like AIF360 \cite{aif360-oct-2018}, Fairlearn \cite{Weerts_Fairlearn_Assessing_and_2023}, Aequitas \cite{2018aequitas} and others \cite{lift,DBLP:journals/corr/abs-1907-04135,tensorflow-no-date} have laid crucial groundwork but are not tailored to the generative and context-dependent nature of LLMs.
 
 LLMs are used in systems that solve tasks such as recommendation, classification, text generation, and summarization. In practice, these systems try to restrict the responses of the LLM to the task at hand, often by including task-specific instructions in system or user prompts. When the LLM is evaluated without taking the set of task-specific prompts into account, the evaluation metrics are not representative of the system's true performance. Representing the system's actual performance is especially important when evaluating its outputs for bias and fairness risks because they pose real harm to the user and, by way of repercussions, the system developer.
 
