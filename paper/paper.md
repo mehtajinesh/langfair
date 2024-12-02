@@ -110,7 +110,7 @@ results = await auto_object.evaluate()
 ```
 
 Under the hood, the `AutoEval.evaluate` method 1) checks for FTU, 2) generates responses and counterfactual responses (if FTU is not satisfied), and 3) calculates applicable metrics for the use case.\footnote{The `AutoEval` class is designed specifically for text generation use cases. Applicable metrics include toxicity metrics, stereotype metrics, and, if FTU is not satisfied, counterfactual fairness metrics.} This process flow is depicted in Figure 1.
-![AutoEval_flowchart](https://github.com/user-attachments/assets/30d68425-770b-4be2-9a41-63195c659d9f)
+![AutoEval_flowchart](AutoEval_flowchart_colored.png)
 
 
 
