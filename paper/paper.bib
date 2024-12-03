@@ -1,6 +1,5 @@
- % Winogender 
- % https://github.com/rudinger/winogender-schemas
-
+% Winogender 
+% https://github.com/rudinger/winogender-schemas
 @InProceedings{rudinger-EtAl:2018:N18,
   author    = {Rudinger, Rachel  and  Naradowsky, Jason  and  Leonard, Brian  and  {Van Durme}, Benjamin},
   title     = {Gender Bias in Coreference Resolution},
@@ -11,6 +10,7 @@
   publisher = {Association for Computational Linguistics}
 }
 
+
 %WinoBias
 @misc{zhao-2018,
 	author = {Zhao, Jieyu and Wang, Tianlu and Yatskar, Mark and Ordonez, Vicente and Chang, Kai-Wei},
@@ -20,28 +20,31 @@
 	url = {https://arxiv.org/abs/1804.06876},
 }
 
-%WinoBias+
-@misc{vnmssnhv-no-date,
-	author = {Vnmssnhv},
-	title = {{GitHub - vnmssnhv/NeuTralRewriter: Neutral rewriter}},
-	url = {https://github.com/vnmssnhv/NeuTralRewriter},
-}
-
 
 %GAP
-%https://github.com/google-research-datasets/gap-coreference
-
-@inproceedings{webster2018gap,
-  title =     {Mind the GAP: A Balanced Corpus of Gendered Ambiguou},
-  author =    {Webster, Kellie and Recasens, Marta and Axelrod, Vera and Baldridge, Jason},
-  booktitle = {Transactions of the ACL},
-  year =      {2018},
-  pages =     {to appear},
+@article{webster-etal-2018-mind,
+    title = "Mind the {GAP}: A Balanced Corpus of Gendered Ambiguous Pronouns",
+    author = "Webster, Kellie  and
+      Recasens, Marta  and
+      Axelrod, Vera  and
+      Baldridge, Jason",
+    editor = "Lee, Lillian  and
+      Johnson, Mark  and
+      Toutanova, Kristina  and
+      Roark, Brian",
+    journal = "Transactions of the Association for Computational Linguistics",
+    volume = "6",
+    year = "2018",
+    address = "Cambridge, MA",
+    publisher = "MIT Press",
+    url = "https://aclanthology.org/Q18-1042",
+    doi = "10.1162/tacl_a_00240",
+    pages = "605--617",
+    abstract = "Coreference resolution is an important task for natural language understanding, and the resolution of ambiguous pronouns a longstanding challenge. Nonetheless, existing corpora do not capture ambiguous pronouns in sufficient volume or diversity to accurately indicate the practical utility of models. Furthermore, we find gender bias in existing corpora and systems favoring masculine entities. To address this, we present and release GAP, a gender-balanced labeled corpus of 8,908 ambiguous pronoun{--}name pairs sampled to provide diverse coverage of challenges posed by real-world text. We explore a range of baselines that demonstrate the complexity of the challenge, the best achieving just 66.9{\%} F1. We show that syntactic structure and continuous neural models provide promising, complementary cues for approaching the challenge.",
 }
 
-%BUG
-%https://github.com/SLAB-NLP/BUG
 
+%BUG
 @misc{levy2021collecting,
       title={Collecting a Large-Scale Gender Bias Dataset for Coreference Resolution and Machine Translation}, 
       author={Shahar Levy and Koren Lazar and Gabriel Stanovsky},
@@ -53,8 +56,6 @@
 
 
 %StereoSet
-%https://github.com/moinnadeem/stereoset, https://github.com/McGill-NLP/bias-bench
-
 @misc{nadeem2020stereoset,
     title={StereoSet: Measuring stereotypical bias in pretrained language models},
     author={Moin Nadeem and Anna Bethke and Siva Reddy},
@@ -66,8 +67,6 @@
 
 
 %BEC-PRO
-%https://github.com/marionbartl/gender-bias-BERT
-
 @inproceedings{bartl2020unmasking,
   title={Unmasking Contextual Stereotypes: Measuring and Mitigating BERT's Gender Bias},
   author={Bartl, Marion and Nissim, Malvina and Gatt, Albert},
@@ -75,6 +74,7 @@
   booktitle={Proceedings of the Second Workshop on Gender Bias in Natural Language Processing},
   year={2020}
 }
+
 
 %Crows-Pairs
 @inproceedings{nangia2020crows,
@@ -89,46 +89,58 @@
     address = "Online",
     publisher = "Association for Computational Linguistics"
 }
+
+
 %WinoQueer
-@misc{katyfelkner-no-date,
-	author = {Katyfelkner},
-	title = {{GitHub - katyfelkner/winoqueer}},
-	url = {https://github.com/katyfelkner/winoqueer},
-}
-%RedditBias
-@misc{umanlp-no-date,
-	author = {Umanlp},
-	title = {{GitHub - umanlp/RedditBias: Code \& Data for the paper "RedditBias: A Real-World Resource for Bias Evaluation and Debiasing of Conversational Language Models"}},
-	url = {https://github.com/umanlp/RedditBias},
+@misc{felkner2024winoqueercommunityintheloopbenchmarkantilgbtq,
+      title={WinoQueer: A Community-in-the-Loop Benchmark for Anti-LGBTQ+ Bias in Large Language Models}, 
+      author={Virginia K. Felkner and Ho-Chun Herbert Chang and Eugene Jang and Jonathan May},
+      year={2024},
+      eprint={2306.15087},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2306.15087}, 
 }
 
+
+%RedditBias
+@misc{barikeri2021redditbiasrealworldresourcebias,
+      title={RedditBias: A Real-World Resource for Bias Evaluation and Debiasing of Conversational Language Models}, 
+      author={Soumya Barikeri and Anne Lauscher and Ivan Vulić and Goran Glavaš},
+      year={2021},
+      eprint={2106.03521},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2106.03521}, 
+}
+
+
 %PANDA
-@article{smith2022imsorry,
-  doi = {10.48550/ARXIV.2205.09209},
-  url = {https://arxiv.org/abs/2205.09209},
-  author = {Smith, Eric Michael and Hall, Melissa and Kambadur, Melanie and Presani, Eleonora and Williams, Adina},
-  keywords = {Computation and Language (cs.CL), Computers and Society (cs.CY), FOS: Computer and information sciences, FOS: Computer and information sciences},
-  title = {"I'm sorry to hear that": Finding New Biases in Language Models with a Holistic Descriptor Dataset},
-  publisher = {arXiv},
-  year = {2022},
-  copyright = {Creative Commons Attribution Share Alike 4.0 International}
+@misc{qian2022perturbationaugmentationfairernlp,
+      title={Perturbation Augmentation for Fairer NLP}, 
+      author={Rebecca Qian and Candace Ross and Jude Fernandes and Eric Smith and Douwe Kiela and Adina Williams},
+      year={2022},
+      eprint={2205.12586},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2205.12586}, 
 }
 
 
 %EquityEvaluationCorpus
-@misc{unknown-author-no-date,
-	title = {{Saif | Bias EEC}},
-	url = {http://saifmohammad.com/WebPages/Biases-SA.html},
+@misc{kiritchenko2018examininggenderracebias,
+      title={Examining Gender and Race Bias in Two Hundred Sentiment Analysis Systems}, 
+      author={Svetlana Kiritchenko and Saif M. Mohammad},
+      year={2018},
+      eprint={1805.04508},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/1805.04508}, 
 }
 
 
-%Bias NLI
-%https://github.com/sunipa/On-Measuring-and-Mitigating-Biased-Inferences-of-Word-Embeddings
-
-@misc{dev2019measuring, title={On Measuring and Mitigating Biased Inferences of Word Embeddings}, author={Sunipa Dev and Tao Li and Jeff Phillips and Vivek Srikumar}, year={2019}, eprint={1908.09369}, archivePrefix={arXiv}, primaryClass={cs.CL} }
-
-RealToxicityPrompts
-https://toxicdegeneration.allenai.org
+%RealToxicityPrompts
+%https://toxicdegeneration.allenai.org
 @inproceedings{Gehman2020RealToxicityPromptsEN,
   title={RealToxicityPrompts: Evaluating Neural Toxic Degeneration in Language Models},
   author={Samuel Gehman and Suchin Gururangan and Maarten Sap and Yejin Choi and Noah A. Smith},
@@ -137,9 +149,9 @@ https://toxicdegeneration.allenai.org
   url={https://api.semanticscholar.org/CorpusID:221878771}
 }
 
+
 %BOLD
 %https://github.com/amazon-science/bold
-
 @inproceedings{bold_2021,
 author = {Dhamala, Jwala and Sun, Tony and Kumar, Varun and Krishna, Satyapriya and Pruksachatkun, Yada and Chang, Kai-Wei and Gupta, Rahul},
 title = {BOLD: Dataset and Metrics for Measuring Biases in Open-Ended Language Generation},
@@ -157,17 +169,20 @@ location = {Virtual Event, Canada},
 series = {FAccT '21}
 }
 
+
 %TrustGPT
-@misc{howiehwong-no-date,
-	author = {HowieHwong},
-	title = {{GitHub - HowieHwong/TrustGPT: Can we Trust Large Language Models?: A benchmark for responsible large language models via toxicity, Bias, and Value-alignment evaluation}},
-	url = {https://github.com/HowieHwong/TrustGPT},
+@misc{huang2023trustgptbenchmarktrustworthyresponsible,
+      title={TrustGPT: A Benchmark for Trustworthy and Responsible Large Language Models}, 
+      author={Yue Huang and Qihui Zhang and Philip S. Y and Lichao Sun},
+      year={2023},
+      eprint={2306.11507},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2306.11507}, 
 }
 
 
 %HONEST
-%https://github.com/MilaNLProc/honest
-
 @inproceedings{nozza-etal-2021-honest,
     title = {"{HONEST}: Measuring Hurtful Sentence Completion in Language Models"},
     author = "Nozza, Debora and Bianchi, Federico  and Hovy, Dirk",
@@ -181,47 +196,76 @@ series = {FAccT '21}
     pages = "2398--2406",
 }
 
-@inproceedings{nozza-etal-2022-measuring,
-    title = {Measuring Harmful Sentence Completion in Language Models for LGBTQIA+ Individuals},
-    author = "Nozza, Debora and Bianchi, Federico and Lauscher, Anne and Hovy, Dirk",
-    booktitle = "Proceedings of the Second Workshop on Language Technology for Equality, Diversity and Inclusion",
-    publisher = "Association for Computational Linguistics",
-    year={2022}
-}
-
 
 %BBQ
-@misc{nyu-mll-no-date,
-	author = {Nyu-Mll},
-	title = {{GitHub - nyu-mll/BBQ: Repository for the Bias Benchmark for QA dataset.}},
-	url = {https://github.com/nyu-mll/BBQ},
+@inproceedings{parrish-etal-2022-bbq,
+    title = "{BBQ}: A hand-built bias benchmark for question answering",
+    author = "Parrish, Alicia  and
+      Chen, Angelica  and
+      Nangia, Nikita  and
+      Padmakumar, Vishakh  and
+      Phang, Jason  and
+      Thompson, Jana  and
+      Htut, Phu Mon  and
+      Bowman, Samuel",
+    editor = "Muresan, Smaranda  and
+      Nakov, Preslav  and
+      Villavicencio, Aline",
+    booktitle = "Findings of the Association for Computational Linguistics: ACL 2022",
+    month = may,
+    year = "2022",
+    address = "Dublin, Ireland",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2022.findings-acl.165",
+    doi = "10.18653/v1/2022.findings-acl.165",
+    pages = "2086--2105",
+    abstract = "It is well documented that NLP models learn social biases, but little work has been done on how these biases manifest in model outputs for applied tasks like question answering (QA). We introduce the Bias Benchmark for QA (BBQ), a dataset of question-sets constructed by the authors that highlight attested social biases against people belonging to protected classes along nine social dimensions relevant for U.S. English-speaking contexts. Our task evaluate model responses at two levels: (i) given an under-informative context, we test how strongly responses reflect social biases, and (ii) given an adequately informative context, we test whether the model{'}s biases override a correct answer choice. We find that models often rely on stereotypes when the context is under-informative, meaning the model{'}s outputs consistently reproduce harmful biases in this setting. Though models are more accurate when the context provides an informative answer, they still rely on stereotypes and average up to 3.4 percentage points higher accuracy when the correct answer aligns with a social bias than when it conflicts, with this difference widening to over 5 points on examples targeting gender for most models tested.",
 }
 
-
 %UnQOVER
-@inproceedings{li2020unqover,
-      author    = {Li, Tao and Khot, Tushar and Khashabi, Daniel and Sabharwal, Ashish and Srikumar, Vivek},
-      title     = {{U}n{Q}overing Stereotyping Biases via Underspecified Questions},
-      booktitle = {Findings of EMNLP},
-      year      = {2020}
-  }
+@inproceedings{li-etal-2020-unqovering,
+    title = "{UNQOVER}ing Stereotyping Biases via Underspecified Questions",
+    author = "Li, Tao  and
+      Khashabi, Daniel  and
+      Khot, Tushar  and
+      Sabharwal, Ashish  and
+      Srikumar, Vivek",
+    editor = "Cohn, Trevor  and
+      He, Yulan  and
+      Liu, Yang",
+    booktitle = "Findings of the Association for Computational Linguistics: EMNLP 2020",
+    month = nov,
+    year = "2020",
+    address = "Online",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2020.findings-emnlp.311",
+    doi = "10.18653/v1/2020.findings-emnlp.311",
+    pages = "3475--3489",
+    abstract = "While language embeddings have been shown to have stereotyping biases, how these biases affect downstream question answering (QA) models remains unexplored. We present UNQOVER, a general framework to probe and quantify biases through underspecified questions. We show that a naive use of model scores can lead to incorrect bias estimates due to two forms of reasoning errors: positional dependence and question independence. We design a formalism that isolates the aforementioned errors. As case studies, we use this metric to analyze four important classes of stereotypes: gender, nationality, ethnicity, and religion. We probe five transformer-based QA models trained on two QA datasets, along with their underlying language models. Our broad study reveals that (1) all these models, with and without fine-tuning, have notable stereotyping biases in these classes; (2) larger models often have higher bias; and (3) the effect of fine-tuning on bias varies strongly with the dataset and the model size.",
+}
 
 
 %Grep_BiasIR
-%https://github.com/KlaraKrieg/GrepBiasIR
-
-@inproceedings{krieg2022grep,
-  title={Grep-BiasIR: a dataset for investigating gender representation-bias in information retrieval results},
-  author={Krieg, Klara and Parada-Cabaleiro, Emilia and Medicus, Gertraud and Lesota, Oleg and Schedl, Markus and Rekabsaz, Navid},
-  booktitle={Proceeding of the 2023 ACM SIGIR Conference On Human Information Interaction And Retrieval (CHIIR)},
-  year={2022}
+@inproceedings{10.1145/3576840.3578295,
+author = {Krieg, Klara and Parada-Cabaleiro, Emilia and Medicus, Gertraud and Lesota, Oleg and Schedl, Markus and Rekabsaz, Navid},
+title = {Grep-BiasIR: A Dataset for Investigating Gender Representation Bias in Information Retrieval Results},
+year = {2023},
+isbn = {9798400700354},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/3576840.3578295},
+doi = {10.1145/3576840.3578295},
+abstract = {The provided contents by information retrieval (IR) systems can reflect the existing societal biases and stereotypes. Such biases in retrieval results can lead to further establishing and strengthening stereotypes in society and also in the systems. To facilitate the studies of gender bias in the retrieval results of IR systems, we introduce Gender Representation-Bias for Information Retrieval (Grep-BiasIR), a novel thoroughly-audited dataset consisting of 118 bias-sensitive neutral search queries. The set of queries covers a wide range of gender-related topics, for which a biased representation of genders in the search result can be considered as socially problematic. Each query is accompanied with one relevant and one non-relevant document, where the document is also provided in three variations of female, male, and neutral. The dataset is available at https://github.com/KlaraKrieg/GrepBiasIR.},
+booktitle = {Proceedings of the 2023 Conference on Human Information Interaction and Retrieval},
+pages = {444–448},
+numpages = {5},
+keywords = {content bias, dataset, gender bias, information retrieval, representation bias},
+location = {Austin, TX, USA},
+series = {CHIIR '23}
 }
 
 
-
-%LLM-FAIRNESS
-
-%helm
+% HELM
 @misc{liang2023holisticevaluationlanguagemodels,
       title={Holistic Evaluation of Language Models}, 
       author={Percy Liang and Rishi Bommasani and Tony Lee and Dimitris Tsipras and Dilara Soylu and Michihiro Yasunaga and Yian Zhang and Deepak Narayanan and Yuhuai Wu and Ananya Kumar and Benjamin Newman and Binhang Yuan and Bobby Yan and Ce Zhang and Christian Cosgrove and Christopher D. Manning and Christopher Ré and Diana Acosta-Navas and Drew A. Hudson and Eric Zelikman and Esin Durmus and Faisal Ladhak and Frieda Rong and Hongyu Ren and Huaxiu Yao and Jue Wang and Keshav Santhanam and Laurel Orr and Lucia Zheng and Mert Yuksekgonul and Mirac Suzgun and Nathan Kim and Neel Guha and Niladri Chatterji and Omar Khattab and Peter Henderson and Qian Huang and Ryan Chi and Sang Michael Xie and Shibani Santurkar and Surya Ganguli and Tatsunori Hashimoto and Thomas Icard and Tianyi Zhang and Vishrav Chaudhary and William Wang and Xuechen Li and Yifan Mai and Yuhui Zhang and Yuta Koreeda},
@@ -232,6 +276,7 @@ series = {FAccT '21}
       url={https://arxiv.org/abs/2211.09110}, 
 }
 
+
 % decodingtrust
 @article{wang2023decodingtrust,
   title={DecodingTrust: A Comprehensive Assessment of Trustworthiness in GPT Models},
@@ -239,6 +284,7 @@ series = {FAccT '21}
   booktitle={Thirty-seventh Conference on Neural Information Processing Systems Datasets and Benchmarks Track},
   year={2023}
 }
+
 
 %evaluate
 @misc{huggingface-no-date,
@@ -248,7 +294,7 @@ series = {FAccT '21}
 }
 
 
-%langtest
+% langtest
 @article{Arshaan_Nazir_and_Thadaka_Kalyan_Chakravarthy_and_David_Amore_Cecchini_and_Thadaka_Kalyan_Chakravarthy_and_Rakshit_Khajuria_and_Prikshit_Sharma_and_Ali_Tarik_Mirik_and_Veysel_Kocaman_and_David_Talby_LangTest_A_comprehensive_2024,
 author = {Arshaan Nazir and Thadaka Kalyan Chakravarthy and David Amore Cecchini and Thadaka Kalyan Chakravarthy and Rakshit Khajuria and Prikshit Sharma and Ali Tarik Mirik and Veysel Kocaman and David Talby},
 doi = {10.1016/j.simpa.2024.100619},
@@ -258,6 +304,7 @@ title = {{LangTest: A comprehensive evaluation library for custom LLM and NLP mo
 volume = {19},
 year = {2024}
 }
+
 
 %BIG-bench
 @article{srivastava2023beyond,
@@ -269,6 +316,8 @@ year = {2024}
   url={https://openreview.net/forum?id=uyTL5Bvosj},
   note={}
 }
+
+
 %lm-evaluation-harness
 @misc{eval-harness,
   author       = {Gao, Leo and Tow, Jonathan and Abbasi, Baber and Biderman, Stella and Black, Sid and DiPofi, Anthony and Foster, Charles and Golding, Laurence and Hsu, Jeffrey and Le Noac'h, Alain and Li, Haonan and McDonell, Kyle and Muennighoff, Niklas and Ociepa, Chris and Phang, Jason and Reynolds, Laria and Schoelkopf, Hailey and Skowron, Aviya and Sutawika, Lintang and Tang, Eric and Thite, Anish and Wang, Ben and Wang, Kevin and Zou, Andy},
@@ -281,6 +330,7 @@ year = {2024}
   url          = {https://zenodo.org/records/12608602}
 }
 
+
 %TrustLLM
 @inproceedings{huang2024trustllm,
   title={TrustLLM: Trustworthiness in Large Language Models},
@@ -289,36 +339,6 @@ year = {2024}
   year={2024},
   url={https://openreview.net/forum?id=bWUU0LwwMp}
 }
-
-%lighteval
-@misc{lighteval,
-  author = {Fourrier, Clémentine and Habib, Nathan and Wolf, Thomas and Tunstall, Lewis},
-  title = {LightEval: A lightweight framework for LLM evaluation},
-  year = {2023},
-  version = {0.3.0},
-  url = {https://github.com/huggingface/lighteval}
-}
-
-%artkit
-@misc{bcg-x-official-no-date,
-	author = {Bcg-X-Official},
-	title = {{GitHub - BCG-X-Official/artkit: Automated prompt-based testing and evaluation of Gen AI applications}},
-	url = {https://github.com/BCG-X-Official/artkit},
-}
-% deepeval
-@misc{confident-ai-no-date,
-	author = {Confident-Ai},
-	title = {{GitHub - confident-ai/deepeval: The LLM Evaluation Framework}},
-	url = {https://github.com/confident-ai/deepeval},
-}
-
-%giskard
-@misc{giskard-ai-no-date,
-	author = {Giskard-Ai},
-	title = {GitHub - Giskard-AI/giskard: Open-Source Evaluation \& Testing for ML models \& LLMs},
-	url = {https://github.com/Giskard-AI/giskard},
-}
-
 
 
 %ML Fairness 
@@ -347,11 +367,13 @@ volume = {24},
 year = {2023}
 }
 
+
 %aequitas
   @article{2018aequitas,
      title={Aequitas: A Bias and Fairness Audit Toolkit},
      author={Saleiro, Pedro and Kuester, Benedict and Stevens, Abby and Anisfeld, Ari and Hinkson, Loren and London, Jesse and Ghani, Rayid}, journal={arXiv preprint arXiv:1811.05577}, year={2018}
 }
+
 
 % What-if-tool
 @article{DBLP:journals/corr/abs-1907-04135,
@@ -373,12 +395,14 @@ year = {2023}
   bibsource    = {dblp computer science bibliography, https://dblp.org}
 }
 
+
 %fairness-indicators
 @misc{tensorflow-no-date,
 	author = {Tensorflow},
 	title = {{GitHub - tensorflow/fairness-indicators: Tensorflow's Fairness Evaluation and Visualization Toolkit}},
 	url = {https://github.com/tensorflow/fairness-indicators},
 }
+
 
 %LiFT
 @inproceedings{vasudevan20lift,
@@ -391,13 +415,6 @@ year = {2023}
     numpages     = {8}
 }
 
-@misc{lift,
-    author       = {Vasudevan, Sriram and Kenthapadi, Krishnaram},
-    title        = {The LinkedIn Fairness Toolkit ({LiFT})},
-    howpublished = {\url{https://github.com/linkedin/lift}},
-    month        = aug,
-    year         = 2020
-}
 
 
 @misc{bouchard2024actionableframeworkassessingbias,
@@ -409,45 +426,6 @@ year = {2023}
       primaryClass={cs.CL},
       url={https://arxiv.org/abs/2407.10853}, 
 }
-
-% surveys
-@misc{minaee2024large,
-      title={Large Language Models: A Survey}, 
-      author={Shervin Minaee and Tomas Mikolov and Narjes Nikzad and Meysam Chenaghlu and Richard Socher and Xavier Amatriain and Jianfeng Gao},
-      year={2024},
-      eprint={2402.06196},
-      archivePrefix={arXiv},
-      primaryClass={cs.CL}
-}
-
-@article{RAY2023121,
-title = {ChatGPT: A comprehensive review on background, applications, key challenges, bias, ethics, limitations and future scope},
-journal = {Internet of Things and Cyber-Physical Systems},
-volume = {3},
-pages = {121-154},
-year = {2023},
-issn = {2667-3452},
-doi = {https://doi.org/10.1016/j.iotcps.2023.04.003},
-url = {https://www.sciencedirect.com/science/article/pii/S266734522300024X},
-author = {Partha Pratim Ray},
-keywords = {ChatGPT, Language model, GPT-3.5, Generative AI, Conversational AI, Context understanding, Natural language processing},
-abstract = {In recent years, artificial intelligence (AI) and machine learning have been transforming the landscape of scientific research. Out of which, the chatbot technology has experienced tremendous advancements in recent years, especially with ChatGPT emerging as a notable AI language model. This comprehensive review delves into the background, applications, key challenges, and future directions of ChatGPT. We begin by exploring its origins, development, and underlying technology, before examining its wide-ranging applications across industries such as customer service, healthcare, and education. We also highlight the critical challenges that ChatGPT faces, including ethical concerns, data biases, and safety issues, while discussing potential mitigation strategies. Finally, we envision the future of ChatGPT by exploring areas of further research and development, focusing on its integration with other technologies, improved human-AI interaction, and addressing the digital divide. This review offers valuable insights for researchers, developers, and stakeholders interested in the ever-evolving landscape of AI-driven conversational agents. This study explores the various ways ChatGPT has been revolutionizing scientific research, spanning from data processing and hypothesis generation to collaboration and public outreach. Furthermore, the paper examines the potential challenges and ethical concerns surrounding the use of ChatGPT in research, while highlighting the importance of striking a balance between AI-assisted innovation and human expertise. The paper presents several ethical issues in existing computing domain and how ChatGPT can invoke challenges to such notion. This work also includes some biases and limitations of ChatGPT. It is worth to note that despite of several controversies and ethical concerns, ChatGPT has attracted remarkable attentions from academia, research, and industries in a very short span of time.}
-}
-
-
-
-@article{Liu_2023,
-   title={Summary of ChatGPT-Related research and perspective towards the future of large language models},
-   volume={1},
-   ISSN={2950-1628},
-   url={http://dx.doi.org/10.1016/j.metrad.2023.100017},
-   DOI={10.1016/j.metrad.2023.100017},
-   number={2},
-   journal={Meta-Radiology},
-   publisher={Elsevier BV},
-   author={Liu, Yiheng and Han, Tianle and Ma, Siyuan and Zhang, Jiayue and Yang, Yuanyuan and Tian, Jiaming and He, Hao and Li, Antong and He, Mengshen and Liu, Zhengliang and Wu, Zihao and Zhao, Lin and Zhu, Dajiang and Li, Xiang and Qiang, Ning and Shen, Dingang and Liu, Tianming and Ge, Bao},
-   year={2023},
-   month=sep, pages={100017} }
 
 
 %COBS
@@ -471,6 +449,7 @@ abstract = {In recent years, artificial intelligence (AI) and machine learning h
     abstract = "Many text corpora exhibit socially problematic biases, which can be propagated or amplified in the models trained on such data. For example, doctor cooccurs more frequently with male pronouns than female pronouns. In this study we (i) propose a metric to measure gender bias; (ii) measure bias in a text corpus and the text generated from a recurrent neural network language model trained on the text corpus; (iii) propose a regularization loss term for the language model that minimizes the projection of encoder-trained embeddings onto an embedding subspace that encodes gender; (iv) finally, evaluate efficacy of our proposed method on reducing gender bias. We find this regularization method to be effective in reducing gender bias up to an optimal weight assigned to the loss term, beyond which the model becomes unstable as the perplexity increases. We replicate this study on three training corpora{---}Penn Treebank, WikiText-2, and CNN/Daily Mail{---}resulting in similar conclusions.",
 }
 
+
 %stereotype classifiers
 @misc{zekun2023auditinglargelanguagemodels,
       title={Towards Auditing Large Language Models: Improving Text-based Stereotype Detection}, 
@@ -493,32 +472,6 @@ abstract = {In recent years, artificial intelligence (AI) and machine learning h
       primaryClass={stat.ML},
       url={https://arxiv.org/abs/1703.06856}, 
 }
-
-% Counterfactual fairness 2 
-@inproceedings{10.1145/3351095.3372851,
-author = {Coston, Amanda and Mishler, Alan and Kennedy, Edward H. and Chouldechova, Alexandra},
-title = {Counterfactual risk assessments, evaluation, and fairness},
-year = {2020},
-isbn = {9781450369367},
-publisher = {Association for Computing Machinery},
-address = {New York, NY, USA},
-url = {https://doi.org/10.1145/3351095.3372851},
-doi = {10.1145/3351095.3372851},
-abstract = {Algorithmic risk assessments are increasingly used to help humans make decisions in high-stakes settings, such as medicine, criminal justice and education. In each of these cases, the purpose of the risk assessment tool is to inform actions, such as medical treatments or release conditions, often with the aim of reducing the likelihood of an adverse event such as hospital readmission or recidivism. Problematically, most tools are trained and evaluated on historical data in which the outcomes observed depend on the historical decision-making policy. These tools thus reflect risk under the historical policy, rather than under the different decision options that the tool is intended to inform. Even when tools are constructed to predict risk under a specific decision, they are often improperly evaluated as predictors of the target outcome.Focusing on the evaluation task, in this paper we define counterfactual analogues of common predictive performance and algorithmic fairness metrics that we argue are better suited for the decision-making context. We introduce a new method for estimating the proposed metrics using doubly robust estimation. We provide theoretical results that show that only under strong conditions can fairness according to the standard metric and the counterfactual metric simultaneously hold. Consequently, fairness-promoting methods that target parity in a standard fairness metric may---and as we show empirically, do---induce greater imbalance in the counterfactual analogue. We provide empirical comparisons on both synthetic data and a real world child welfare dataset to demonstrate how the proposed method improves upon standard practice.},
-booktitle = {Proceedings of the 2020 Conference on Fairness, Accountability, and Transparency},
-pages = {582–593},
-numpages = {12},
-location = {Barcelona, Spain},
-series = {FAT* '20}
-}
-
-% CF 3
-
-@article{osti_10126321,
-place = {Country unknown/Code not available}, title = {Counterfactual Fairness: Unidentification, Bound and Algorithm}, url = {https://par.nsf.gov/biblio/10126321}, DOI = {10.24963/ijcai.2019/199}, abstractNote = {Fairness-aware learning studies the problem of building machine learning models that are subject to fairness requirements. Counterfactual fairness is a notion of fairness derived from Pearl's causal model, which considers a model is fair if for a particular individual or group its prediction in the real world is the same as that in the counterfactual world where the individual(s) had belonged to a different demographic group. However, an inherent limitation of counterfactual fairness is that it cannot be uniquely quantified from the observational data in certain situations, due to the unidentifiability of the counterfactual quantity. In this paper, we address this limitation by mathematically bounding the unidentifiable counterfactual quantity, and develop a theoretically sound algorithm for constructing counterfactually fair classifiers. We evaluate our method in the experiments using both synthetic and real-world datasets, as well as compare with existing methods. The results validate our theory and show the effectiveness of our method.}, journal = {Proceedings of the Twenty-Eighth International Joint Conference on Artificial Intelligence}, author = {Wu, Yongkai and Zhang, Lu and Wu, Xintao}, }
-
-% Cf 4
-@article{Rosenblatt_Witter_2023, title={Counterfactual Fairness Is Basically Demographic Parity}, volume={37}, url={https://ojs.aaai.org/index.php/AAAI/article/view/26691}, DOI={10.1609/aaai.v37i12.26691}, abstractNote={Making fair decisions is crucial to ethically implementing machine learning algorithms in social settings. In this work, we consider the celebrated definition of counterfactual fairness. We begin by showing that an algorithm which satisfies counterfactual fairness also satisfies demographic parity, a far simpler fairness constraint. Similarly, we show that all algorithms satisfying demographic parity can be trivially modified to satisfy counterfactual fairness. Together, our results indicate that counterfactual fairness is basically equivalent to demographic parity, which has important implications for the growing body of work on counterfactual fairness. We then validate our theoretical findings empirically, analyzing three existing algorithms for counterfactual fairness against three simple benchmarks. We find that two simple benchmark algorithms outperform all three existing algorithms---in terms of fairness, accuracy, and efficiency---on several data sets. Our analysis leads us to formalize a concrete fairness goal: to preserve the order of individuals within protected groups. We believe transparency around the ordering of individuals within protected groups makes fair algorithms more trustworthy. By design, the two simple benchmark algorithms satisfy this goal while the existing algorithms do not.}, number={12}, journal={Proceedings of the AAAI Conference on Artificial Intelligence}, author={Rosenblatt, Lucas and Witter, R. Teal}, year={2023}, month={Jun.}, pages={14461-14469} }
 
 
 % gallegos survey
@@ -545,40 +498,7 @@ place = {Country unknown/Code not available}, title = {Counterfactual Fairness: 
 }
 
 
-% rouge 
-@inproceedings{lin-2004-rouge,
-    title = "{ROUGE}: A Package for Automatic Evaluation of Summaries",
-    author = "Lin, Chin-Yew",
-    booktitle = "Text Summarization Branches Out",
-    month = jul,
-    year = "2004",
-    address = "Barcelona, Spain",
-    publisher = "Association for Computational Linguistics",
-    url = "https://aclanthology.org/W04-1013",
-    pages = "74--81",
-}
-
-
-% BLEU 
-@inproceedings{10.3115/1073083.1073135,
-author = {Papineni, Kishore and Roukos, Salim and Ward, Todd and Zhu, Wei-Jing},
-title = {BLEU: a method for automatic evaluation of machine translation},
-year = {2002},
-publisher = {Association for Computational Linguistics},
-address = {USA},
-url = {https://doi.org/10.3115/1073083.1073135},
-doi = {10.3115/1073083.1073135},
-abstract = {Human evaluations of machine translation are extensive but expensive. Human evaluations can take months to finish and involve human labor that can not be reused. We propose a method of automatic machine translation evaluation that is quick, inexpensive, and language-independent, that correlates highly with human evaluation, and that has little marginal cost per run. We present this method as an automated understudy to skilled human judges which substitutes for them when there is need for quick or frequent evaluations.},
-booktitle = {Proceedings of the 40th Annual Meeting on Association for Computational Linguistics},
-pages = {311–318},
-numpages = {8},
-location = {Philadelphia, Pennsylvania},
-series = {ACL '02}
-}
-
-
 % Rec
-
 @inproceedings{Zhang_2023, series={RecSys ’23},
    title={Is ChatGPT Fair for Recommendation? Evaluating Fairness in Large Language Model Recommendation},
    volume={2012},
@@ -591,6 +511,7 @@ series = {ACL '02}
    month=sep, pages={993–999},
    collection={RecSys ’23} }
 
+
 % DI
 @misc{feldman2015certifyingremovingdisparateimpact,
       title={Certifying and removing disparate impact}, 
@@ -601,88 +522,6 @@ series = {ACL '02}
       primaryClass={stat.ML},
       url={https://arxiv.org/abs/1412.3756}, 
 }
-
-
-
-BibTeX
-@inproceedings{10.5555/3120007.3120011,
-author = {Kamishima, Toshihiro and Akaho, Shotaro and Asoh, Hideki and Sakuma, Jun},
-title = {Fairness-aware classifier with prejudice remover regularizer},
-year = {2012},
-isbn = {9783642334856},
-publisher = {Springer-Verlag},
-address = {Berlin, Heidelberg},
-abstract = {With the spread of data mining technologies and the accumulation of social data, such technologies and data are being used for determinations that seriously affect individuals' lives. For example, credit scoring is frequently determined based on the records of past credit data together with statistical prediction techniques. Needless to say, such determinations must be nondiscriminatory and fair in sensitive features, such as race, gender, religion, and so on. Several researchers have recently begun to attempt the development of analysis techniques that are aware of social fairness or discrimination. They have shown that simply avoiding the use of sensitive features is insufficient for eliminating biases in determinations, due to the indirect influence of sensitive information. In this paper, we first discuss three causes of unfairness in machine learning. We then propose a regularization approach that is applicable to any prediction algorithm with probabilistic discriminative models. We further apply this approach to logistic regression and empirically show its effectiveness and efficiency.},
-booktitle = {Proceedings of the 2012th European Conference on Machine Learning and Knowledge Discovery in Databases - Volume Part II},
-pages = {35–50},
-numpages = {16},
-keywords = {classification, discrimination, fairness, information theory, logistic regression, social responsibility},
-location = {Bristol, UK},
-series = {ECMLPKDD'12}
-}
-
-% EOP
-@misc{hardt2016equalityopportunitysupervisedlearning,
-      title={Equality of Opportunity in Supervised Learning}, 
-      author={Moritz Hardt and Eric Price and Nathan Srebro},
-      year={2016},
-      eprint={1610.02413},
-      archivePrefix={arXiv},
-      primaryClass={cs.LG},
-      url={https://arxiv.org/abs/1610.02413}, 
-}
-
-%CEOP
-@misc{pleiss2017fairnesscalibration,
-      title={On Fairness and Calibration}, 
-      author={Geoff Pleiss and Manish Raghavan and Felix Wu and Jon Kleinberg and Kilian Q. Weinberger},
-      year={2017},
-      eprint={1709.02012},
-      archivePrefix={arXiv},
-      primaryClass={cs.LG},
-      url={https://arxiv.org/abs/1709.02012}, 
-}
-
-%ROCP
-@inproceedings{10.1109/ICDM.2012.45,
-author = {Kamiran, Faisal and Karim, Asim and Zhang, Xiangliang},
-title = {Decision Theory for Discrimination-Aware Classification},
-year = {2012},
-isbn = {9780769549057},
-publisher = {IEEE Computer Society},
-address = {USA},
-url = {https://doi.org/10.1109/ICDM.2012.45},
-doi = {10.1109/ICDM.2012.45},
-abstract = {Social discrimination (e.g., against females) arising from data mining techniques is a growing concern worldwide. In recent years, several methods have been proposed for making classifiers learned over discriminatory data discrimination-aware. However, these methods suffer from two major shortcomings: (1) They require either modifying the discriminatory data or tweaking a specific classification algorithm and (2) They are not flexible w.r.t. discrimination control and multiple sensitive attribute handling. In this paper, we present two solutions for discrimination-aware classification that neither require data modification nor classifier tweaking. Our first and second solutions exploit, respectively, the reject option of probabilistic classifier(s) and the disagreement region of general classifier ensembles to reduce discrimination. We relate both solutions with decision theory for better understanding of the process. Our experiments using real-world datasets demonstrate that our solutions outperform existing state-of-the-art methods, especially at low discrimination which is a significant advantage. The superior performance coupled with flexible control over discrimination and easy applicability to multiple sensitive attributes makes our solutions an important step forward in practical discrimination-aware classification.},
-booktitle = {Proceedings of the 2012 IEEE 12th International Conference on Data Mining},
-pages = {924–929},
-numpages = {6},
-keywords = {classification, decision theory, ensembles, social discrimination},
-series = {ICDM '12}
-}
-
-% reductions
-@misc{agarwal2018reductionsapproachfairclassification,
-      title={A Reductions Approach to Fair Classification}, 
-      author={Alekh Agarwal and Alina Beygelzimer and Miroslav Dudík and John Langford and Hanna Wallach},
-      year={2018},
-      eprint={1803.02453},
-      archivePrefix={arXiv},
-      primaryClass={cs.LG},
-      url={https://arxiv.org/abs/1803.02453}, 
-}
-
-% Adversarial debiasing
-@misc{zhang2018mitigatingunwantedbiasesadversarial,
-      title={Mitigating Unwanted Biases with Adversarial Learning}, 
-      author={Brian Hu Zhang and Blake Lemoine and Margaret Mitchell},
-      year={2018},
-      eprint={1801.07593},
-      archivePrefix={arXiv},
-      primaryClass={cs.LG},
-      url={https://arxiv.org/abs/1801.07593}, 
-}
-
 
 
 @misc{goldfarbtarrant2021intrinsicbiasmetricscorrelate,
@@ -714,4 +553,11 @@ series = {ICDM '12}
     doi = "10.18653/v1/2022.naacl-main.122",
     pages = "1693--1706",
     abstract = "An increasing awareness of biased patterns in natural language processing resources such as BERT has motivated many metrics to quantify {`}bias{'} and {`}fairness{'} in these resources. However, comparing the results of different metrics and the works that evaluate with such metrics remains difficult, if not outright impossible. We survey the literature on fairness metrics for pre-trained language models and experimentally evaluate compatibility, including both biases in language models and in their downstream tasks. We do this by combining traditional literature survey, correlation analysis and empirical evaluations. We find that many metrics are not compatible with each other and highly depend on (i) templates, (ii) attribute and target seeds and (iii) the choice of embeddings. We also see no tangible evidence of intrinsic bias relating to extrinsic bias. These results indicate that fairness or bias evaluation remains challenging for contextualized language models, among other reasons because these choices remain subjective. To improve future comparisons and fairness evaluations, we recommend to avoid embedding-based metrics and focus on fairness evaluations in downstream tasks.",
+}
+
+% Evaluate
+@misc{huggingface-no-date,
+	author = {Huggingface},
+	title = {GitHub - huggingface/evaluate: Evaluate: A library for easily evaluating machine learning models and datasets.},
+	url = {https://github.com/huggingface/evaluate},
 }
