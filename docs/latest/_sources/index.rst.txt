@@ -6,9 +6,6 @@
 Welcome to LangFair's documentation!
 ====================================
 
-LLM bias and fairness made simple
----------------------------------
-
 LangFair is a comprehensive Python library designed for conducting use-case-specific bias and fairness assessments for large language model (LLM) use cases. Using a unique Bring Your Own Prompts (BYOP) approach, LangFair helps you:
 
 ✨ **Evaluate Real-World Scenarios**: Evaluate bias and fairness for actual LLM use cases
@@ -29,6 +26,14 @@ Static benchmark assessments, which are typically assumed to be sufficiently rep
 LangFair addresses this gap by adopting a Bring Your Own Prompts (BYOP) approach, allowing users to tailor bias and fairness evaluations to their specific use cases. This ensures that the metrics computed reflect the true performance of the LLMs in real-world scenarios, where prompt-specific risks are critical. Additionally, LangFair's focus is on output-based metrics that are practical for governance audits and real-world testing, without needing access to internal model states.
 
 
+Featured Resources
+------------------
+
+- 🚀 :doc:`Get started <usage>` in minutes 
+- 🔬 Explore our :doc:`framework for choosing metrics <choosing_metrics>`
+- 💡 Try our :doc:`guided examples <auto_examples/index>`
+- 📖 Read the `research paper <https://arxiv.org/abs/2407.10853>`_
+
 Quick Links
 -----------
 
@@ -41,11 +46,3 @@ Quick Links
    API <api>
    auto_examples/index
    Contributor Guide <guide>
-
-Featured Resources
-------------------
-
-- 🚀 :doc:`Get started <usage>` in minutes 
-- 🔬 Explore our :doc:`framework for choosing metrics <choosing_metrics>`
-- 💡 Try our :doc:`guided examples <auto_examples/index>`
-- 📖 Read the `research paper <https://arxiv.org/abs/2407.10853>`_
