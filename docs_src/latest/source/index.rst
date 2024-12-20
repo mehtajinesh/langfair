@@ -14,7 +14,7 @@ LangFair is a comprehensive Python library designed for conducting use-case-spec
 
 🔍 **Make Informed Decisions**: Use our framework to choose the right evaluation metrics
 
-🛠️ **Simple Integration**: Easy-to-use Python interface for seamless implementation
+🛠️ **Integrate with Workflows**: Easy-to-use Python interface for seamless implementation
 
 :doc:`Get Started → <usage>` | :doc:`View Examples → <auto_examples/index>`
 
@@ -29,12 +29,14 @@ LangFair addresses this gap by adopting a Bring Your Own Prompts (BYOP) approach
 Featured Resources
 ------------------
 
+Check out our featured resources to help you get started with LangFair.
+
 - 🚀 :doc:`Get started <usage>` in minutes 
 - 🔬 Explore our :doc:`framework for choosing metrics <choosing_metrics>`
 - 💡 Try our :doc:`guided examples <auto_examples/index>`
 - 📖 Read the `research paper <https://arxiv.org/abs/2407.10853>`_
 
-Quick Links
+
 -----------
 
 .. toctree::
