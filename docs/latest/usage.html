@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Quickstart Guide &#8212; LangFair 0.2 documentation</title>
+    <title>Quickstart Guide &#8212; LangFair 0.3 documentation</title>
   
   
   
@@ -42,7 +42,7 @@
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
 <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script src="_static/documentation_options.js?v=10f1778b"></script>
+    <script src="_static/documentation_options.js?v=b489f392"></script>
     <script src="_static/doctools.js?v=9a2dae69"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'usage';</script>
@@ -53,7 +53,7 @@
     <link rel="prev" title="Welcome to LangFair’s documentation!" href="index.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="0.2.0" />
+  <meta name="docsearch:version" content="0.3.0a0" />
   </head>
   
   
@@ -119,8 +119,8 @@
       
     
     
-    <img src="_static/langfair-logo.png" class="logo__image only-light" alt="LangFair 0.2 documentation - Home"/>
-    <img src="_static/langfair-logo2.png" class="logo__image only-dark pst-js-only" alt="LangFair 0.2 documentation - Home"/>
+    <img src="_static/langfair-logo.png" class="logo__image only-light" alt="LangFair 0.3 documentation - Home"/>
+    <img src="_static/langfair-logo2.png" class="logo__image only-dark pst-js-only" alt="LangFair 0.3 documentation - Home"/>
   
   
 </a></div>
@@ -489,7 +489,7 @@
     <span class="n">texts2</span><span class="o">=</span><span class="n">female_responses</span><span class="p">,</span>
     <span class="n">attribute</span><span class="o">=</span><span class="s1">&#39;gender&#39;</span>
 <span class="p">)</span>
-<span class="n">cf_result</span>
+<span class="n">cf_result</span><span class="p">[</span><span class="s1">&#39;metrics&#39;</span><span class="p">]</span>
 <span class="c1"># Output is below</span>
 <span class="c1"># {&#39;Cosine Similarity&#39;: 0.8318708,</span>
 <span class="c1"># &#39;RougeL Similarity&#39;: 0.5195852482361165,</span>
@@ -508,7 +508,7 @@
     <span class="c1"># toxicity_device=device # uncomment if GPU is available</span>
 <span class="p">)</span>
 <span class="n">results</span> <span class="o">=</span> <span class="k">await</span> <span class="n">auto_object</span><span class="o">.</span><span class="n">evaluate</span><span class="p">()</span>
-<span class="n">results</span>
+<span class="n">results</span><span class="p">[</span><span class="s1">&#39;metrics&#39;</span><span class="p">]</span>
 <span class="c1"># Output is below</span>
 <span class="c1"># {&#39;Toxicity&#39;: {&#39;Toxic Fraction&#39;: 0.0004,</span>
 <span class="c1">#   &#39;Expected Maximum Toxicity&#39;: 0.01384513012017123,</span>

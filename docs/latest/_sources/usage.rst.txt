@@ -110,7 +110,7 @@ Counterfactual metrics can be easily computed with ``CounterfactualMetrics``.
        texts2=female_responses,
        attribute='gender'
    )
-   cf_result
+   cf_result['metrics']
    # Output is below
    # {'Cosine Similarity': 0.8318708,
    # 'RougeL Similarity': 0.5195852482361165,
@@ -131,7 +131,7 @@ To streamline assessments for text generation and summarization use cases, the `
        # toxicity_device=device # uncomment if GPU is available
    )
    results = await auto_object.evaluate()
-   results
+   results['metrics']
    # Output is below
    # {'Toxicity': {'Toxic Fraction': 0.0004,
    #   'Expected Maximum Toxicity': 0.01384513012017123,

@@ -106,25 +106,19 @@ For more details on the definitions of these metrics, refer to the Metric Defini
 
 Load input prompts with `'race`' as sensitive attribute.
 
-.. GENERATED FROM PYTHON SOURCE LINES 83-96
+.. GENERATED FROM PYTHON SOURCE LINES 83-90
 
 .. code-block:: Python
 
 
     # THIS IS AN EXAMPLE SET OF PROMPTS. USER TO REPLACE WITH THEIR OWN PROMPTS
-    resource_path = os.path.join(repo_path, "data/RealToxicityPrompts.jsonl")
-    with open(resource_path, "r") as file:
-        # Read each line in the file
-        challenging = []
-        prompts = []
-        for line in file:
-            # Parse the JSON object from each line
-            challenging.append(json.loads(line)["challenging"])
-            prompts.append(json.loads(line)["prompt"]["text"])
-    prompts = [prompts[i] for i in range(len(prompts)) if not challenging[i]][15000:30000]
+    from langfair.utils.dataloader import load_realtoxicity
+
+    n=50000 # number of prompts we want to test
+    prompts = load_realtoxicity(n=n)
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 97-159
+.. GENERATED FROM PYTHON SOURCE LINES 91-153
 
 Counterfactual Dataset Generator
 --------------------------------
@@ -189,7 +183,7 @@ Below we use LangFair's ``CounterfactualGenerator`` class to check for fairness 
 
 **Important note: We provide three examples of LangChain LLMs below, but these can be replaced with a LangChain LLM of your choice.**
 
-.. GENERATED FROM PYTHON SOURCE LINES 159-167
+.. GENERATED FROM PYTHON SOURCE LINES 153-161
 
 .. code-block:: Python
 
@@ -202,11 +196,11 @@ Below we use LangFair's ``CounterfactualGenerator`` class to check for fairness 
     )
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 168-169
+.. GENERATED FROM PYTHON SOURCE LINES 162-163
 
 **Example 1: Gemini Pro with VertexAI**
 
-.. GENERATED FROM PYTHON SOURCE LINES 169-180
+.. GENERATED FROM PYTHON SOURCE LINES 163-174
 
 .. code-block:: Python
 
@@ -222,11 +216,11 @@ Below we use LangFair's ``CounterfactualGenerator`` class to check for fairness 
     # suppressed_exceptions = (IndexError, ) # suppresses error when gemini refuses to answer
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 181-182
+.. GENERATED FROM PYTHON SOURCE LINES 175-176
 
 **Example 2: Mistral AI**
 
-.. GENERATED FROM PYTHON SOURCE LINES 182-197
+.. GENERATED FROM PYTHON SOURCE LINES 176-191
 
 .. code-block:: Python
 
@@ -246,11 +240,11 @@ Below we use LangFair's ``CounterfactualGenerator`` class to check for fairness 
     # suppressed_exceptions = None
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 198-199
+.. GENERATED FROM PYTHON SOURCE LINES 192-193
 
 **Example 3: OpenAI on Azure**
 
-.. GENERATED FROM PYTHON SOURCE LINES 199-223
+.. GENERATED FROM PYTHON SOURCE LINES 193-217
 
 .. code-block:: Python
 
@@ -279,11 +273,11 @@ Below we use LangFair's ``CounterfactualGenerator`` class to check for fairness 
     )  # this suppresses content filtering errors
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 224-225
+.. GENERATED FROM PYTHON SOURCE LINES 218-219
 
 Instantiate ``CounterfactualGenerator`` class
 
-.. GENERATED FROM PYTHON SOURCE LINES 225-232
+.. GENERATED FROM PYTHON SOURCE LINES 219-226
 
 .. code-block:: Python
 
@@ -295,13 +289,13 @@ Instantiate ``CounterfactualGenerator`` class
     )
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 233-236
+.. GENERATED FROM PYTHON SOURCE LINES 227-230
 
 For illustration, this notebook assesses with 'race' as the protected attribute, but metrics can be evaluated for 'gender' or other custom protected attributes in the same way. First, the above mentioned `parse_texts` method is used to identify the input prompts that contain protected attribute words.
 
 Note: We recommend using atleast 1000 prompts that contain protected attribute words for better estimates. Otherwise, increase `count` attribute of `CounterfactualGenerator` class generate more responses.
 
-.. GENERATED FROM PYTHON SOURCE LINES 236-249
+.. GENERATED FROM PYTHON SOURCE LINES 230-243
 
 .. code-block:: Python
 
@@ -319,11 +313,11 @@ Note: We recommend using atleast 1000 prompts that contain protected attribute w
     race_prompts.tail(5)
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 250-251
+.. GENERATED FROM PYTHON SOURCE LINES 244-245
 
 Generate the model response on the input prompts using ``generate_responses`` method.
 
-.. GENERATED FROM PYTHON SOURCE LINES 251-269
+.. GENERATED FROM PYTHON SOURCE LINES 245-263
 
 .. code-block:: Python
 
@@ -346,7 +340,7 @@ Generate the model response on the input prompts using ``generate_responses`` me
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 270-299
+.. GENERATED FROM PYTHON SOURCE LINES 264-293
 
 .. _assessment:
 3. Assessment
@@ -378,7 +372,7 @@ This section shows two ways to evaluate countefactual metrics on a given dataset
       Returns:
       - A dictionary containing all Counterfactual metric values (**dict**).
 
-.. GENERATED FROM PYTHON SOURCE LINES 299-317
+.. GENERATED FROM PYTHON SOURCE LINES 293-313
 
 .. code-block:: Python
 
@@ -388,25 +382,27 @@ This section shows two ways to evaluate countefactual metrics on a given dataset
 
     similarity_values = {}
     keys_, count = [], 1
-    for group1, group2 in combinations(["white", "black", "asian", "hispanic"], 2):
+    for group1, group2 in combinations(['white','black','asian','hispanic'], 2):
         keys_.append(f"{group1}-{group2}")
-        similarity_values[keys_[-1]] = counterfactual.evaluate(
-            race_eval_df[group1 + "_response"],
-            race_eval_df[group2 + "_response"],
+        result = counterfactual.evaluate(
+            texts1=race_eval_df[group1 + '_response'], 
+            texts2=race_eval_df[group2 + '_response'], 
             attribute="race",
+            return_data=True
         )
+        similarity_values[keys_[-1]] = result['metrics']
         print(f"{count}. {group1}-{group2}")
         for key_ in similarity_values[keys_[-1]]:
             print("\t- ", key_, ": {:1.5f}".format(similarity_values[keys_[-1]][key_]))
         count += 1
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 318-320
+.. GENERATED FROM PYTHON SOURCE LINES 314-316
 
 Next, we create a scatter plot to compare the metrics for different race combinations.
 Note: `matplotlib` installation is necessary to recreate the plot.
 
-.. GENERATED FROM PYTHON SOURCE LINES 320-348
+.. GENERATED FROM PYTHON SOURCE LINES 316-344
 
 .. code-block:: Python
 
@@ -439,7 +435,7 @@ Note: `matplotlib` installation is necessary to recreate the plot.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 349-375
+.. GENERATED FROM PYTHON SOURCE LINES 345-371
 
 .. _separate:
 3.2 Separate Implementation
@@ -468,7 +464,7 @@ Note: `matplotlib` installation is necessary to recreate the plot.
     Returns:
     - Counterfactual Sentiment Bias score (**float**)
 
-.. GENERATED FROM PYTHON SOURCE LINES 375-388
+.. GENERATED FROM PYTHON SOURCE LINES 371-384
 
 .. code-block:: Python
 
@@ -486,7 +482,7 @@ Note: `matplotlib` installation is necessary to recreate the plot.
         )
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 389-409
+.. GENERATED FROM PYTHON SOURCE LINES 385-405
 
 3.2.2 Cosine Similarity
 
@@ -509,7 +505,7 @@ Note: `matplotlib` installation is necessary to recreate the plot.
     Returns:
     - Cosine distance score(s) (**float or list of floats**)
 
-.. GENERATED FROM PYTHON SOURCE LINES 409-418
+.. GENERATED FROM PYTHON SOURCE LINES 405-414
 
 .. code-block:: Python
 
@@ -523,7 +519,7 @@ Note: `matplotlib` installation is necessary to recreate the plot.
         print(f"{group1}-{group2} Counterfactual Cosine Similarity: ", similarity_values)
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 419-438
+.. GENERATED FROM PYTHON SOURCE LINES 415-434
 
 3.2.3 RougeL Similarity
 
@@ -545,7 +541,7 @@ Note: `matplotlib` installation is necessary to recreate the plot.
     Returns:
     - ROUGE-L or ROUGE-L sums score(s) (**float or list of floats**)
 
-.. GENERATED FROM PYTHON SOURCE LINES 438-454
+.. GENERATED FROM PYTHON SOURCE LINES 434-450
 
 .. code-block:: Python
 
@@ -566,7 +562,7 @@ Note: `matplotlib` installation is necessary to recreate the plot.
         print(f"{group1}-{group2} Counterfactual RougeL Similarity: ", similarity_values)
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 455-472
+.. GENERATED FROM PYTHON SOURCE LINES 451-468
 
 3.2.4 BLEU Similarity
 
@@ -586,7 +582,7 @@ Note: `matplotlib` installation is necessary to recreate the plot.
     Returns:
     - BLEU score(s) (**float or list of floats**)
 
-.. GENERATED FROM PYTHON SOURCE LINES 472-489
+.. GENERATED FROM PYTHON SOURCE LINES 468-485
 
 .. code-block:: Python
 
@@ -608,7 +604,7 @@ Note: `matplotlib` installation is necessary to recreate the plot.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 490-540
+.. GENERATED FROM PYTHON SOURCE LINES 486-536
 
 .. _metric-defns:
 4. Metric Definitions

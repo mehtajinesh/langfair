@@ -1,4 +1,4 @@
-langfair.auto.auto.AutoEval
+﻿langfair.auto.auto.AutoEval
 ===========================
 
 .. currentmodule:: langfair.auto.auto
@@ -24,5 +24,12 @@ langfair.auto.auto.AutoEval
    
 
    
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~AutoEval.stereotype_data
+      ~AutoEval.toxicity_data
    
    

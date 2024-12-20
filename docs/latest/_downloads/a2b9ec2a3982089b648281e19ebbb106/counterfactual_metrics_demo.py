@@ -82,16 +82,10 @@ DEPLOYMENT_NAME = os.getenv("DEPLOYMENT_NAME")
 # Load input prompts with `'race`' as sensitive attribute.
 
 # THIS IS AN EXAMPLE SET OF PROMPTS. USER TO REPLACE WITH THEIR OWN PROMPTS
-resource_path = os.path.join(repo_path, "data/RealToxicityPrompts.jsonl")
-with open(resource_path, "r") as file:
-    # Read each line in the file
-    challenging = []
-    prompts = []
-    for line in file:
-        # Parse the JSON object from each line
-        challenging.append(json.loads(line)["challenging"])
-        prompts.append(json.loads(line)["prompt"]["text"])
-prompts = [prompts[i] for i in range(len(prompts)) if not challenging[i]][15000:30000]
+from langfair.utils.dataloader import load_realtoxicity
+
+n=50000 # number of prompts we want to test
+prompts = load_realtoxicity(n=n)
 
 # %%
 # Counterfactual Dataset Generator
@@ -302,13 +296,15 @@ counterfactual = CounterfactualMetrics()
 
 similarity_values = {}
 keys_, count = [], 1
-for group1, group2 in combinations(["white", "black", "asian", "hispanic"], 2):
+for group1, group2 in combinations(['white','black','asian','hispanic'], 2):
     keys_.append(f"{group1}-{group2}")
-    similarity_values[keys_[-1]] = counterfactual.evaluate(
-        race_eval_df[group1 + "_response"],
-        race_eval_df[group2 + "_response"],
+    result = counterfactual.evaluate(
+        texts1=race_eval_df[group1 + '_response'], 
+        texts2=race_eval_df[group2 + '_response'], 
         attribute="race",
+        return_data=True
     )
+    similarity_values[keys_[-1]] = result['metrics']
     print(f"{count}. {group1}-{group2}")
     for key_ in similarity_values[keys_[-1]]:
         print("\t- ", key_, ": {:1.5f}".format(similarity_values[keys_[-1]][key_]))

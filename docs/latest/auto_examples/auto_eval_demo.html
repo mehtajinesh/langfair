@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Auto Eval Demo - Dialogue Summarization &#8212; LangFair 0.2 documentation</title>
+    <title>Auto Eval Demo - Dialogue Summarization &#8212; LangFair 0.3 documentation</title>
   
   
   
@@ -42,7 +42,7 @@
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script src="../_static/documentation_options.js?v=10f1778b"></script>
+    <script src="../_static/documentation_options.js?v=b489f392"></script>
     <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -54,7 +54,7 @@
     <link rel="prev" title="Recommendation Metrics" href="recommendation_metrics_demo.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="0.2.0" />
+  <meta name="docsearch:version" content="0.3.0a0" />
   </head>
   
   
@@ -120,8 +120,8 @@
       
     
     
-    <img src="../_static/langfair-logo.png" class="logo__image only-light" alt="LangFair 0.2 documentation - Home"/>
-    <img src="../_static/langfair-logo2.png" class="logo__image only-dark pst-js-only" alt="LangFair 0.2 documentation - Home"/>
+    <img src="../_static/langfair-logo.png" class="logo__image only-light" alt="LangFair 0.3 documentation - Home"/>
+    <img src="../_static/langfair-logo2.png" class="logo__image only-dark pst-js-only" alt="LangFair 0.3 documentation - Home"/>
   
   
 </a></div>
@@ -575,7 +575,7 @@ Name of the .txt file.</p>
 <p>Call <code class="docutils literal notranslate"><span class="pre">evaluate</span></code> method to compute scores corresponding to supported metrics.</p>
 <p>Note that this  may take some time due to evaluation being computationally intensive. Consider using GPU acceleration for  faster processing.</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
-<span class="n">results</span> <span class="o">=</span> <span class="k">await</span> <span class="n">ae</span><span class="o">.</span><span class="n">evaluate</span><span class="p">()</span>
+<span class="n">results</span> <span class="o">=</span> <span class="k">await</span> <span class="n">ae</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">return_data</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">evaluate</span></code> method return the score computed for different metrics and also store as an attribute of <code class="docutils literal notranslate"><span class="pre">AutoEval</span></code> class object (<code class="docutils literal notranslate"><span class="pre">AutoEval.results</span></code>). The <code class="docutils literal notranslate"><span class="pre">results</span></code> attribute can be printed in a clean format using <code class="docutils literal notranslate"><span class="pre">print_results</span></code> method.</p>
@@ -586,13 +586,16 @@ Name of the .txt file.</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">ae</span><span class="o">.</span><span class="n">export_results</span><span class="p">(</span><span class="n">file_name</span><span class="o">=</span><span class="s2">&quot;final_metrics.txt&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>The <code class="docutils literal notranslate"><span class="pre">AutoEval</span></code> class also stores the toxicity and stereotype scores in a Dataframe. The dataframe can be accessed using <code class="docutils literal notranslate"><span class="pre">toxicity_data</span></code> and <code class="docutils literal notranslate"><span class="pre">steretype_data</span></code> attributes. This is useful for investigating potentially toxic or stereotypical outputs.</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">toxicity_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">ae</span><span class="o">.</span><span class="n">toxicity_data</span><span class="p">)</span>
-<span class="n">toxicity_data</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s2">&quot;score&quot;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<p>If specified, the <code class="docutils literal notranslate"><span class="pre">AutoEval</span></code> class also returns response-level toxicity, stereotype, and counterfactual scores. This is useful for investigating which responses were problematic.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">toxicity_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">results</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">][</span><span class="s2">&quot;Toxicity&quot;</span><span class="p">])</span>
+<span class="n">toxicity_data</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">&#39;score&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 
 
-<span class="n">stereotype_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">ae</span><span class="o">.</span><span class="n">stereotype_data</span><span class="p">)</span>
-<span class="n">stereotype_data</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s2">&quot;stereotype_score_gender&quot;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="n">stereotype_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">results</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">][</span><span class="s2">&quot;Stereotype&quot;</span><span class="p">])</span>
+<span class="n">stereotype_data</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">&#39;stereotype_score_gender&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+
+<span class="n">counterfactual_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">results</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">][</span><span class="s2">&quot;Counterfactual&quot;</span><span class="p">][</span><span class="s2">&quot;male-female&quot;</span><span class="p">])</span>
+<span class="n">counterfactual_data</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">&#39;Sentiment Bias&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
 <section id="metric-definitions">

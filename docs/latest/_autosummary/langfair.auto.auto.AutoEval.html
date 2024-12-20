@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>langfair.auto.auto.AutoEval &#8212; LangFair 0.2 documentation</title>
+    <title>langfair.auto.auto.AutoEval &#8212; LangFair 0.3 documentation</title>
   
   
   
@@ -42,7 +42,7 @@
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script src="../_static/documentation_options.js?v=10f1778b"></script>
+    <script src="../_static/documentation_options.js?v=b489f392"></script>
     <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_autosummary/langfair.auto.auto.AutoEval';</script>
@@ -53,7 +53,7 @@
     <link rel="prev" title="langfair.auto.auto" href="langfair.auto.auto.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="0.2.0" />
+  <meta name="docsearch:version" content="0.3.0a0" />
   </head>
   
   
@@ -119,8 +119,8 @@
       
     
     
-    <img src="../_static/langfair-logo.png" class="logo__image only-light" alt="LangFair 0.2 documentation - Home"/>
-    <img src="../_static/langfair-logo2.png" class="logo__image only-dark pst-js-only" alt="LangFair 0.2 documentation - Home"/>
+    <img src="../_static/langfair-logo.png" class="logo__image only-light" alt="LangFair 0.3 documentation - Home"/>
+    <img src="../_static/langfair-logo2.png" class="logo__image only-dark pst-js-only" alt="LangFair 0.3 documentation - Home"/>
   
   
 </a></div>
@@ -530,7 +530,7 @@ responses are masked using <cite>CounterfactualGenerator.neutralize_tokens</cite
 <tr class="row-odd"><td><p><a class="reference internal" href="#langfair.auto.auto.AutoEval.__init__" title="langfair.auto.auto.AutoEval.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>(prompts[, responses, ...])</p></td>
 <td><p>This class calculates all toxicity, stereotype, and counterfactual metrics support by langfair</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#langfair.auto.auto.AutoEval.evaluate" title="langfair.auto.auto.AutoEval.evaluate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">evaluate</span></code></a>([metrics])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#langfair.auto.auto.AutoEval.evaluate" title="langfair.auto.auto.AutoEval.evaluate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">evaluate</span></code></a>([metrics, return_data])</p></td>
 <td><p>Compute all the metrics based on the provided data.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#langfair.auto.auto.AutoEval.export_results" title="langfair.auto.auto.AutoEval.export_results"><code class="xref py py-obj docutils literal notranslate"><span class="pre">export_results</span></code></a>([file_name])</p></td>
@@ -542,16 +542,32 @@ responses are masked using <cite>CounterfactualGenerator.neutralize_tokens</cite
 </tbody>
 </table>
 </div>
+<p class="rubric">Attributes</p>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">stereotype_data</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">toxicity_data</span></code></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</div>
 <dl class="py method">
 <dt class="sig sig-object py" id="langfair.auto.auto.AutoEval.evaluate">
-<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">evaluate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">metrics</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langfair.auto.auto.AutoEval.evaluate" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">evaluate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">metrics</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langfair.auto.auto.AutoEval.evaluate" title="Link to this definition">#</a></dt>
 <dd><p>Compute all the metrics based on the provided data.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>metrics</strong> (<em>dict</em><em> or </em><em>list</em><em> of </em><em>str</em><em>, </em><em>optional</em>) – Specifies which metrics to evaluate. If None, computes all supported metrics.</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>metrics</strong> (<em>dict</em><em> or </em><em>list</em><em> of </em><em>str</em><em>, </em><em>optional</em>) – Specifies which metrics to evaluate. If None, computes all supported metrics.</p></li>
+<li><p><strong>return_data</strong> (<em>bool</em><em>, </em><em>default=False</em>) – Indicates whether to include response-level scores in results dictionary returned by this method.</p></li>
+</ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>A dictionary containing values of toxicity, stereotype, and counterfactual metrics.</p>
+<dd class="field-even"><p>A dictionary containing values of toxicity, stereotype, and counterfactual metrics and, optionally,
+response-level scores.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>dict</p>

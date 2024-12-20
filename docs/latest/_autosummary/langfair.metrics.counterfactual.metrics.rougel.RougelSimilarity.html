@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>langfair.metrics.counterfactual.metrics.rougel.RougelSimilarity &#8212; LangFair 0.2 documentation</title>
+    <title>langfair.metrics.counterfactual.metrics.rougel.RougelSimilarity &#8212; LangFair 0.3 documentation</title>
   
   
   
@@ -42,7 +42,7 @@
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script src="../_static/documentation_options.js?v=10f1778b"></script>
+    <script src="../_static/documentation_options.js?v=b489f392"></script>
     <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_autosummary/langfair.metrics.counterfactual.metrics.rougel.RougelSimilarity';</script>
@@ -53,7 +53,7 @@
     <link rel="prev" title="langfair.metrics.counterfactual.metrics.rougel" href="langfair.metrics.counterfactual.metrics.rougel.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="0.2.0" />
+  <meta name="docsearch:version" content="0.3.0a0" />
   </head>
   
   
@@ -119,8 +119,8 @@
       
     
     
-    <img src="../_static/langfair-logo.png" class="logo__image only-light" alt="LangFair 0.2 documentation - Home"/>
-    <img src="../_static/langfair-logo2.png" class="logo__image only-dark pst-js-only" alt="LangFair 0.2 documentation - Home"/>
+    <img src="../_static/langfair-logo.png" class="logo__image only-light" alt="LangFair 0.3 documentation - Home"/>
+    <img src="../_static/langfair-logo2.png" class="logo__image only-dark pst-js-only" alt="LangFair 0.3 documentation - Home"/>
   
   
 </a></div>
@@ -516,7 +516,7 @@ enables calculation of counterfactual ROUGE-L. For more information on this metr
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>rouge_metric</strong> (<em>{'rougeL'</em><em>,</em><em>'rougeLsum'}</em><em>, </em><em>default='rougeL'</em>) – Specifies which ROUGE metric to use. If sentence-wise assessment is preferred, select ‘rougeLsum’.</p></li>
-<li><p><strong>how</strong> (<em>{'mean'</em><em>,</em><em>'pairwise'}</em>) – Specifies whether to return the mean cosine similarity over all counterfactual pairs or a list containing cosine
+<li><p><strong>how</strong> (<em>{'mean'</em><em>,</em><em>'pairwise'}</em>) – Specifies whether to return the mean rougel similarity over all counterfactual pairs or a list containing rougel
 distance for each pair.</p></li>
 </ul>
 </dd>

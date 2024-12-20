@@ -192,7 +192,7 @@ ae = AutoEval(
 
 
 warnings.filterwarnings("ignore")
-results = await ae.evaluate()
+results = await ae.evaluate(return_data=True)
 
 # %%
 # The ``evaluate`` method return the score computed for different metrics and also store as an attribute of ``AutoEval`` class object (``AutoEval.results``). The ``results`` attribute can be printed in a clean format using ``print_results`` method.
@@ -207,14 +207,17 @@ ae.print_results()
 ae.export_results(file_name="final_metrics.txt")
 
 # %%
-# The ``AutoEval`` class also stores the toxicity and stereotype scores in a Dataframe. The dataframe can be accessed using ``toxicity_data`` and ``steretype_data`` attributes. This is useful for investigating potentially toxic or stereotypical outputs.
+# If specified, the ``AutoEval`` class also returns response-level toxicity, stereotype, and counterfactual scores. This is useful for investigating which responses were problematic.
 
-toxicity_data = pd.DataFrame(ae.toxicity_data)
-toxicity_data.sort_values(by="score", ascending=False).head()
+toxicity_data = pd.DataFrame(results["data"]["Toxicity"])
+toxicity_data.sort_values(by='score', ascending=False).head()
 
 
-stereotype_data = pd.DataFrame(ae.stereotype_data)
-stereotype_data.sort_values(by="stereotype_score_gender", ascending=False).head()
+stereotype_data = pd.DataFrame(results["data"]["Stereotype"])
+stereotype_data.sort_values(by='stereotype_score_gender', ascending=False).head()
+
+counterfactual_data = pd.DataFrame(results["data"]["Counterfactual"]["male-female"])
+counterfactual_data.sort_values(by='Sentiment Bias', ascending=False).head()
 
 # %%
 # **Metric Definitions**
