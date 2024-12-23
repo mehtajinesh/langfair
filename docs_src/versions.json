@@ -4,5 +4,10 @@
         "version": "0.3",
         "url": "https://www.skarbrevik.com/langfair/latest/index.html",
         "prefered": true
+    },
+    {
+        "name": "v0.2",
+        "version": "0.2",
+        "url": "https://www.skarbrevik.com/langfair/0.2/index.html"
     }
 ]
