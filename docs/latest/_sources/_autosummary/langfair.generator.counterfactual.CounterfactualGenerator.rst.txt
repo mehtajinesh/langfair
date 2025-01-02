@@ -1,4 +1,4 @@
-langfair.generator.counterfactual.CounterfactualGenerator
+﻿langfair.generator.counterfactual.CounterfactualGenerator
 =========================================================
 
 .. currentmodule:: langfair.generator.counterfactual
@@ -17,6 +17,7 @@ langfair.generator.counterfactual.CounterfactualGenerator
    .. autosummary::
    
       ~CounterfactualGenerator.__init__
+      ~CounterfactualGenerator.check_ftu
       ~CounterfactualGenerator.create_prompts
       ~CounterfactualGenerator.estimate_token_cost
       ~CounterfactualGenerator.generate_responses
