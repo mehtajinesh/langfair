@@ -524,24 +524,70 @@ exception</p></li>
 <tr class="row-odd"><td><p><a class="reference internal" href="#langfair.generator.counterfactual.CounterfactualGenerator.__init__" title="langfair.generator.counterfactual.CounterfactualGenerator.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>([langchain_llm, ...])</p></td>
 <td><p>Class for parsing and replacing protected attribute words.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#langfair.generator.counterfactual.CounterfactualGenerator.create_prompts" title="langfair.generator.counterfactual.CounterfactualGenerator.create_prompts"><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_prompts</span></code></a>(prompts[, attribute, custom_dict])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#langfair.generator.counterfactual.CounterfactualGenerator.check_ftu" title="langfair.generator.counterfactual.CounterfactualGenerator.check_ftu"><code class="xref py py-obj docutils literal notranslate"><span class="pre">check_ftu</span></code></a>(prompts[, attribute, custom_list, ...])</p></td>
+<td><p>Checks for fairness through unawarenss (FTU) based on a list of prompts and a specified protected attribute</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#langfair.generator.counterfactual.CounterfactualGenerator.create_prompts" title="langfair.generator.counterfactual.CounterfactualGenerator.create_prompts"><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_prompts</span></code></a>(prompts[, attribute, custom_dict])</p></td>
 <td><p>Creates prompts by counterfactual substitution</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#langfair.generator.counterfactual.CounterfactualGenerator.estimate_token_cost" title="langfair.generator.counterfactual.CounterfactualGenerator.estimate_token_cost"><code class="xref py py-obj docutils literal notranslate"><span class="pre">estimate_token_cost</span></code></a>(tiktoken_model_name, ...)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#langfair.generator.counterfactual.CounterfactualGenerator.estimate_token_cost" title="langfair.generator.counterfactual.CounterfactualGenerator.estimate_token_cost"><code class="xref py py-obj docutils literal notranslate"><span class="pre">estimate_token_cost</span></code></a>(tiktoken_model_name, ...)</p></td>
 <td><p>Estimates the token cost for a given list of prompts and (optionally) example responses.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#langfair.generator.counterfactual.CounterfactualGenerator.generate_responses" title="langfair.generator.counterfactual.CounterfactualGenerator.generate_responses"><code class="xref py py-obj docutils literal notranslate"><span class="pre">generate_responses</span></code></a>(prompts[, attribute, ...])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#langfair.generator.counterfactual.CounterfactualGenerator.generate_responses" title="langfair.generator.counterfactual.CounterfactualGenerator.generate_responses"><code class="xref py py-obj docutils literal notranslate"><span class="pre">generate_responses</span></code></a>(prompts[, attribute, ...])</p></td>
 <td><p>Creates prompts by counterfactual substitution and generates responses asynchronously</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#langfair.generator.counterfactual.CounterfactualGenerator.neutralize_tokens" title="langfair.generator.counterfactual.CounterfactualGenerator.neutralize_tokens"><code class="xref py py-obj docutils literal notranslate"><span class="pre">neutralize_tokens</span></code></a>(texts[, attribute])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#langfair.generator.counterfactual.CounterfactualGenerator.neutralize_tokens" title="langfair.generator.counterfactual.CounterfactualGenerator.neutralize_tokens"><code class="xref py py-obj docutils literal notranslate"><span class="pre">neutralize_tokens</span></code></a>(texts[, attribute])</p></td>
 <td><p>Neutralize gender and race words contained in a list of texts.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#langfair.generator.counterfactual.CounterfactualGenerator.parse_texts" title="langfair.generator.counterfactual.CounterfactualGenerator.parse_texts"><code class="xref py py-obj docutils literal notranslate"><span class="pre">parse_texts</span></code></a>(texts[, attribute, custom_list])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#langfair.generator.counterfactual.CounterfactualGenerator.parse_texts" title="langfair.generator.counterfactual.CounterfactualGenerator.parse_texts"><code class="xref py py-obj docutils literal notranslate"><span class="pre">parse_texts</span></code></a>(texts[, attribute, custom_list])</p></td>
 <td><p>Parses a list of texts for protected attribute words</p></td>
 </tr>
 </tbody>
 </table>
 </div>
+<dl class="py method">
+<dt class="sig sig-object py" id="langfair.generator.counterfactual.CounterfactualGenerator.check_ftu">
+<span class="sig-name descname"><span class="pre">check_ftu</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prompts</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attribute</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">custom_list</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subset_prompts</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langfair.generator.counterfactual.CounterfactualGenerator.check_ftu" title="Link to this definition">#</a></dt>
+<dd><p>Checks for fairness through unawarenss (FTU) based on a list of prompts and a specified protected
+attribute</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>prompts</strong> (<em>list</em><em> of </em><em>strings</em>) – A list of prompts to be parsed for protected attribute words</p></li>
+<li><p><strong>attribute</strong> (<em>{'race'</em><em>,</em><em>'gender'}</em><em>, </em><em>default=None</em>) – Specifies what to parse for among race words and gender words. Must be specified
+if custom_list is None</p></li>
+<li><p><strong>custom_list</strong> (<em>List</em><em>[</em><em>str</em><em>]</em><em>, </em><em>default=None</em>) – Custom list of tokens to use for parsing prompts. Must be provided if attribute is None.</p></li>
+<li><p><strong>subset_prompts</strong> (<em>bool</em><em>, </em><em>default=True</em>) – Indicates whether to return all prompts or only those containing attribute words</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><p>A dictionary with two keys: ‘data’ and ‘metadata’.</p>
+<dl>
+<dt>’data’<span class="classifier">dict</span></dt><dd><p>A dictionary containing the prompts and the attribute words they contain.</p>
+<dl class="simple">
+<dt>’prompt’<span class="classifier">list</span></dt><dd><p>A list of prompts.</p>
+</dd>
+<dt>’attribute_words’<span class="classifier">list</span></dt><dd><p>A list of attribute_words in each prompt.</p>
+</dd>
+</dl>
+</dd>
+<dt>’metadata’<span class="classifier">dict</span></dt><dd><p>A dictionary containing metadata related to FTU.</p>
+<dl class="simple">
+<dt>’ftu_satisfied’<span class="classifier">boolean</span></dt><dd><p>Boolean indicator of whether or not prompts satisfy FTU</p>
+</dd>
+<dt>’filtered_prompt_count’<span class="classifier">int</span></dt><dd><p>The number of prompts that satisfy FTU.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
 <dl class="py method">
 <dt class="sig sig-object py" id="langfair.generator.counterfactual.CounterfactualGenerator.create_prompts">
 <span class="sig-name descname"><span class="pre">create_prompts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prompts</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attribute</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">custom_dict</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langfair.generator.counterfactual.CounterfactualGenerator.create_prompts" title="Link to this definition">#</a></dt>
@@ -737,6 +783,7 @@ attribute words in provided text</p>
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#langfair.generator.counterfactual.CounterfactualGenerator"><code class="docutils literal notranslate"><span class="pre">CounterfactualGenerator</span></code></a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#langfair.generator.counterfactual.CounterfactualGenerator.__init__"><code class="docutils literal notranslate"><span class="pre">CounterfactualGenerator.__init__()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#langfair.generator.counterfactual.CounterfactualGenerator.check_ftu"><code class="docutils literal notranslate"><span class="pre">CounterfactualGenerator.check_ftu()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#langfair.generator.counterfactual.CounterfactualGenerator.create_prompts"><code class="docutils literal notranslate"><span class="pre">CounterfactualGenerator.create_prompts()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#langfair.generator.counterfactual.CounterfactualGenerator.estimate_token_cost"><code class="docutils literal notranslate"><span class="pre">CounterfactualGenerator.estimate_token_cost()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#langfair.generator.counterfactual.CounterfactualGenerator.generate_responses"><code class="docutils literal notranslate"><span class="pre">CounterfactualGenerator.generate_responses()</span></code></a></li>
