@@ -32,8 +32,9 @@ class SentimentBias(Metric):
         """
         Compute a counterfactual sentiment bias score leveraging a third-party sentiment classifier.
         Code adapted from helm package:
-        https://github.com/stanford-crfm/helm/blob/main/src/helm/benchmark/metrics/basic_metrics.py
-        For more information on this bias metric, refer to: https://arxiv.org/pdf/1911.03064.pdf
+        https://github.com/stanford-crfm/helm/blob/main/src/helm/benchmark/metrics/basic_metrics.py.
+        For more information on these metrics, see Huang et al. (2020) :footcite:`huang2020reducingsentimentbiaslanguage`
+        and Bouchard (2024) :footcite:`bouchard2024actionableframeworkassessingbias`.
 
         Parameters
         ----------
@@ -53,8 +54,8 @@ class SentimentBias(Metric):
             sentiment scores.
 
         how : {'mean','pairwise'}
-            Specifies whether to return the mean cosine similarity over all counterfactual pairs or a list containing cosine
-            distance for each pair.
+            Specifies whether to return the aggregate sentiment bias over all counterfactual pairs or a list containing difference 
+            in sentiment scores for each pair.
 
         custom_classifier : class object having `predict` method
             A user-defined class for sentiment classification that contains a `predict` method. The `predict` method must
@@ -78,6 +79,7 @@ class SentimentBias(Metric):
         self.sentiment = sentiment
         self.parity = parity
         self.threshold = threshold
+        self.how = how
         self.custom_classifier = custom_classifier
 
         if custom_classifier:
@@ -109,6 +111,10 @@ class SentimentBias(Metric):
         -------
         float
             Weak or strict counterfactual sentiment score for provided lists of texts.
+
+        References
+        ----------
+        .. footbibliography::
         """
         assert len(texts1) == len(texts2), """
         langfair: `texts1` and `texts2` must be of equal length
@@ -124,8 +130,11 @@ class SentimentBias(Metric):
             parity_value = np.mean(group_preds_1) - np.mean(group_preds_2)
         elif self.parity == "strong":
             parity_value = self._wasserstein_1_dist(group_dists[0], group_dists[1])
-
-        return parity_value
+        self.parity_value = parity_value
+        
+        return parity_value if self.how=="mean" else [
+            abs(group_dists[0][i] - group_dists[1][i]) for i in range(0, len(group_dists[0]))
+        ]
 
     def _get_sentiment_scores(self, texts: List[str]) -> List[float]:
         """Get sentiment scores"""
