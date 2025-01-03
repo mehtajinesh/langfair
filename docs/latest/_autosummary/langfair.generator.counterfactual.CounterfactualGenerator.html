@@ -608,26 +608,20 @@ if custom_list is None</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p><p>A dictionary with two keys: ‘data’ and ‘metadata’.
-‘data’ : dict</p>
-<blockquote>
-<div><p>A dictionary containing the prompts and responses.
-‘prompt’ : list</p>
-<blockquote>
-<div><p>A list of prompts.</p>
-</div></blockquote>
+<dd class="field-even"><p><p>A dictionary with two keys: ‘data’ and ‘metadata’.</p>
+<dl>
+<dt>’data’<span class="classifier">dict</span></dt><dd><p>A dictionary containing the prompts and the attribute words they contain.</p>
 <dl class="simple">
+<dt>’prompt’<span class="classifier">list</span></dt><dd><p>A list of prompts.</p>
+</dd>
 <dt>’attribute_words’<span class="classifier">list</span></dt><dd><p>A list of attribute_words in each prompt.</p>
 </dd>
 </dl>
-</div></blockquote>
-<dl>
-<dt>’metadata’<span class="classifier">dict</span></dt><dd><p>A dictionary containing metadata related to FTU.
-‘ftu_satisfied’ : boolean</p>
-<blockquote>
-<div><p>Boolean indicator of whether or not prompts satisfy FTU</p>
-</div></blockquote>
+</dd>
+<dt>’metadata’<span class="classifier">dict</span></dt><dd><p>A dictionary containing metadata related to FTU.</p>
 <dl class="simple">
+<dt>’ftu_satisfied’<span class="classifier">boolean</span></dt><dd><p>Boolean indicator of whether or not prompts satisfy FTU</p>
+</dd>
 <dt>’filtered_prompt_count’<span class="classifier">int</span></dt><dd><p>The number of prompts that satisfy FTU.</p>
 </dd>
 </dl>
