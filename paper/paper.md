@@ -46,7 +46,7 @@ Furthermore, LangFair is designed for real-world LLM-based systems that require 
 
 
 # Generation of Evaluation Datasets
-The `langfair.generator` module offers two classes, `ResponseGenerator` and `CounterfactualGenerator`, which aim to enable user-friendly construction of evaluation datasets for text generation use cases.
+The `langfair.generator` module offers two classes, `ResponseGenerator` and `Counterfactual`-`Generator`, which aim to enable user-friendly construction of evaluation datasets for text generation use cases.
 
 
 ### `ResponseGenerator` class
