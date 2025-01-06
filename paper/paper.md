@@ -46,7 +46,7 @@ Furthermore, LangFair is designed for real-world LLM-based systems that require 
 
 
 # Generation of Evaluation Datasets
-The `langfair.generator` module offers two classes, `ResponseGenerator` and `CounterfactualGenerator`, which aim to enable user-friendly construction of evaluation datasets for text generation use cases.
+The `langfair.generator` module offers two classes, `ResponseGenerator` and `Counterfactual`- `Generator`, which aim to enable user-friendly construction of evaluation datasets for text generation use cases.
 
 
 ### `ResponseGenerator` class
@@ -94,10 +94,10 @@ To streamline assessments for text generation use cases, the `AutoEval` class co
 
 
 ```python
-from langchain_google_vertexai import VertexAI
+from langchain_google_vertexai import ChatVertexAI
 from langfair.auto import AutoEval
 
-llm = VertexAI(model_name='gemini-pro')
+llm = ChatVertexAI(model_name='gemini-pro')
 auto_object = AutoEval(prompts=prompts, langchain_llm=llm)
 results = await auto_object.evaluate()
 ```
