@@ -567,8 +567,8 @@ see Bellamy et al. (2018) <a class="footnote-reference brackets" href="#footcite
 <tr class="row-odd"><td><p><a class="reference internal" href="#langfair.metrics.classification.metrics.false_omission.FalseOmissionRateParity.__init__" title="langfair.metrics.classification.metrics.false_omission.FalseOmissionRateParity.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>()</p></td>
 <td><p>This class computes false omission rate parity.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">binary_confusion_matrix</span></code>(y_true, y_pred)</p></td>
-<td><p></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#langfair.metrics.classification.metrics.false_omission.FalseOmissionRateParity.binary_confusion_matrix" title="langfair.metrics.classification.metrics.false_omission.FalseOmissionRateParity.binary_confusion_matrix"><code class="xref py py-obj docutils literal notranslate"><span class="pre">binary_confusion_matrix</span></code></a>(y_true, y_pred)</p></td>
+<td><p>Method for computing binary confusion matrix</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#langfair.metrics.classification.metrics.false_omission.FalseOmissionRateParity.evaluate" title="langfair.metrics.classification.metrics.false_omission.FalseOmissionRateParity.evaluate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">evaluate</span></code></a>(groups, y_pred, y_true[, ratio])</p></td>
 <td><p>This method computes disparity in false omission rates between two groups.</p></td>
@@ -576,6 +576,26 @@ see Bellamy et al. (2018) <a class="footnote-reference brackets" href="#footcite
 </tbody>
 </table>
 </div>
+<dl class="py method">
+<dt class="sig sig-object py" id="langfair.metrics.classification.metrics.false_omission.FalseOmissionRateParity.binary_confusion_matrix">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">binary_confusion_matrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_true</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_pred</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langfair.metrics.classification.metrics.false_omission.FalseOmissionRateParity.binary_confusion_matrix" title="Link to this definition">#</a></dt>
+<dd><p>Method for computing binary confusion matrix</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>y_true</strong> (<em>Array-like</em>) – Binary labels (ground truth values)</p></li>
+<li><p><strong>y_pred</strong> (<em>Array-like</em>) – Binary model predictions</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>2x2 confusion matrix</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List[List[float]]</p>
+</dd>
+</dl>
+</dd></dl>
+
 <dl class="py method">
 <dt class="sig sig-object py" id="langfair.metrics.classification.metrics.false_omission.FalseOmissionRateParity.evaluate">
 <span class="sig-name descname"><span class="pre">evaluate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">groups</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_pred</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_true</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ratio</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langfair.metrics.classification.metrics.false_omission.FalseOmissionRateParity.evaluate" title="Link to this definition">#</a></dt>
@@ -664,6 +684,7 @@ see Bellamy et al. (2018) <a class="footnote-reference brackets" href="#footcite
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#langfair.metrics.classification.metrics.false_omission.FalseOmissionRateParity"><code class="docutils literal notranslate"><span class="pre">FalseOmissionRateParity</span></code></a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#langfair.metrics.classification.metrics.false_omission.FalseOmissionRateParity.__init__"><code class="docutils literal notranslate"><span class="pre">FalseOmissionRateParity.__init__()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#langfair.metrics.classification.metrics.false_omission.FalseOmissionRateParity.binary_confusion_matrix"><code class="docutils literal notranslate"><span class="pre">FalseOmissionRateParity.binary_confusion_matrix()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#langfair.metrics.classification.metrics.false_omission.FalseOmissionRateParity.evaluate"><code class="docutils literal notranslate"><span class="pre">FalseOmissionRateParity.evaluate()</span></code></a></li>
 </ul>
 </li>
