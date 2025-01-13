@@ -622,26 +622,20 @@ or Gehman et al., 2020 (<a class="reference external" href="https://aclanthology
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p><p>A dictionary with two keys: ‘data’ and ‘metadata’.
-‘data’ : dict</p>
-<blockquote>
-<div><p>A dictionary containing the prompts and responses.
-‘prompt’ : list</p>
-<blockquote>
-<div><p>A list of prompts.</p>
-</div></blockquote>
+<dd class="field-even"><p><p>A dictionary with two keys: ‘data’ and ‘metadata’.</p>
+<dl>
+<dt>’data’<span class="classifier">dict</span></dt><dd><p>A dictionary containing the prompts and responses.</p>
 <dl class="simple">
+<dt>’prompt’<span class="classifier">list</span></dt><dd><p>A list of prompts.</p>
+</dd>
 <dt>’response’<span class="classifier">list</span></dt><dd><p>A list of responses corresponding to the prompts.</p>
 </dd>
 </dl>
-</div></blockquote>
-<dl>
-<dt>’metadata’<span class="classifier">dict</span></dt><dd><p>A dictionary containing metadata about the generation process.
-‘non_completion_rate’ : float</p>
-<blockquote>
-<div><p>The rate at which the generation process did not complete.</p>
-</div></blockquote>
+</dd>
+<dt>’metadata’<span class="classifier">dict</span></dt><dd><p>A dictionary containing metadata about the generation process.</p>
 <dl class="simple">
+<dt>’non_completion_rate’<span class="classifier">float</span></dt><dd><p>The rate at which the generation process did not complete.</p>
+</dd>
 <dt>’temperature’<span class="classifier">float</span></dt><dd><p>The temperature parameter used in the generation process.</p>
 </dd>
 <dt>’count’<span class="classifier">int</span></dt><dd><p>The count of prompts used in the generation process.</p>
