@@ -5,6 +5,7 @@ Here's a list of example notebooks for using the library. If you're interested i
 adding new ones please consult the guide on :ref:`how to contribute <guide>`.
 
 
+
 .. raw:: html
 
     <div class="sphx-glr-thumbnails">
@@ -13,7 +14,8 @@ adding new ones please consult the guide on :ref:`how to contribute <guide>`.
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" >
+    <div class="sphx-glr-thumbcontainer" tooltip="Classification Metrics">
+
 
 .. only:: html
 
@@ -24,8 +26,9 @@ adding new ones please consult the guide on :ref:`how to contribute <guide>`.
 
 .. raw:: html
 
-      
+      <div class="sphx-glr-thumbnail-title">Classification Metrics</div>
     </div>
+
 
 
 .. raw:: html
@@ -41,13 +44,13 @@ adding new ones please consult the guide on :ref:`how to contribute <guide>`.
 
 .. raw:: html
 
-      
+      <div class="sphx-glr-thumbnail-title">Recommendation Metrics</div>
     </div>
 
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="Auto Eval Demo - Dialogue Summarization">
+    <div class="sphx-glr-thumbcontainer" tooltip="Semi-Automated Assessment with AutoEval">
 
 .. only:: html
 
@@ -58,13 +61,13 @@ adding new ones please consult the guide on :ref:`how to contribute <guide>`.
 
 .. raw:: html
 
-      
-    </div>    
+      <div class="sphx-glr-thumbnail-title">Semi-Automated Assessment with AutoEval</div>
+    </div>  
 
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="Classification Metrics">
+    <div class="sphx-glr-thumbcontainer" tooltip="Counterfactual Fairness Assessment">
 
 .. only:: html
 
@@ -75,12 +78,12 @@ adding new ones please consult the guide on :ref:`how to contribute <guide>`.
 
 .. raw:: html
 
-      
+      <div class="sphx-glr-thumbnail-title">Counterfactual Fairness Assessment</div>
     </div>
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="Classification Metrics">
+    <div class="sphx-glr-thumbcontainer" tooltip="Stereotype Assessment">
 
 .. only:: html
 
@@ -91,13 +94,13 @@ adding new ones please consult the guide on :ref:`how to contribute <guide>`.
 
 .. raw:: html
 
-      
+      <div class="sphx-glr-thumbnail-title">Stereotype Assessment</div>
     </div>
 
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="Classification Metrics">
+    <div class="sphx-glr-thumbcontainer" tooltip="Toxicity Assessment">
 
 .. only:: html
 
@@ -108,13 +111,12 @@ adding new ones please consult the guide on :ref:`how to contribute <guide>`.
 
 .. raw:: html
 
-      
-    </div>        
-
+      <div class="sphx-glr-thumbnail-title">Toxicity Assessment</div>
+    </div>
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="Generators">
+    <div class="sphx-glr-thumbcontainer" tooltip="Demo of ResponseGenerator class">
 
 .. only:: html
 
@@ -125,8 +127,8 @@ adding new ones please consult the guide on :ref:`how to contribute <guide>`.
 
 .. raw:: html
 
-      
-    </div>                
+      <div class="sphx-glr-thumbnail-title">Demo of ResponseGenerator class</div>
+    </div>           
 
 .. thumbnail-parent-div-close
 

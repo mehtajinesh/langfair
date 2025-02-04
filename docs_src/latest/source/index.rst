@@ -33,7 +33,7 @@ Check out our featured resources to help you get started with LangFair.
 
 - 🚀 :doc:`Get started <usage>` in minutes 
 - 🔬 Explore our :doc:`framework for choosing metrics <choosing_metrics>`
-- 💡 Try our :doc:`guided examples <auto_examples/index>`
+- 💡 Try our :doc:`guided examples <notebooks/examples/index>`
 - 📖 Read the `research paper <https://arxiv.org/abs/2407.10853>`_
 
 
