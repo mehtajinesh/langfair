@@ -9,7 +9,7 @@ import sys
 
 sys.path.insert(
     0, os.path.abspath("../../../langfair")
-)  # lets sphinx find llambda code
+)  # lets sphinx find langfair code
 
 project = "LangFair"
 copyright = "2024, CVS Health"

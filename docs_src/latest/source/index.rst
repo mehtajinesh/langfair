@@ -1,4 +1,4 @@
-.. LLaMBDA documentation master file, created by
+.. LangFair documentation master file, created by
    sphinx-quickstart on Wed Jun 12 09:11:05 2024.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
@@ -31,10 +31,9 @@ Featured Resources
 
 Check out our featured resources to help you get started with LangFair.
 
-- 🚀 :doc:`Get started <usage>` in minutes 
-- 🔬 Explore our :doc:`framework for choosing metrics <choosing_metrics>`
-- 💡 Try our :doc:`guided examples <notebooks/examples/index>`
-- 📖 Read the `research paper <https://arxiv.org/abs/2407.10853>`_
+- 📝 `LangFair tutorial <https://medium.com/cvs-health-tech-blog/how-to-assess-your-llm-use-case-for-bias-and-fairness-with-langfair-7be89c0c4fab>`_ on Medium
+- 💻 `Software paper <https://arxiv.org/abs/2501.03112v1>`_ on how LangFair compares to other toolkits
+- 📖 `Research paper <https://arxiv.org/abs/2407.10853>`_ on our evaluation approach
 
 
 -----------
