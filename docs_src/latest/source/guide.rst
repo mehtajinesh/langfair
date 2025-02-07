@@ -92,7 +92,7 @@ Style Guides
 
 .. _code-style:
 Code Style
-*********
+**********
 
 - We use `Ruff <https://github.com/astral-sh/ruff>`_ to lint and format our files.
 - Our pre-commit hook will run Ruff linting and formatting when you commit.
