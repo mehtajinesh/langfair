@@ -28,5 +28,5 @@
    :template: module.rst
    :recursive:
 
-   langfair.auto.auto
+   auto
 

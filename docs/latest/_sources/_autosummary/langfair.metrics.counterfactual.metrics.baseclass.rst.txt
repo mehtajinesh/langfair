@@ -28,5 +28,5 @@ langfair.metrics.counterfactual.metrics.baseclass
    :template: module.rst
    :recursive:
 
-   langfair.metrics.counterfactual.metrics.baseclass.metrics
+   metrics
 

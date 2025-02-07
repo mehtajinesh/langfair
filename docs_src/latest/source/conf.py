@@ -25,8 +25,9 @@ extensions = [
     "sphinx.ext.napoleon",
     "sphinx_autodoc_typehints",
     "sphinxcontrib.bibtex",
-    "sphinx_gallery.gen_gallery",
+    'nbsphinx'
 ]
+nbsphinx_execute='never'
 
 bibtex_bibfiles = ["refs.bib"]
 
@@ -37,6 +38,8 @@ autosummary_generate = True
 templates_path = ["_templates"]
 
 html_static_path = ["_static"]
+
+html_css_files = ['custom.css']
 
 exclude_patterns = []
 
@@ -57,14 +60,5 @@ html_theme_options = {
 }
 
 html_favicon = "_static/images/langfair-logo-only.png"
-
-sphinx_gallery_conf = {
-    # "reference_url": {"langfair": None},
-    "examples_dirs": "../../../example_scripts",
-    "gallery_dirs": "auto_examples",
-    # pypandoc enables rst to md conversion in downloadable notebooks
-    # "pypandoc": True,
-    # "doc_module": ("langfair",),
-}
 
 source_suffix = [".rst"]

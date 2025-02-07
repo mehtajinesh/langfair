@@ -28,6 +28,6 @@ langfair.metrics.stereotype
    :template: module.rst
    :recursive:
 
-   langfair.metrics.stereotype.metrics
-   langfair.metrics.stereotype.stereotype
+   metrics
+   stereotype
 

@@ -31,10 +31,7 @@
 <link href="_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
-    <link rel="stylesheet" type="text/css" href="_static/sg_gallery.css?v=d2d258e8" />
-    <link rel="stylesheet" type="text/css" href="_static/sg_gallery-binder.css?v=f4aeca0c" />
-    <link rel="stylesheet" type="text/css" href="_static/sg_gallery-dataframe.css?v=2082cf3c" />
-    <link rel="stylesheet" type="text/css" href="_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=3ffa509f" />
   
   <!-- So that users can add custom icons -->
   <script src="_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
@@ -45,7 +42,9 @@
     <script src="_static/documentation_options.js?v=b489f392"></script>
     <script src="_static/doctools.js?v=9a2dae69"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'index';</script>
     <script>
         DOCUMENTATION_OPTIONS.theme_version = '0.16.1';
@@ -60,7 +59,7 @@
     <link rel="next" title="Quickstart Guide" href="usage.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="0.3.1" />
+  <meta name="docsearch:version" content="0.3.2" />
   </head>
   
   
@@ -164,7 +163,7 @@
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-internal" href="auto_examples/index.html">
+  <a class="nav-link nav-internal" href="notebooks/examples/index.html">
     Example Notebooks
   </a>
 </li>
@@ -309,7 +308,7 @@
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-internal" href="auto_examples/index.html">
+  <a class="nav-link nav-internal" href="notebooks/examples/index.html">
     Example Notebooks
   </a>
 </li>
@@ -414,7 +413,7 @@
 <p>🎯 <strong>Get Actionable Metrics</strong>: Measure toxicity, stereotypes, and fairness with applicable metrics</p>
 <p>🔍 <strong>Make Informed Decisions</strong>: Use our framework to choose the right evaluation metrics</p>
 <p>🛠️ <strong>Integrate with Workflows</strong>: Easy-to-use Python interface for seamless implementation</p>
-<p><a class="reference internal" href="usage.html"><span class="doc">Get Started →</span></a> | <a class="reference internal" href="auto_examples/index.html"><span class="doc">View Examples →</span></a></p>
+<p><a class="reference internal" href="usage.html"><span class="doc">Get Started →</span></a> | <a class="reference internal" href="notebooks/examples/index.html"><span class="doc">View Examples →</span></a></p>
 <section id="why-langfair">
 <h2>Why LangFair?<a class="headerlink" href="#why-langfair" title="Link to this heading">#</a></h2>
 <p>Static benchmark assessments, which are typically assumed to be sufficiently representative, often fall short in capturing the risks associated with all possible use cases of LLMs. These models are increasingly used in various applications, including recommendation systems, classification, text generation, and summarization. However, evaluating these models without considering use-case-specific prompts can lead to misleading assessments of their performance, especially regarding bias and fairness risks.</p>
@@ -426,7 +425,7 @@
 <ul class="simple">
 <li><p>🚀 <a class="reference internal" href="usage.html"><span class="doc">Get started</span></a> in minutes</p></li>
 <li><p>🔬 Explore our <a class="reference internal" href="choosing_metrics.html"><span class="doc">framework for choosing metrics</span></a></p></li>
-<li><p>💡 Try our <a class="reference internal" href="auto_examples/index.html"><span class="doc">guided examples</span></a></p></li>
+<li><p>💡 Try our <a class="reference internal" href="notebooks/examples/index.html"><span class="doc">guided examples</span></a></p></li>
 <li><p>📖 Read the <a class="reference external" href="https://arxiv.org/abs/2407.10853">research paper</a></p></li>
 </ul>
 <hr class="docutils" />
@@ -436,7 +435,7 @@
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Get Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="choosing_metrics.html">Choosing Metrics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
-<li class="toctree-l1"><a class="reference internal" href="auto_examples/index.html">Example Notebooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/examples/index.html">Example Notebooks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="guide.html">Contributor Guide</a></li>
 </ul>
 </div>
@@ -529,7 +528,7 @@
         <div class="footer-item">
 
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.3.7.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.4.7.
     <br/>
   </p>
 </div>

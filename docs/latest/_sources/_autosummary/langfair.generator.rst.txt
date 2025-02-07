@@ -28,6 +28,6 @@
    :template: module.rst
    :recursive:
 
-   langfair.generator.counterfactual
-   langfair.generator.generator
+   counterfactual
+   generator
 

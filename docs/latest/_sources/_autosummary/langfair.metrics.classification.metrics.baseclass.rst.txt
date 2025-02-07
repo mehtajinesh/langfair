@@ -28,5 +28,5 @@ langfair.metrics.classification.metrics.baseclass
    :template: module.rst
    :recursive:
 
-   langfair.metrics.classification.metrics.baseclass.metrics
+   metrics
 

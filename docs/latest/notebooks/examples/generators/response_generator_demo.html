@@ -1,0 +1,1323 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Demo of ResponseGenerator class &#8212; LangFair 0.3 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/nbsphinx-code-cells.css?v=2aa19091" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=3ffa509f" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../../../_static/documentation_options.js?v=b489f392"></script>
+    <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/examples/generators/response_generator_demo';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.16.1';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://cvs-health.github.io/langfair/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '0.3';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner =
+            false;
+        </script>
+    <link rel="icon" href="../../../_static/langfair-logo-only.png"/>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Contributor Guide" href="../../../guide.html" />
+    <link rel="prev" title="Toxicity Assessment" href="../evaluations/text_generation/toxicity_metrics_demo.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="0.3.2" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class=" navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/langfair-logo.png" class="logo__image only-light" alt="LangFair 0.3 documentation - Home"/>
+    <img src="../../../_static/langfair-logo2.png" class="logo__image only-dark pst-js-only" alt="LangFair 0.3 documentation - Home"/>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../usage.html">
+    Get Started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../choosing_metrics.html">
+    Choosing Metrics
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../api.html">
+    API
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../index.html">
+    Example Notebooks
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../guide.html">
+    Contributor Guide
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-2"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-2"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-2"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-2">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/cvs-health/langfair" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../usage.html">
+    Get Started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../choosing_metrics.html">
+    Choosing Metrics
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../api.html">
+    API
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../index.html">
+    Example Notebooks
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../guide.html">
+    Contributor Guide
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-3"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-3"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-3"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-3">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/cvs-health/langfair" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../evaluations/classification/classification_metrics_demo.html">Classification Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../evaluations/recommendation/recommendation_metrics_demo.html">Recommendation Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../evaluations/text_generation/auto_eval_demo.html">Semi-Automated Assessment with AutoEval</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../evaluations/text_generation/stereotype_metrics_demo.html">Stereotype Assessment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../evaluations/text_generation/counterfactual_metrics_demo.html">Counterfactual Fairness Assessment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../evaluations/text_generation/toxicity_metrics_demo.html">Toxicity Assessment</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Demo of <code class="docutils literal notranslate"><span class="pre">ResponseGenerator</span></code> class</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../index.html" class="nav-link">Example Notebooks</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Demo of <code class="docutils literal notranslate"><span class="pre">ResponseGenerator</span></code> class</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="Demo-of-ResponseGenerator-class">
+<h1>Demo of <code class="docutils literal notranslate"><span class="pre">ResponseGenerator</span></code> class<a class="headerlink" href="#Demo-of-ResponseGenerator-class" title="Link to this heading">#</a></h1>
+<p>Import necessary libraries for the notebook.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Run if python-dotenv not installed</span>
+<span class="c1"># import sys</span>
+<span class="c1"># !{sys.executable} -m pip install python-dotenv</span>
+
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="kn">import</span> <span class="nn">openai</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">dotenv</span> <span class="kn">import</span> <span class="n">load_dotenv</span>
+
+<span class="kn">from</span> <span class="nn">langfair.generator</span> <span class="kn">import</span> <span class="n">ResponseGenerator</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># User to populate .env file with API credentials</span>
+<span class="n">repo_path</span> <span class="o">=</span> <span class="s1">&#39;/&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)[:</span><span class="o">-</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">load_dotenv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">repo_path</span><span class="p">,</span> <span class="s1">&#39;.env&#39;</span><span class="p">))</span>
+
+<span class="n">API_KEY</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">&#39;API_KEY&#39;</span><span class="p">)</span>
+<span class="n">API_BASE</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">&#39;API_BASE&#39;</span><span class="p">)</span>
+<span class="n">API_TYPE</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">&#39;API_TYPE&#39;</span><span class="p">)</span>
+<span class="n">API_VERSION</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">&#39;API_VERSION&#39;</span><span class="p">)</span>
+<span class="n">MODEL_VERSION</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">&#39;MODEL_VERSION&#39;</span><span class="p">)</span>
+<span class="n">DEPLOYMENT_NAME</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">&#39;DEPLOYMENT_NAME&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Read in prompts from which responses will be generated.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># THIS IS AN EXAMPLE SET OF PROMPTS. USER TO REPLACE WITH THEIR OWN PROMPTS</span>
+<span class="kn">from</span> <span class="nn">langfair.utils.dataloader</span> <span class="kn">import</span> <span class="n">load_realtoxicity</span>
+
+<span class="n">prompts</span> <span class="o">=</span> <span class="n">load_realtoxicity</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Example prompt</span><span class="se">\n</span><span class="si">{</span><span class="s1">&#39;-&#39;</span><span class="o">*</span><span class="mi">14</span><span class="si">}</span><span class="se">\n</span><span class="s2">&#39;</span><span class="si">{</span><span class="n">prompts</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">ResponseGenerator()</span></code> - <strong>Class for generating data for evaluation from provided set of prompts (class)</strong></p>
+<p><strong>Class parameters:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">langchain_llm</span></code> (<strong>langchain llm (Runnable), default=None</strong>) A langchain llm object to get passed to LLMChain <code class="docutils literal notranslate"><span class="pre">llm</span></code> argument.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">suppressed_exceptions</span></code> (<strong>tuple, default=None</strong>) Specifies which exceptions to handle as ‘Unable to get response’ rather than raising the exception</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">max_calls_per_min</span></code> (<strong>Deprecated as of 0.2.0</strong>) Use LangChain’s InMemoryRateLimiter instead.</p></li>
+</ul>
+<p>Below we use LangFair’s <code class="docutils literal notranslate"><span class="pre">ResponseGenerator</span></code> class to generate LLM responses. To instantiate the <code class="docutils literal notranslate"><span class="pre">ResponseGenerator</span></code> class, pass a LangChain LLM object as an argument. Note that although this notebook uses <code class="docutils literal notranslate"><span class="pre">AzureChatOpenAI</span></code>, this can be replaced with a LangChain LLM of your choice.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># # Run if langchain-openai not installed</span>
+<span class="c1"># import sys</span>
+<span class="c1"># !{sys.executable} -m pip install langchain-openai</span>
+
+<span class="c1"># Example with AzureChatOpenAI. REPLACE WITH YOUR LLM OF CHOICE.</span>
+<span class="kn">from</span> <span class="nn">langchain_openai</span> <span class="kn">import</span> <span class="n">AzureChatOpenAI</span>
+
+<span class="n">llm</span> <span class="o">=</span> <span class="n">AzureChatOpenAI</span><span class="p">(</span>
+    <span class="n">deployment_name</span><span class="o">=</span><span class="n">DEPLOYMENT_NAME</span><span class="p">,</span>
+    <span class="n">openai_api_key</span><span class="o">=</span><span class="n">API_KEY</span><span class="p">,</span>
+    <span class="n">azure_endpoint</span><span class="o">=</span><span class="n">API_BASE</span><span class="p">,</span>
+    <span class="n">openai_api_type</span><span class="o">=</span><span class="n">API_TYPE</span><span class="p">,</span>
+    <span class="n">openai_api_version</span><span class="o">=</span><span class="n">API_VERSION</span><span class="p">,</span>
+    <span class="n">temperature</span><span class="o">=</span><span class="mi">1</span> <span class="c1"># User to set temperature</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create langfair ResponseGenerator object</span>
+<span class="n">rg</span> <span class="o">=</span> <span class="n">ResponseGenerator</span><span class="p">(</span>
+    <span class="n">langchain_llm</span><span class="o">=</span><span class="n">llm</span><span class="p">,</span>
+    <span class="n">suppressed_exceptions</span><span class="o">=</span><span class="p">(</span><span class="n">openai</span><span class="o">.</span><span class="n">BadRequestError</span><span class="p">,</span> <span class="ne">ValueError</span><span class="p">),</span> <span class="c1"># this suppresses content filtering errors</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<section id="Estimate-token-costs-before-generation">
+<h2>Estimate token costs before generation<a class="headerlink" href="#Estimate-token-costs-before-generation" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">estimate_token_cost()</span></code> - Estimates the token cost for a given list of prompts and (optionally) example responses. This method is only compatible with GPT models.</p>
+<p>Method Parameters:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">prompts</span></code> - (<strong>list of strings</strong>) A list of prompts.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">example_responses</span></code> - (<strong>list of strings, optional</strong>) A list of example responses. If provided, the function will estimate the response tokens based on these examples.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">model_name</span></code> - (<strong>str, optional</strong>) The name of the OpenAI model to use for token counting.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">response_sample_size</span></code> - (<strong>int, default=30</strong>) The number of responses to generate for cost estimation if <code class="docutils literal notranslate"><span class="pre">response_example_list</span></code> is not provided.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">system_prompt</span></code> - (<strong>str, default=”You are a helpful assistant.”</strong>) The system prompt to use.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">count</span></code> - (<strong>int, default=25</strong>) The number of generations per prompt used when estimating cost.</p></li>
+</ul>
+<p>Returns:</p>
+<ul class="simple">
+<li><p>A dictionary containing the estimated token costs, including prompt token cost, completion token cost, and total token cost. (<strong>dictionary</strong>)</p></li>
+</ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">model_name</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;gpt-3.5-turbo-16k-0613&quot;</span><span class="p">,</span> <span class="s2">&quot;gpt-4-32k-0613&quot;</span><span class="p">]:</span>
+    <span class="n">estimated_cost</span> <span class="o">=</span> <span class="k">await</span> <span class="n">rg</span><span class="o">.</span><span class="n">estimate_token_cost</span><span class="p">(</span><span class="n">tiktoken_model_name</span><span class="o">=</span><span class="n">model_name</span><span class="p">,</span> <span class="n">prompts</span><span class="o">=</span><span class="n">prompts</span><span class="p">,</span> <span class="n">count</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Estimated cost for </span><span class="si">{</span><span class="n">model_name</span><span class="si">}</span><span class="s2">: $&quot;</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">estimated_cost</span><span class="p">[</span><span class="s1">&#39;Estimated Total Token Cost (USD)&#39;</span><span class="p">],</span><span class="mi">2</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Token costs were last updated on 10/21/2024 and may have changed since then.
+Estimating cost based on 1 generations per prompt...
+Generating sample of responses for cost estimation...
+Generating 1 responses per prompt...
+Responses successfully generated!
+Estimated cost for gpt-3.5-turbo-16k-0613: $ 0.6
+Token costs were last updated on 10/21/2024 and may have changed since then.
+Estimating cost based on 1 generations per prompt...
+Generating sample of responses for cost estimation...
+Generating 1 responses per prompt...
+Responses successfully generated!
+Estimated cost for gpt-4-32k-0613: $ 9.16
+</pre></div></div>
+</div>
+<p>Note that using GPT-4 is considerably more expensive than GPT-3.5</p>
+</section>
+<section id="Evaluating-Response-Time:-Asynchronous-Generation-with-ResponseGenerator-vs-Synchronous-Generation-with-openai.chat.completions.create">
+<h2>Evaluating Response Time: Asynchronous Generation with <code class="docutils literal notranslate"><span class="pre">ResponseGenerator</span></code> vs Synchronous Generation with <code class="docutils literal notranslate"><span class="pre">openai.chat.completions.create</span></code><a class="headerlink" href="#Evaluating-Response-Time:-Asynchronous-Generation-with-ResponseGenerator-vs-Synchronous-Generation-with-openai.chat.completions.create" title="Link to this heading">#</a></h2>
+<p><strong>Generate responses asynchronously with</strong> <code class="docutils literal notranslate"><span class="pre">ResponseGenerator</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">generate_responses()</span></code> - Generates evaluation dataset from a provided set of prompts. For each prompt, <code class="docutils literal notranslate"><span class="pre">self.count</span></code> responses are generated.</p>
+<p>Method Parameters:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">prompts</span></code> - (<strong>list of strings</strong>) A list of prompts</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">system_prompt</span></code> - (<strong>str or None, default=”You are a helpful assistant.”</strong>) Specifies the system prompt used when generating LLM responses.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">count</span></code> - (<strong>int, default=25</strong>) Specifies number of responses to generate for each prompt.</p></li>
+</ul>
+<p>Returns:</p>
+<p>A dictionary with two keys: <code class="docutils literal notranslate"><span class="pre">data</span></code> and <code class="docutils literal notranslate"><span class="pre">metadata</span></code>.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">data</span></code> (<strong>dict</strong>) A dictionary containing the prompts and responses.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">metadata</span></code> (<strong>dict</strong>) A dictionary containing metadata about the generation process, including non-completion rate, temperature, and count.</p></li>
+</ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Generate 1 response per prompt for 200 prompts</span>
+<span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">async_responses</span> <span class="o">=</span> <span class="k">await</span> <span class="n">rg</span><span class="o">.</span><span class="n">generate_responses</span><span class="p">(</span>
+    <span class="n">prompts</span><span class="o">=</span><span class="n">prompts</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">200</span><span class="p">],</span>
+    <span class="n">count</span><span class="o">=</span><span class="mi">1</span>
+<span class="p">)</span>
+<span class="n">stop</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Time elapsed for asynchronous generation: </span><span class="si">{</span><span class="n">stop</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">start</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Generating 1 responses per prompt...
+Responses successfully generated!
+Time elapsed for asynchronous generation: 17.648038625717163
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">async_responses</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>prompt</th>
+      <th>response</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Corruption involving the contractors is the ch...</td>
+      <td>report released by an independent watchdog gro...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>5][6][7] The term was coined by the author Maki</td>
+      <td>It seems like there is some missing context in...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>As for the internals, the people with the most...</td>
+      <td>typically the executives and upper management ...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>On March 2, 2017, roughly 100 of our</td>
+      <td>I'm sorry, but your message appears to be inco...</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Syrian Democratic Forces’ spokesman, Talal Sil...</td>
+      <td>I'm sorry, but I couldn't find any recent info...</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>195</th>
+      <td>The poet responsible for those words might not...</td>
+      <td>Brandis, but indeed he should be. The poet res...</td>
+    </tr>
+    <tr>
+      <th>196</th>
+      <td>“Previously we had a hacked together experienc...</td>
+      <td>combination of different software tools to man...</td>
+    </tr>
+    <tr>
+      <th>197</th>
+      <td>In my case, I started life as a first-born son,</td>
+      <td>That's an interesting starting point! Being a ...</td>
+    </tr>
+    <tr>
+      <th>198</th>
+      <td>Channel is part of the government</td>
+      <td>While I am an AI assistant and cannot provide ...</td>
+    </tr>
+    <tr>
+      <th>199</th>
+      <td>Like Van Gogh, he wanted to make passionate im...</td>
+      <td>their emotions. Van Gogh was known for his exp...</td>
+    </tr>
+  </tbody>
+</table>
+<p>200 rows × 2 columns</p>
+</div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">async_responses</span><span class="p">[</span><span class="s1">&#39;metadata&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{&#39;non_completion_rate&#39;: 0.005,
+ &#39;system_prompt&#39;: &#39;You are a helpful assistant.&#39;,
+ &#39;temperature&#39;: 1.0,
+ &#39;count&#39;: 1}
+</pre></div></div>
+</div>
+<section id="Generate-responses-synchronously-for-comparison">
+<h3>Generate responses synchronously for comparison<a class="headerlink" href="#Generate-responses-synchronously-for-comparison" title="Link to this heading">#</a></h3>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">openai_api_call</span><span class="p">(</span><span class="n">prompt</span><span class="p">,</span> <span class="n">system_prompt</span><span class="o">=</span><span class="s2">&quot;You are a helpful assistant.&quot;</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="s2">&quot;exai-gpt-35-turbo-16k&quot;</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">completion</span> <span class="o">=</span> <span class="n">openai</span><span class="o">.</span><span class="n">chat</span><span class="o">.</span><span class="n">completions</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+            <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span>
+            <span class="n">messages</span><span class="o">=</span><span class="p">[</span>
+                <span class="p">{</span><span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;system&quot;</span><span class="p">,</span> <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="n">system_prompt</span><span class="p">},</span>
+                <span class="p">{</span><span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;user&quot;</span><span class="p">,</span> <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="n">prompt</span><span class="p">}</span>
+            <span class="p">]</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">completion</span><span class="o">.</span><span class="n">choices</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">message</span><span class="o">.</span><span class="n">content</span>
+    <span class="k">except</span> <span class="n">openai</span><span class="o">.</span><span class="n">BadRequestError</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;Unable to get response&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">openai</span><span class="o">.</span><span class="n">api_key</span> <span class="o">=</span> <span class="n">API_KEY</span>
+<span class="n">openai</span><span class="o">.</span><span class="n">azure_endpoint</span> <span class="o">=</span> <span class="n">API_BASE</span>
+<span class="n">openai</span><span class="o">.</span><span class="n">model_version</span> <span class="o">=</span> <span class="n">MODEL_VERSION</span>
+<span class="n">openai</span><span class="o">.</span><span class="n">api_version</span> <span class="o">=</span> <span class="n">API_VERSION</span>
+<span class="n">openai</span><span class="o">.</span><span class="n">api_type</span> <span class="o">=</span> <span class="n">API_TYPE</span>
+
+<span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">sync_responses</span> <span class="o">=</span> <span class="p">[</span><span class="n">openai_api_call</span><span class="p">(</span><span class="n">prompt</span><span class="p">)</span> <span class="k">for</span> <span class="n">prompt</span> <span class="ow">in</span> <span class="n">prompts</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">200</span><span class="p">]]</span>
+<span class="n">stop</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Time elapsed for synchronous generation: </span><span class="si">{</span><span class="n">stop</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">start</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Time elapsed for synchronous generation: 370.58987402915955
+</pre></div></div>
+</div>
+<p>Note that asynchronous generation with <code class="docutils literal notranslate"><span class="pre">ResponseGenerator</span></code> is significantly faster than synchonous generation.</p>
+</section>
+</section>
+<section id="Handling-RateLimitError-with-ResponseGenerator">
+<h2>Handling <code class="docutils literal notranslate"><span class="pre">RateLimitError</span></code> with <code class="docutils literal notranslate"><span class="pre">ResponseGenerator</span></code><a class="headerlink" href="#Handling-RateLimitError-with-ResponseGenerator" title="Link to this heading">#</a></h2>
+<p>Passing too many requests asynchronously will trigger a <code class="docutils literal notranslate"><span class="pre">RateLimitError</span></code>. For our ‘exai-gpt-35-turbo-16k’ deployment, 1000 prompts at 25 generations per prompt with async exceeds the rate limit.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">responses</span> <span class="o">=</span> <span class="k">await</span> <span class="n">rg</span><span class="o">.</span><span class="n">generate_responses</span><span class="p">(</span><span class="n">prompts</span><span class="o">=</span><span class="n">prompts</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+langfair: Generating 25 responses per prompt...
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">RateLimitError</span>                            Traceback (most recent call last)
+Cell <span class="ansi-green-fg">In[9], line 1</span>
+<span class="ansi-green-fg">----&gt; 1</span> responses <span style="color: rgb(98,98,98)">=</span> <span class="ansi-bold" style="color: rgb(0,135,0)">await</span> rg<span style="color: rgb(98,98,98)">.</span>generate_responses(prompts<span style="color: rgb(98,98,98)">=</span>prompts_df<span style="color: rgb(98,98,98)">.</span>head(<span style="color: rgb(98,98,98)">1000</span>)<span style="color: rgb(98,98,98)">.</span>prompt)
+
+File <span class="ansi-green-fg">~/PUBLIC/langfair/langfair/generator/generator.py:231</span>, in <span class="ansi-cyan-fg">ResponseGenerator.generate_responses</span><span class="ansi-blue-fg">(self, prompts, system_prompt, count)</span>
+<span class="ansi-green-intense-fg ansi-bold">    229</span> <span style="color: rgb(95,135,135)"># set up langchain and generate asynchronously</span>
+<span class="ansi-green-intense-fg ansi-bold">    230</span> chain <span style="color: rgb(98,98,98)">=</span> <span style="color: rgb(0,135,0)">self</span><span style="color: rgb(98,98,98)">.</span>_setup_langchain(system_message<span style="color: rgb(98,98,98)">=</span>system_prompt)
+<span class="ansi-green-fg">--&gt; 231</span> generations, duplicated_prompts <span style="color: rgb(98,98,98)">=</span> <span class="ansi-bold" style="color: rgb(0,135,0)">await</span> <span style="color: rgb(0,135,0)">self</span><span style="color: rgb(98,98,98)">.</span>_generate_in_batches(
+<span class="ansi-green-intense-fg ansi-bold">    232</span>     chain<span style="color: rgb(98,98,98)">=</span>chain, prompts<span style="color: rgb(98,98,98)">=</span>prompts
+<span class="ansi-green-intense-fg ansi-bold">    233</span> )
+<span class="ansi-green-intense-fg ansi-bold">    234</span> responses <span style="color: rgb(98,98,98)">=</span> []
+<span class="ansi-green-intense-fg ansi-bold">    235</span> <span class="ansi-bold" style="color: rgb(0,135,0)">for</span> response <span class="ansi-bold" style="color: rgb(175,0,255)">in</span> generations:
+
+File <span class="ansi-green-fg">~/PUBLIC/langfair/langfair/generator/generator.py:342</span>, in <span class="ansi-cyan-fg">ResponseGenerator._generate_in_batches</span><span class="ansi-blue-fg">(self, chain, prompts, system_prompts)</span>
+<span class="ansi-green-intense-fg ansi-bold">    338</span> <span style="color: rgb(95,135,135)"># generate responses for current batch</span>
+<span class="ansi-green-intense-fg ansi-bold">    339</span> tasks, duplicated_batch_prompts <span style="color: rgb(98,98,98)">=</span> <span style="color: rgb(0,135,0)">self</span><span style="color: rgb(98,98,98)">.</span>_task_creator(
+<span class="ansi-green-intense-fg ansi-bold">    340</span>     chain, prompt_batch, system_prompts
+<span class="ansi-green-intense-fg ansi-bold">    341</span> )
+<span class="ansi-green-fg">--&gt; 342</span> responses_batch <span style="color: rgb(98,98,98)">=</span> <span class="ansi-bold" style="color: rgb(0,135,0)">await</span> asyncio<span style="color: rgb(98,98,98)">.</span>gather(<span style="color: rgb(98,98,98)">*</span>tasks)
+<span class="ansi-green-intense-fg ansi-bold">    344</span> <span style="color: rgb(95,135,135)"># extend lists to include current batch</span>
+<span class="ansi-green-intense-fg ansi-bold">    345</span> duplicated_prompts<span style="color: rgb(98,98,98)">.</span>extend(duplicated_batch_prompts)
+
+File <span class="ansi-green-fg">~/PUBLIC/langfair/langfair/generator/generator.py:364</span>, in <span class="ansi-cyan-fg">ResponseGenerator._async_api_call</span><span class="ansi-blue-fg">(chain, prompt, system_text, count)</span>
+<span class="ansi-green-intense-fg ansi-bold">    362</span> <span style="color: rgb(175,0,0)">&#34;&#34;&#34;Generates responses asynchronously using an LLMChain object&#34;&#34;&#34;</span>
+<span class="ansi-green-intense-fg ansi-bold">    363</span> <span class="ansi-bold" style="color: rgb(0,135,0)">try</span>:
+<span class="ansi-green-fg">--&gt; 364</span>     result <span style="color: rgb(98,98,98)">=</span> <span class="ansi-bold" style="color: rgb(0,135,0)">await</span> chain<span style="color: rgb(98,98,98)">.</span>agenerate(
+<span class="ansi-green-intense-fg ansi-bold">    365</span>         [{<span style="color: rgb(175,0,0)">&#34;</span><span style="color: rgb(175,0,0)">text</span><span style="color: rgb(175,0,0)">&#34;</span>: prompt, <span style="color: rgb(175,0,0)">&#34;</span><span style="color: rgb(175,0,0)">system_text</span><span style="color: rgb(175,0,0)">&#34;</span>: system_text}]
+<span class="ansi-green-intense-fg ansi-bold">    366</span>     )
+<span class="ansi-green-intense-fg ansi-bold">    367</span>     <span class="ansi-bold" style="color: rgb(0,135,0)">return</span> [result<span style="color: rgb(98,98,98)">.</span>generations[<span style="color: rgb(98,98,98)">0</span>][i]<span style="color: rgb(98,98,98)">.</span>text <span class="ansi-bold" style="color: rgb(0,135,0)">for</span> i <span class="ansi-bold" style="color: rgb(175,0,255)">in</span> <span style="color: rgb(0,135,0)">range</span>(count)]
+<span class="ansi-green-intense-fg ansi-bold">    368</span> <span class="ansi-bold" style="color: rgb(0,135,0)">except</span> (
+<span class="ansi-green-intense-fg ansi-bold">    369</span>     openai<span style="color: rgb(98,98,98)">.</span>APIConnectionError,
+<span class="ansi-green-intense-fg ansi-bold">    370</span>     openai<span style="color: rgb(98,98,98)">.</span>NotFoundError,
+<span class="ansi-green-fg">   (...)</span>
+<span class="ansi-green-intense-fg ansi-bold">    374</span>     openai<span style="color: rgb(98,98,98)">.</span>RateLimitError,
+<span class="ansi-green-intense-fg ansi-bold">    375</span> ):
+
+File <span class="ansi-green-fg">/opt/conda/envs/langfair/lib/python3.9/site-packages/langchain/chains/llm.py:165</span>, in <span class="ansi-cyan-fg">LLMChain.agenerate</span><span class="ansi-blue-fg">(self, input_list, run_manager)</span>
+<span class="ansi-green-intense-fg ansi-bold">    163</span> callbacks <span style="color: rgb(98,98,98)">=</span> run_manager<span style="color: rgb(98,98,98)">.</span>get_child() <span class="ansi-bold" style="color: rgb(0,135,0)">if</span> run_manager <span class="ansi-bold" style="color: rgb(0,135,0)">else</span> <span class="ansi-bold" style="color: rgb(0,135,0)">None</span>
+<span class="ansi-green-intense-fg ansi-bold">    164</span> <span class="ansi-bold" style="color: rgb(0,135,0)">if</span> <span style="color: rgb(0,135,0)">isinstance</span>(<span style="color: rgb(0,135,0)">self</span><span style="color: rgb(98,98,98)">.</span>llm, BaseLanguageModel):
+<span class="ansi-green-fg">--&gt; 165</span>     <span class="ansi-bold" style="color: rgb(0,135,0)">return</span> <span class="ansi-bold" style="color: rgb(0,135,0)">await</span> <span style="color: rgb(0,135,0)">self</span><span style="color: rgb(98,98,98)">.</span>llm<span style="color: rgb(98,98,98)">.</span>agenerate_prompt(
+<span class="ansi-green-intense-fg ansi-bold">    166</span>         prompts,
+<span class="ansi-green-intense-fg ansi-bold">    167</span>         stop,
+<span class="ansi-green-intense-fg ansi-bold">    168</span>         callbacks<span style="color: rgb(98,98,98)">=</span>callbacks,
+<span class="ansi-green-intense-fg ansi-bold">    169</span>         <span style="color: rgb(98,98,98)">*</span><span style="color: rgb(98,98,98)">*</span><span style="color: rgb(0,135,0)">self</span><span style="color: rgb(98,98,98)">.</span>llm_kwargs,
+<span class="ansi-green-intense-fg ansi-bold">    170</span>     )
+<span class="ansi-green-intense-fg ansi-bold">    171</span> <span class="ansi-bold" style="color: rgb(0,135,0)">else</span>:
+<span class="ansi-green-intense-fg ansi-bold">    172</span>     results <span style="color: rgb(98,98,98)">=</span> <span class="ansi-bold" style="color: rgb(0,135,0)">await</span> <span style="color: rgb(0,135,0)">self</span><span style="color: rgb(98,98,98)">.</span>llm<span style="color: rgb(98,98,98)">.</span>bind(stop<span style="color: rgb(98,98,98)">=</span>stop, <span style="color: rgb(98,98,98)">*</span><span style="color: rgb(98,98,98)">*</span><span style="color: rgb(0,135,0)">self</span><span style="color: rgb(98,98,98)">.</span>llm_kwargs)<span style="color: rgb(98,98,98)">.</span>abatch(
+<span class="ansi-green-intense-fg ansi-bold">    173</span>         cast(List, prompts), {<span style="color: rgb(175,0,0)">&#34;</span><span style="color: rgb(175,0,0)">callbacks</span><span style="color: rgb(175,0,0)">&#34;</span>: callbacks}
+<span class="ansi-green-intense-fg ansi-bold">    174</span>     )
+
+File <span class="ansi-green-fg">/opt/conda/envs/langfair/lib/python3.9/site-packages/langchain_core/language_models/chat_models.py:570</span>, in <span class="ansi-cyan-fg">BaseChatModel.agenerate_prompt</span><span class="ansi-blue-fg">(self, prompts, stop, callbacks, **kwargs)</span>
+<span class="ansi-green-intense-fg ansi-bold">    562</span> <span class="ansi-bold" style="color: rgb(0,135,0)">async</span> <span class="ansi-bold" style="color: rgb(0,135,0)">def</span> <span style="color: rgb(0,0,255)">agenerate_prompt</span>(
+<span class="ansi-green-intense-fg ansi-bold">    563</span>     <span style="color: rgb(0,135,0)">self</span>,
+<span class="ansi-green-intense-fg ansi-bold">    564</span>     prompts: List[PromptValue],
+<span class="ansi-green-fg">   (...)</span>
+<span class="ansi-green-intense-fg ansi-bold">    567</span>     <span style="color: rgb(98,98,98)">*</span><span style="color: rgb(98,98,98)">*</span>kwargs: Any,
+<span class="ansi-green-intense-fg ansi-bold">    568</span> ) <span style="color: rgb(98,98,98)">-</span><span style="color: rgb(98,98,98)">&gt;</span> LLMResult:
+<span class="ansi-green-intense-fg ansi-bold">    569</span>     prompt_messages <span style="color: rgb(98,98,98)">=</span> [p<span style="color: rgb(98,98,98)">.</span>to_messages() <span class="ansi-bold" style="color: rgb(0,135,0)">for</span> p <span class="ansi-bold" style="color: rgb(175,0,255)">in</span> prompts]
+<span class="ansi-green-fg">--&gt; 570</span>     <span class="ansi-bold" style="color: rgb(0,135,0)">return</span> <span class="ansi-bold" style="color: rgb(0,135,0)">await</span> <span style="color: rgb(0,135,0)">self</span><span style="color: rgb(98,98,98)">.</span>agenerate(
+<span class="ansi-green-intense-fg ansi-bold">    571</span>         prompt_messages, stop<span style="color: rgb(98,98,98)">=</span>stop, callbacks<span style="color: rgb(98,98,98)">=</span>callbacks, <span style="color: rgb(98,98,98)">*</span><span style="color: rgb(98,98,98)">*</span>kwargs
+<span class="ansi-green-intense-fg ansi-bold">    572</span>     )
+
+File <span class="ansi-green-fg">/opt/conda/envs/langfair/lib/python3.9/site-packages/langchain_core/language_models/chat_models.py:530</span>, in <span class="ansi-cyan-fg">BaseChatModel.agenerate</span><span class="ansi-blue-fg">(self, messages, stop, callbacks, tags, metadata, run_name, run_id, **kwargs)</span>
+<span class="ansi-green-intense-fg ansi-bold">    517</span>     <span class="ansi-bold" style="color: rgb(0,135,0)">if</span> run_managers:
+<span class="ansi-green-intense-fg ansi-bold">    518</span>         <span class="ansi-bold" style="color: rgb(0,135,0)">await</span> asyncio<span style="color: rgb(98,98,98)">.</span>gather(
+<span class="ansi-green-intense-fg ansi-bold">    519</span>             <span style="color: rgb(98,98,98)">*</span>[
+<span class="ansi-green-intense-fg ansi-bold">    520</span>                 run_manager<span style="color: rgb(98,98,98)">.</span>on_llm_end(
+<span class="ansi-green-fg">   (...)</span>
+<span class="ansi-green-intense-fg ansi-bold">    528</span>             ]
+<span class="ansi-green-intense-fg ansi-bold">    529</span>         )
+<span class="ansi-green-fg">--&gt; 530</span>     <span class="ansi-bold" style="color: rgb(0,135,0)">raise</span> exceptions[<span style="color: rgb(98,98,98)">0</span>]
+<span class="ansi-green-intense-fg ansi-bold">    531</span> flattened_outputs <span style="color: rgb(98,98,98)">=</span> [
+<span class="ansi-green-intense-fg ansi-bold">    532</span>     LLMResult(generations<span style="color: rgb(98,98,98)">=</span>[res<span style="color: rgb(98,98,98)">.</span>generations], llm_output<span style="color: rgb(98,98,98)">=</span>res<span style="color: rgb(98,98,98)">.</span>llm_output)  <span style="color: rgb(95,135,135)"># type: ignore[list-item, union-attr]</span>
+<span class="ansi-green-intense-fg ansi-bold">    533</span>     <span class="ansi-bold" style="color: rgb(0,135,0)">for</span> res <span class="ansi-bold" style="color: rgb(175,0,255)">in</span> results
+<span class="ansi-green-intense-fg ansi-bold">    534</span> ]
+<span class="ansi-green-intense-fg ansi-bold">    535</span> llm_output <span style="color: rgb(98,98,98)">=</span> <span style="color: rgb(0,135,0)">self</span><span style="color: rgb(98,98,98)">.</span>_combine_llm_outputs([res<span style="color: rgb(98,98,98)">.</span>llm_output <span class="ansi-bold" style="color: rgb(0,135,0)">for</span> res <span class="ansi-bold" style="color: rgb(175,0,255)">in</span> results])  <span style="color: rgb(95,135,135)"># type: ignore[union-attr]</span>
+
+File <span class="ansi-green-fg">/opt/conda/envs/langfair/lib/python3.9/site-packages/langchain_core/language_models/chat_models.py:715</span>, in <span class="ansi-cyan-fg">BaseChatModel._agenerate_with_cache</span><span class="ansi-blue-fg">(self, messages, stop, run_manager, **kwargs)</span>
+<span class="ansi-green-intense-fg ansi-bold">    713</span> <span class="ansi-bold" style="color: rgb(0,135,0)">else</span>:
+<span class="ansi-green-intense-fg ansi-bold">    714</span>     <span class="ansi-bold" style="color: rgb(0,135,0)">if</span> inspect<span style="color: rgb(98,98,98)">.</span>signature(<span style="color: rgb(0,135,0)">self</span><span style="color: rgb(98,98,98)">.</span>_agenerate)<span style="color: rgb(98,98,98)">.</span>parameters<span style="color: rgb(98,98,98)">.</span>get(<span style="color: rgb(175,0,0)">&#34;</span><span style="color: rgb(175,0,0)">run_manager</span><span style="color: rgb(175,0,0)">&#34;</span>):
+<span class="ansi-green-fg">--&gt; 715</span>         result <span style="color: rgb(98,98,98)">=</span> <span class="ansi-bold" style="color: rgb(0,135,0)">await</span> <span style="color: rgb(0,135,0)">self</span><span style="color: rgb(98,98,98)">.</span>_agenerate(
+<span class="ansi-green-intense-fg ansi-bold">    716</span>             messages, stop<span style="color: rgb(98,98,98)">=</span>stop, run_manager<span style="color: rgb(98,98,98)">=</span>run_manager, <span style="color: rgb(98,98,98)">*</span><span style="color: rgb(98,98,98)">*</span>kwargs
+<span class="ansi-green-intense-fg ansi-bold">    717</span>         )
+<span class="ansi-green-intense-fg ansi-bold">    718</span>     <span class="ansi-bold" style="color: rgb(0,135,0)">else</span>:
+<span class="ansi-green-intense-fg ansi-bold">    719</span>         result <span style="color: rgb(98,98,98)">=</span> <span class="ansi-bold" style="color: rgb(0,135,0)">await</span> <span style="color: rgb(0,135,0)">self</span><span style="color: rgb(98,98,98)">.</span>_agenerate(messages, stop<span style="color: rgb(98,98,98)">=</span>stop, <span style="color: rgb(98,98,98)">*</span><span style="color: rgb(98,98,98)">*</span>kwargs)
+
+File <span class="ansi-green-fg">/opt/conda/envs/langfair/lib/python3.9/site-packages/langchain_openai/chat_models/base.py:623</span>, in <span class="ansi-cyan-fg">BaseChatOpenAI._agenerate</span><span class="ansi-blue-fg">(self, messages, stop, run_manager, **kwargs)</span>
+<span class="ansi-green-intense-fg ansi-bold">    621</span> message_dicts, params <span style="color: rgb(98,98,98)">=</span> <span style="color: rgb(0,135,0)">self</span><span style="color: rgb(98,98,98)">.</span>_create_message_dicts(messages, stop)
+<span class="ansi-green-intense-fg ansi-bold">    622</span> params <span style="color: rgb(98,98,98)">=</span> {<span style="color: rgb(98,98,98)">*</span><span style="color: rgb(98,98,98)">*</span>params, <span style="color: rgb(98,98,98)">*</span><span style="color: rgb(98,98,98)">*</span>kwargs}
+<span class="ansi-green-fg">--&gt; 623</span> response <span style="color: rgb(98,98,98)">=</span> <span class="ansi-bold" style="color: rgb(0,135,0)">await</span> <span style="color: rgb(0,135,0)">self</span><span style="color: rgb(98,98,98)">.</span>async_client<span style="color: rgb(98,98,98)">.</span>create(messages<span style="color: rgb(98,98,98)">=</span>message_dicts, <span style="color: rgb(98,98,98)">*</span><span style="color: rgb(98,98,98)">*</span>params)
+<span class="ansi-green-intense-fg ansi-bold">    624</span> <span class="ansi-bold" style="color: rgb(0,135,0)">return</span> <span style="color: rgb(0,135,0)">self</span><span style="color: rgb(98,98,98)">.</span>_create_chat_result(response)
+
+File <span class="ansi-green-fg">/opt/conda/envs/langfair/lib/python3.9/site-packages/openai/resources/chat/completions.py:1633</span>, in <span class="ansi-cyan-fg">AsyncCompletions.create</span><span class="ansi-blue-fg">(self, messages, model, audio, frequency_penalty, function_call, functions, logit_bias, logprobs, max_completion_tokens, max_tokens, metadata, modalities, n, parallel_tool_calls, presence_penalty, response_format, seed, service_tier, stop, store, stream, stream_options, temperature, tool_choice, tools, top_logprobs, top_p, user, extra_headers, extra_query, extra_body, timeout)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1593</span> <span style="color: rgb(175,0,255)">@required_args</span>([<span style="color: rgb(175,0,0)">&#34;</span><span style="color: rgb(175,0,0)">messages</span><span style="color: rgb(175,0,0)">&#34;</span>, <span style="color: rgb(175,0,0)">&#34;</span><span style="color: rgb(175,0,0)">model</span><span style="color: rgb(175,0,0)">&#34;</span>], [<span style="color: rgb(175,0,0)">&#34;</span><span style="color: rgb(175,0,0)">messages</span><span style="color: rgb(175,0,0)">&#34;</span>, <span style="color: rgb(175,0,0)">&#34;</span><span style="color: rgb(175,0,0)">model</span><span style="color: rgb(175,0,0)">&#34;</span>, <span style="color: rgb(175,0,0)">&#34;</span><span style="color: rgb(175,0,0)">stream</span><span style="color: rgb(175,0,0)">&#34;</span>])
+<span class="ansi-green-intense-fg ansi-bold">   1594</span> <span class="ansi-bold" style="color: rgb(0,135,0)">async</span> <span class="ansi-bold" style="color: rgb(0,135,0)">def</span> <span style="color: rgb(0,0,255)">create</span>(
+<span class="ansi-green-intense-fg ansi-bold">   1595</span>     <span style="color: rgb(0,135,0)">self</span>,
+<span class="ansi-green-fg">   (...)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1630</span>     timeout: <span style="color: rgb(0,135,0)">float</span> <span style="color: rgb(98,98,98)">|</span> httpx<span style="color: rgb(98,98,98)">.</span>Timeout <span style="color: rgb(98,98,98)">|</span> <span class="ansi-bold" style="color: rgb(0,135,0)">None</span> <span style="color: rgb(98,98,98)">|</span> NotGiven <span style="color: rgb(98,98,98)">=</span> NOT_GIVEN,
+<span class="ansi-green-intense-fg ansi-bold">   1631</span> ) <span style="color: rgb(98,98,98)">-</span><span style="color: rgb(98,98,98)">&gt;</span> ChatCompletion <span style="color: rgb(98,98,98)">|</span> AsyncStream[ChatCompletionChunk]:
+<span class="ansi-green-intense-fg ansi-bold">   1632</span>     validate_response_format(response_format)
+<span class="ansi-green-fg">-&gt; 1633</span>     <span class="ansi-bold" style="color: rgb(0,135,0)">return</span> <span class="ansi-bold" style="color: rgb(0,135,0)">await</span> <span style="color: rgb(0,135,0)">self</span><span style="color: rgb(98,98,98)">.</span>_post(
+<span class="ansi-green-intense-fg ansi-bold">   1634</span>         <span style="color: rgb(175,0,0)">&#34;</span><span style="color: rgb(175,0,0)">/chat/completions</span><span style="color: rgb(175,0,0)">&#34;</span>,
+<span class="ansi-green-intense-fg ansi-bold">   1635</span>         body<span style="color: rgb(98,98,98)">=</span><span class="ansi-bold" style="color: rgb(0,135,0)">await</span> async_maybe_transform(
+<span class="ansi-green-intense-fg ansi-bold">   1636</span>             {
+<span class="ansi-green-intense-fg ansi-bold">   1637</span>                 <span style="color: rgb(175,0,0)">&#34;</span><span style="color: rgb(175,0,0)">messages</span><span style="color: rgb(175,0,0)">&#34;</span>: messages,
+<span class="ansi-green-intense-fg ansi-bold">   1638</span>                 <span style="color: rgb(175,0,0)">&#34;</span><span style="color: rgb(175,0,0)">model</span><span style="color: rgb(175,0,0)">&#34;</span>: model,
+<span class="ansi-green-intense-fg ansi-bold">   1639</span>                 <span style="color: rgb(175,0,0)">&#34;</span><span style="color: rgb(175,0,0)">audio</span><span style="color: rgb(175,0,0)">&#34;</span>: audio,
+<span class="ansi-green-intense-fg ansi-bold">   1640</span>                 <span style="color: rgb(175,0,0)">&#34;</span><span style="color: rgb(175,0,0)">frequency_penalty</span><span style="color: rgb(175,0,0)">&#34;</span>: frequency_penalty,
+<span class="ansi-green-intense-fg ansi-bold">   1641</span>                 <span style="color: rgb(175,0,0)">&#34;</span><span style="color: rgb(175,0,0)">function_call</span><span style="color: rgb(175,0,0)">&#34;</span>: function_call,
+<span class="ansi-green-intense-fg ansi-bold">   1642</span>                 <span style="color: rgb(175,0,0)">&#34;</span><span style="color: rgb(175,0,0)">functions</span><span style="color: rgb(175,0,0)">&#34;</span>: functions,
+<span class="ansi-green-intense-fg ansi-bold">   1643</span>                 <span style="color: rgb(175,0,0)">&#34;</span><span style="color: rgb(175,0,0)">logit_bias</span><span style="color: rgb(175,0,0)">&#34;</span>: logit_bias,
+<span class="ansi-green-intense-fg ansi-bold">   1644</span>                 <span style="color: rgb(175,0,0)">&#34;</span><span style="color: rgb(175,0,0)">logprobs</span><span style="color: rgb(175,0,0)">&#34;</span>: logprobs,
+<span class="ansi-green-intense-fg ansi-bold">   1645</span>                 <span style="color: rgb(175,0,0)">&#34;</span><span style="color: rgb(175,0,0)">max_completion_tokens</span><span style="color: rgb(175,0,0)">&#34;</span>: max_completion_tokens,
+<span class="ansi-green-intense-fg ansi-bold">   1646</span>                 <span style="color: rgb(175,0,0)">&#34;</span><span style="color: rgb(175,0,0)">max_tokens</span><span style="color: rgb(175,0,0)">&#34;</span>: max_tokens,
+<span class="ansi-green-intense-fg ansi-bold">   1647</span>                 <span style="color: rgb(175,0,0)">&#34;</span><span style="color: rgb(175,0,0)">metadata</span><span style="color: rgb(175,0,0)">&#34;</span>: metadata,
+<span class="ansi-green-intense-fg ansi-bold">   1648</span>                 <span style="color: rgb(175,0,0)">&#34;</span><span style="color: rgb(175,0,0)">modalities</span><span style="color: rgb(175,0,0)">&#34;</span>: modalities,
+<span class="ansi-green-intense-fg ansi-bold">   1649</span>                 <span style="color: rgb(175,0,0)">&#34;</span><span style="color: rgb(175,0,0)">n</span><span style="color: rgb(175,0,0)">&#34;</span>: n,
+<span class="ansi-green-intense-fg ansi-bold">   1650</span>                 <span style="color: rgb(175,0,0)">&#34;</span><span style="color: rgb(175,0,0)">parallel_tool_calls</span><span style="color: rgb(175,0,0)">&#34;</span>: parallel_tool_calls,
+<span class="ansi-green-intense-fg ansi-bold">   1651</span>                 <span style="color: rgb(175,0,0)">&#34;</span><span style="color: rgb(175,0,0)">presence_penalty</span><span style="color: rgb(175,0,0)">&#34;</span>: presence_penalty,
+<span class="ansi-green-intense-fg ansi-bold">   1652</span>                 <span style="color: rgb(175,0,0)">&#34;</span><span style="color: rgb(175,0,0)">response_format</span><span style="color: rgb(175,0,0)">&#34;</span>: response_format,
+<span class="ansi-green-intense-fg ansi-bold">   1653</span>                 <span style="color: rgb(175,0,0)">&#34;</span><span style="color: rgb(175,0,0)">seed</span><span style="color: rgb(175,0,0)">&#34;</span>: seed,
+<span class="ansi-green-intense-fg ansi-bold">   1654</span>                 <span style="color: rgb(175,0,0)">&#34;</span><span style="color: rgb(175,0,0)">service_tier</span><span style="color: rgb(175,0,0)">&#34;</span>: service_tier,
+<span class="ansi-green-intense-fg ansi-bold">   1655</span>                 <span style="color: rgb(175,0,0)">&#34;</span><span style="color: rgb(175,0,0)">stop</span><span style="color: rgb(175,0,0)">&#34;</span>: stop,
+<span class="ansi-green-intense-fg ansi-bold">   1656</span>                 <span style="color: rgb(175,0,0)">&#34;</span><span style="color: rgb(175,0,0)">store</span><span style="color: rgb(175,0,0)">&#34;</span>: store,
+<span class="ansi-green-intense-fg ansi-bold">   1657</span>                 <span style="color: rgb(175,0,0)">&#34;</span><span style="color: rgb(175,0,0)">stream</span><span style="color: rgb(175,0,0)">&#34;</span>: stream,
+<span class="ansi-green-intense-fg ansi-bold">   1658</span>                 <span style="color: rgb(175,0,0)">&#34;</span><span style="color: rgb(175,0,0)">stream_options</span><span style="color: rgb(175,0,0)">&#34;</span>: stream_options,
+<span class="ansi-green-intense-fg ansi-bold">   1659</span>                 <span style="color: rgb(175,0,0)">&#34;</span><span style="color: rgb(175,0,0)">temperature</span><span style="color: rgb(175,0,0)">&#34;</span>: temperature,
+<span class="ansi-green-intense-fg ansi-bold">   1660</span>                 <span style="color: rgb(175,0,0)">&#34;</span><span style="color: rgb(175,0,0)">tool_choice</span><span style="color: rgb(175,0,0)">&#34;</span>: tool_choice,
+<span class="ansi-green-intense-fg ansi-bold">   1661</span>                 <span style="color: rgb(175,0,0)">&#34;</span><span style="color: rgb(175,0,0)">tools</span><span style="color: rgb(175,0,0)">&#34;</span>: tools,
+<span class="ansi-green-intense-fg ansi-bold">   1662</span>                 <span style="color: rgb(175,0,0)">&#34;</span><span style="color: rgb(175,0,0)">top_logprobs</span><span style="color: rgb(175,0,0)">&#34;</span>: top_logprobs,
+<span class="ansi-green-intense-fg ansi-bold">   1663</span>                 <span style="color: rgb(175,0,0)">&#34;</span><span style="color: rgb(175,0,0)">top_p</span><span style="color: rgb(175,0,0)">&#34;</span>: top_p,
+<span class="ansi-green-intense-fg ansi-bold">   1664</span>                 <span style="color: rgb(175,0,0)">&#34;</span><span style="color: rgb(175,0,0)">user</span><span style="color: rgb(175,0,0)">&#34;</span>: user,
+<span class="ansi-green-intense-fg ansi-bold">   1665</span>             },
+<span class="ansi-green-intense-fg ansi-bold">   1666</span>             completion_create_params<span style="color: rgb(98,98,98)">.</span>CompletionCreateParams,
+<span class="ansi-green-intense-fg ansi-bold">   1667</span>         ),
+<span class="ansi-green-intense-fg ansi-bold">   1668</span>         options<span style="color: rgb(98,98,98)">=</span>make_request_options(
+<span class="ansi-green-intense-fg ansi-bold">   1669</span>             extra_headers<span style="color: rgb(98,98,98)">=</span>extra_headers, extra_query<span style="color: rgb(98,98,98)">=</span>extra_query, extra_body<span style="color: rgb(98,98,98)">=</span>extra_body, timeout<span style="color: rgb(98,98,98)">=</span>timeout
+<span class="ansi-green-intense-fg ansi-bold">   1670</span>         ),
+<span class="ansi-green-intense-fg ansi-bold">   1671</span>         cast_to<span style="color: rgb(98,98,98)">=</span>ChatCompletion,
+<span class="ansi-green-intense-fg ansi-bold">   1672</span>         stream<span style="color: rgb(98,98,98)">=</span>stream <span class="ansi-bold" style="color: rgb(175,0,255)">or</span> <span class="ansi-bold" style="color: rgb(0,135,0)">False</span>,
+<span class="ansi-green-intense-fg ansi-bold">   1673</span>         stream_cls<span style="color: rgb(98,98,98)">=</span>AsyncStream[ChatCompletionChunk],
+<span class="ansi-green-intense-fg ansi-bold">   1674</span>     )
+
+File <span class="ansi-green-fg">/opt/conda/envs/langfair/lib/python3.9/site-packages/openai/_base_client.py:1838</span>, in <span class="ansi-cyan-fg">AsyncAPIClient.post</span><span class="ansi-blue-fg">(self, path, cast_to, body, files, options, stream, stream_cls)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1824</span> <span class="ansi-bold" style="color: rgb(0,135,0)">async</span> <span class="ansi-bold" style="color: rgb(0,135,0)">def</span> <span style="color: rgb(0,0,255)">post</span>(
+<span class="ansi-green-intense-fg ansi-bold">   1825</span>     <span style="color: rgb(0,135,0)">self</span>,
+<span class="ansi-green-intense-fg ansi-bold">   1826</span>     path: <span style="color: rgb(0,135,0)">str</span>,
+<span class="ansi-green-fg">   (...)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1833</span>     stream_cls: <span style="color: rgb(0,135,0)">type</span>[_AsyncStreamT] <span style="color: rgb(98,98,98)">|</span> <span class="ansi-bold" style="color: rgb(0,135,0)">None</span> <span style="color: rgb(98,98,98)">=</span> <span class="ansi-bold" style="color: rgb(0,135,0)">None</span>,
+<span class="ansi-green-intense-fg ansi-bold">   1834</span> ) <span style="color: rgb(98,98,98)">-</span><span style="color: rgb(98,98,98)">&gt;</span> ResponseT <span style="color: rgb(98,98,98)">|</span> _AsyncStreamT:
+<span class="ansi-green-intense-fg ansi-bold">   1835</span>     opts <span style="color: rgb(98,98,98)">=</span> FinalRequestOptions<span style="color: rgb(98,98,98)">.</span>construct(
+<span class="ansi-green-intense-fg ansi-bold">   1836</span>         method<span style="color: rgb(98,98,98)">=</span><span style="color: rgb(175,0,0)">&#34;</span><span style="color: rgb(175,0,0)">post</span><span style="color: rgb(175,0,0)">&#34;</span>, url<span style="color: rgb(98,98,98)">=</span>path, json_data<span style="color: rgb(98,98,98)">=</span>body, files<span style="color: rgb(98,98,98)">=</span><span class="ansi-bold" style="color: rgb(0,135,0)">await</span> async_to_httpx_files(files), <span style="color: rgb(98,98,98)">*</span><span style="color: rgb(98,98,98)">*</span>options
+<span class="ansi-green-intense-fg ansi-bold">   1837</span>     )
+<span class="ansi-green-fg">-&gt; 1838</span>     <span class="ansi-bold" style="color: rgb(0,135,0)">return</span> <span class="ansi-bold" style="color: rgb(0,135,0)">await</span> <span style="color: rgb(0,135,0)">self</span><span style="color: rgb(98,98,98)">.</span>request(cast_to, opts, stream<span style="color: rgb(98,98,98)">=</span>stream, stream_cls<span style="color: rgb(98,98,98)">=</span>stream_cls)
+
+File <span class="ansi-green-fg">/opt/conda/envs/langfair/lib/python3.9/site-packages/openai/_base_client.py:1532</span>, in <span class="ansi-cyan-fg">AsyncAPIClient.request</span><span class="ansi-blue-fg">(self, cast_to, options, stream, stream_cls, remaining_retries)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1529</span> <span class="ansi-bold" style="color: rgb(0,135,0)">else</span>:
+<span class="ansi-green-intense-fg ansi-bold">   1530</span>     retries_taken <span style="color: rgb(98,98,98)">=</span> <span style="color: rgb(98,98,98)">0</span>
+<span class="ansi-green-fg">-&gt; 1532</span> <span class="ansi-bold" style="color: rgb(0,135,0)">return</span> <span class="ansi-bold" style="color: rgb(0,135,0)">await</span> <span style="color: rgb(0,135,0)">self</span><span style="color: rgb(98,98,98)">.</span>_request(
+<span class="ansi-green-intense-fg ansi-bold">   1533</span>     cast_to<span style="color: rgb(98,98,98)">=</span>cast_to,
+<span class="ansi-green-intense-fg ansi-bold">   1534</span>     options<span style="color: rgb(98,98,98)">=</span>options,
+<span class="ansi-green-intense-fg ansi-bold">   1535</span>     stream<span style="color: rgb(98,98,98)">=</span>stream,
+<span class="ansi-green-intense-fg ansi-bold">   1536</span>     stream_cls<span style="color: rgb(98,98,98)">=</span>stream_cls,
+<span class="ansi-green-intense-fg ansi-bold">   1537</span>     retries_taken<span style="color: rgb(98,98,98)">=</span>retries_taken,
+<span class="ansi-green-intense-fg ansi-bold">   1538</span> )
+
+File <span class="ansi-green-fg">/opt/conda/envs/langfair/lib/python3.9/site-packages/openai/_base_client.py:1618</span>, in <span class="ansi-cyan-fg">AsyncAPIClient._request</span><span class="ansi-blue-fg">(self, cast_to, options, stream, stream_cls, retries_taken)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1616</span> <span class="ansi-bold" style="color: rgb(0,135,0)">if</span> remaining_retries <span style="color: rgb(98,98,98)">&gt;</span> <span style="color: rgb(98,98,98)">0</span> <span class="ansi-bold" style="color: rgb(175,0,255)">and</span> <span style="color: rgb(0,135,0)">self</span><span style="color: rgb(98,98,98)">.</span>_should_retry(err<span style="color: rgb(98,98,98)">.</span>response):
+<span class="ansi-green-intense-fg ansi-bold">   1617</span>     <span class="ansi-bold" style="color: rgb(0,135,0)">await</span> err<span style="color: rgb(98,98,98)">.</span>response<span style="color: rgb(98,98,98)">.</span>aclose()
+<span class="ansi-green-fg">-&gt; 1618</span>     <span class="ansi-bold" style="color: rgb(0,135,0)">return</span> <span class="ansi-bold" style="color: rgb(0,135,0)">await</span> <span style="color: rgb(0,135,0)">self</span><span style="color: rgb(98,98,98)">.</span>_retry_request(
+<span class="ansi-green-intense-fg ansi-bold">   1619</span>         input_options,
+<span class="ansi-green-intense-fg ansi-bold">   1620</span>         cast_to,
+<span class="ansi-green-intense-fg ansi-bold">   1621</span>         retries_taken<span style="color: rgb(98,98,98)">=</span>retries_taken,
+<span class="ansi-green-intense-fg ansi-bold">   1622</span>         response_headers<span style="color: rgb(98,98,98)">=</span>err<span style="color: rgb(98,98,98)">.</span>response<span style="color: rgb(98,98,98)">.</span>headers,
+<span class="ansi-green-intense-fg ansi-bold">   1623</span>         stream<span style="color: rgb(98,98,98)">=</span>stream,
+<span class="ansi-green-intense-fg ansi-bold">   1624</span>         stream_cls<span style="color: rgb(98,98,98)">=</span>stream_cls,
+<span class="ansi-green-intense-fg ansi-bold">   1625</span>     )
+<span class="ansi-green-intense-fg ansi-bold">   1627</span> <span style="color: rgb(95,135,135)"># If the response is streamed then we need to explicitly read the response</span>
+<span class="ansi-green-intense-fg ansi-bold">   1628</span> <span style="color: rgb(95,135,135)"># to completion before attempting to access the response text.</span>
+<span class="ansi-green-intense-fg ansi-bold">   1629</span> <span class="ansi-bold" style="color: rgb(0,135,0)">if</span> <span class="ansi-bold" style="color: rgb(175,0,255)">not</span> err<span style="color: rgb(98,98,98)">.</span>response<span style="color: rgb(98,98,98)">.</span>is_closed:
+
+File <span class="ansi-green-fg">/opt/conda/envs/langfair/lib/python3.9/site-packages/openai/_base_client.py:1665</span>, in <span class="ansi-cyan-fg">AsyncAPIClient._retry_request</span><span class="ansi-blue-fg">(self, options, cast_to, retries_taken, response_headers, stream, stream_cls)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1661</span> log<span style="color: rgb(98,98,98)">.</span>info(<span style="color: rgb(175,0,0)">&#34;</span><span style="color: rgb(175,0,0)">Retrying request to </span><span class="ansi-bold" style="color: rgb(175,95,135)">%s</span><span style="color: rgb(175,0,0)"> in </span><span class="ansi-bold" style="color: rgb(175,95,135)">%f</span><span style="color: rgb(175,0,0)"> seconds</span><span style="color: rgb(175,0,0)">&#34;</span>, options<span style="color: rgb(98,98,98)">.</span>url, timeout)
+<span class="ansi-green-intense-fg ansi-bold">   1663</span> <span class="ansi-bold" style="color: rgb(0,135,0)">await</span> anyio<span style="color: rgb(98,98,98)">.</span>sleep(timeout)
+<span class="ansi-green-fg">-&gt; 1665</span> <span class="ansi-bold" style="color: rgb(0,135,0)">return</span> <span class="ansi-bold" style="color: rgb(0,135,0)">await</span> <span style="color: rgb(0,135,0)">self</span><span style="color: rgb(98,98,98)">.</span>_request(
+<span class="ansi-green-intense-fg ansi-bold">   1666</span>     options<span style="color: rgb(98,98,98)">=</span>options,
+<span class="ansi-green-intense-fg ansi-bold">   1667</span>     cast_to<span style="color: rgb(98,98,98)">=</span>cast_to,
+<span class="ansi-green-intense-fg ansi-bold">   1668</span>     retries_taken<span style="color: rgb(98,98,98)">=</span>retries_taken <span style="color: rgb(98,98,98)">+</span> <span style="color: rgb(98,98,98)">1</span>,
+<span class="ansi-green-intense-fg ansi-bold">   1669</span>     stream<span style="color: rgb(98,98,98)">=</span>stream,
+<span class="ansi-green-intense-fg ansi-bold">   1670</span>     stream_cls<span style="color: rgb(98,98,98)">=</span>stream_cls,
+<span class="ansi-green-intense-fg ansi-bold">   1671</span> )
+
+File <span class="ansi-green-fg">/opt/conda/envs/langfair/lib/python3.9/site-packages/openai/_base_client.py:1618</span>, in <span class="ansi-cyan-fg">AsyncAPIClient._request</span><span class="ansi-blue-fg">(self, cast_to, options, stream, stream_cls, retries_taken)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1616</span> <span class="ansi-bold" style="color: rgb(0,135,0)">if</span> remaining_retries <span style="color: rgb(98,98,98)">&gt;</span> <span style="color: rgb(98,98,98)">0</span> <span class="ansi-bold" style="color: rgb(175,0,255)">and</span> <span style="color: rgb(0,135,0)">self</span><span style="color: rgb(98,98,98)">.</span>_should_retry(err<span style="color: rgb(98,98,98)">.</span>response):
+<span class="ansi-green-intense-fg ansi-bold">   1617</span>     <span class="ansi-bold" style="color: rgb(0,135,0)">await</span> err<span style="color: rgb(98,98,98)">.</span>response<span style="color: rgb(98,98,98)">.</span>aclose()
+<span class="ansi-green-fg">-&gt; 1618</span>     <span class="ansi-bold" style="color: rgb(0,135,0)">return</span> <span class="ansi-bold" style="color: rgb(0,135,0)">await</span> <span style="color: rgb(0,135,0)">self</span><span style="color: rgb(98,98,98)">.</span>_retry_request(
+<span class="ansi-green-intense-fg ansi-bold">   1619</span>         input_options,
+<span class="ansi-green-intense-fg ansi-bold">   1620</span>         cast_to,
+<span class="ansi-green-intense-fg ansi-bold">   1621</span>         retries_taken<span style="color: rgb(98,98,98)">=</span>retries_taken,
+<span class="ansi-green-intense-fg ansi-bold">   1622</span>         response_headers<span style="color: rgb(98,98,98)">=</span>err<span style="color: rgb(98,98,98)">.</span>response<span style="color: rgb(98,98,98)">.</span>headers,
+<span class="ansi-green-intense-fg ansi-bold">   1623</span>         stream<span style="color: rgb(98,98,98)">=</span>stream,
+<span class="ansi-green-intense-fg ansi-bold">   1624</span>         stream_cls<span style="color: rgb(98,98,98)">=</span>stream_cls,
+<span class="ansi-green-intense-fg ansi-bold">   1625</span>     )
+<span class="ansi-green-intense-fg ansi-bold">   1627</span> <span style="color: rgb(95,135,135)"># If the response is streamed then we need to explicitly read the response</span>
+<span class="ansi-green-intense-fg ansi-bold">   1628</span> <span style="color: rgb(95,135,135)"># to completion before attempting to access the response text.</span>
+<span class="ansi-green-intense-fg ansi-bold">   1629</span> <span class="ansi-bold" style="color: rgb(0,135,0)">if</span> <span class="ansi-bold" style="color: rgb(175,0,255)">not</span> err<span style="color: rgb(98,98,98)">.</span>response<span style="color: rgb(98,98,98)">.</span>is_closed:
+
+File <span class="ansi-green-fg">/opt/conda/envs/langfair/lib/python3.9/site-packages/openai/_base_client.py:1665</span>, in <span class="ansi-cyan-fg">AsyncAPIClient._retry_request</span><span class="ansi-blue-fg">(self, options, cast_to, retries_taken, response_headers, stream, stream_cls)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1661</span> log<span style="color: rgb(98,98,98)">.</span>info(<span style="color: rgb(175,0,0)">&#34;</span><span style="color: rgb(175,0,0)">Retrying request to </span><span class="ansi-bold" style="color: rgb(175,95,135)">%s</span><span style="color: rgb(175,0,0)"> in </span><span class="ansi-bold" style="color: rgb(175,95,135)">%f</span><span style="color: rgb(175,0,0)"> seconds</span><span style="color: rgb(175,0,0)">&#34;</span>, options<span style="color: rgb(98,98,98)">.</span>url, timeout)
+<span class="ansi-green-intense-fg ansi-bold">   1663</span> <span class="ansi-bold" style="color: rgb(0,135,0)">await</span> anyio<span style="color: rgb(98,98,98)">.</span>sleep(timeout)
+<span class="ansi-green-fg">-&gt; 1665</span> <span class="ansi-bold" style="color: rgb(0,135,0)">return</span> <span class="ansi-bold" style="color: rgb(0,135,0)">await</span> <span style="color: rgb(0,135,0)">self</span><span style="color: rgb(98,98,98)">.</span>_request(
+<span class="ansi-green-intense-fg ansi-bold">   1666</span>     options<span style="color: rgb(98,98,98)">=</span>options,
+<span class="ansi-green-intense-fg ansi-bold">   1667</span>     cast_to<span style="color: rgb(98,98,98)">=</span>cast_to,
+<span class="ansi-green-intense-fg ansi-bold">   1668</span>     retries_taken<span style="color: rgb(98,98,98)">=</span>retries_taken <span style="color: rgb(98,98,98)">+</span> <span style="color: rgb(98,98,98)">1</span>,
+<span class="ansi-green-intense-fg ansi-bold">   1669</span>     stream<span style="color: rgb(98,98,98)">=</span>stream,
+<span class="ansi-green-intense-fg ansi-bold">   1670</span>     stream_cls<span style="color: rgb(98,98,98)">=</span>stream_cls,
+<span class="ansi-green-intense-fg ansi-bold">   1671</span> )
+
+File <span class="ansi-green-fg">/opt/conda/envs/langfair/lib/python3.9/site-packages/openai/_base_client.py:1633</span>, in <span class="ansi-cyan-fg">AsyncAPIClient._request</span><span class="ansi-blue-fg">(self, cast_to, options, stream, stream_cls, retries_taken)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1630</span>         <span class="ansi-bold" style="color: rgb(0,135,0)">await</span> err<span style="color: rgb(98,98,98)">.</span>response<span style="color: rgb(98,98,98)">.</span>aread()
+<span class="ansi-green-intense-fg ansi-bold">   1632</span>     log<span style="color: rgb(98,98,98)">.</span>debug(<span style="color: rgb(175,0,0)">&#34;</span><span style="color: rgb(175,0,0)">Re-raising status error</span><span style="color: rgb(175,0,0)">&#34;</span>)
+<span class="ansi-green-fg">-&gt; 1633</span>     <span class="ansi-bold" style="color: rgb(0,135,0)">raise</span> <span style="color: rgb(0,135,0)">self</span><span style="color: rgb(98,98,98)">.</span>_make_status_error_from_response(err<span style="color: rgb(98,98,98)">.</span>response) <span class="ansi-bold" style="color: rgb(0,135,0)">from</span> <span class="ansi-bold" style="color: rgb(0,135,0)">None</span>
+<span class="ansi-green-intense-fg ansi-bold">   1635</span> <span class="ansi-bold" style="color: rgb(0,135,0)">return</span> <span class="ansi-bold" style="color: rgb(0,135,0)">await</span> <span style="color: rgb(0,135,0)">self</span><span style="color: rgb(98,98,98)">.</span>_process_response(
+<span class="ansi-green-intense-fg ansi-bold">   1636</span>     cast_to<span style="color: rgb(98,98,98)">=</span>cast_to,
+<span class="ansi-green-intense-fg ansi-bold">   1637</span>     options<span style="color: rgb(98,98,98)">=</span>options,
+<span class="ansi-green-fg">   (...)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1641</span>     retries_taken<span style="color: rgb(98,98,98)">=</span>retries_taken,
+<span class="ansi-green-intense-fg ansi-bold">   1642</span> )
+
+<span class="ansi-red-fg">RateLimitError</span>: Error code: 429 - {&#39;error&#39;: {&#39;code&#39;: &#39;429&#39;, &#39;message&#39;: &#39;Requests to the ChatCompletions_Create Operation under Azure OpenAI API version 2023-07-01-preview have exceeded token rate limit of your current OpenAI S0 pricing tier. Please retry after 36 seconds. Please go here: https://aka.ms/oai/quotaincrease if you would like to further increase the default rate limit.&#39;}}
+</pre></div></div>
+</div>
+<p>To handle this error, we can use <code class="docutils literal notranslate"><span class="pre">InMemoryRateLimiter</span></code> to limit the number of requests per minute.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">langchain_core.rate_limiters</span> <span class="kn">import</span> <span class="n">InMemoryRateLimiter</span>
+
+<span class="n">rate_limiter</span> <span class="o">=</span> <span class="n">InMemoryRateLimiter</span><span class="p">(</span>
+    <span class="n">requests_per_second</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+    <span class="n">check_every_n_seconds</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+    <span class="n">max_bucket_size</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">llm</span> <span class="o">=</span> <span class="n">AzureChatOpenAI</span><span class="p">(</span>
+    <span class="n">deployment_name</span><span class="o">=</span><span class="n">DEPLOYMENT_NAME</span><span class="p">,</span>
+    <span class="n">openai_api_key</span><span class="o">=</span><span class="n">API_KEY</span><span class="p">,</span>
+    <span class="n">azure_endpoint</span><span class="o">=</span><span class="n">API_BASE</span><span class="p">,</span>
+    <span class="n">openai_api_type</span><span class="o">=</span><span class="n">API_TYPE</span><span class="p">,</span>
+    <span class="n">openai_api_version</span><span class="o">=</span><span class="n">API_VERSION</span><span class="p">,</span>
+    <span class="n">temperature</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="c1"># User to set temperature</span>
+    <span class="n">rate_limiter</span><span class="o">=</span><span class="n">rate_limiter</span>
+<span class="p">)</span>
+
+<span class="n">rg_limited</span> <span class="o">=</span> <span class="n">ResponseGenerator</span><span class="p">(</span><span class="n">langchain_llm</span><span class="o">=</span><span class="n">llm</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">responses</span> <span class="o">=</span> <span class="k">await</span> <span class="n">rg_limited</span><span class="o">.</span><span class="n">generate_responses</span><span class="p">(</span><span class="n">prompts</span><span class="o">=</span><span class="n">prompts</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Generating 25 responses per prompt...
+Responses successfully generated!
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">responses</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>prompt</th>
+      <th>response</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>You are required to keep generation given the ...</td>
+      <td>Hosaka in his novel "Generation X." It refers ...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>You are required to keep generation given the ...</td>
+      <td>The term was coined by the author Maki to desc...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>You are required to keep generation given the ...</td>
+      <td>The term was coined by the author Maki [genera...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>You are required to keep generation given the ...</td>
+      <td>The term was coined by the author Maki for the...</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>You are required to keep generation given the ...</td>
+      <td>The term was coined by the author Maki to desc...</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>24995</th>
+      <td>You are required to keep generation given the ...</td>
+      <td>discuss the importance of preserving and hand ...</td>
+    </tr>
+    <tr>
+      <th>24996</th>
+      <td>You are required to keep generation given the ...</td>
+      <td>discuss the influence of music on Dave's caree...</td>
+    </tr>
+    <tr>
+      <th>24997</th>
+      <td>You are required to keep generation given the ...</td>
+      <td>discuss the evolution of music in the 1970s. T...</td>
+    </tr>
+    <tr>
+      <th>24998</th>
+      <td>You are required to keep generation given the ...</td>
+      <td>Close delve into the captivating world of musi...</td>
+    </tr>
+    <tr>
+      <th>24999</th>
+      <td>You are required to keep generation given the ...</td>
+      <td>explore the vast influence of legendary musici...</td>
+    </tr>
+  </tbody>
+</table>
+<p>25000 rows × 2 columns</p>
+</div></div>
+</div>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../evaluations/text_generation/toxicity_metrics_demo.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Toxicity Assessment</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../../../guide.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Contributor Guide</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Estimate-token-costs-before-generation">Estimate token costs before generation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Evaluating-Response-Time:-Asynchronous-Generation-with-ResponseGenerator-vs-Synchronous-Generation-with-openai.chat.completions.create">Evaluating Response Time: Asynchronous Generation with <code class="docutils literal notranslate"><span class="pre">ResponseGenerator</span></code> vs Synchronous Generation with <code class="docutils literal notranslate"><span class="pre">openai.chat.completions.create</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Generate-responses-synchronously-for-comparison">Generate responses synchronously for comparison</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Handling-RateLimitError-with-ResponseGenerator">Handling <code class="docutils literal notranslate"><span class="pre">RateLimitError</span></code> with <code class="docutils literal notranslate"><span class="pre">ResponseGenerator</span></code></a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../../_sources/notebooks/examples/generators/response_generator_demo.ipynb.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2024, CVS Health.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.4.7.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

@@ -28,5 +28,5 @@ langfair.metrics.toxicity
    :template: module.rst
    :recursive:
 
-   langfair.metrics.toxicity.toxicity
+   toxicity
 
