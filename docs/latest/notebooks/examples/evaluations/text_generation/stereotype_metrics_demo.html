@@ -552,10 +552,8 @@
 </section>
 <section id="Evaluation-Dataset-Generation">
 <h3>Evaluation Dataset Generation<a class="headerlink" href="#Evaluation-Dataset-Generation" title="Link to this heading">#</a></h3>
-</section>
 <hr class="docutils" />
-<section id="ResponseGenerator()---Class-for-generating-data-for-evaluation-from-provided-set-of-prompts-(class)">
-<h3><code class="docutils literal notranslate"><span class="pre">ResponseGenerator()</span></code> - Class for generating data for evaluation from provided set of prompts (class)<a class="headerlink" href="#ResponseGenerator()---Class-for-generating-data-for-evaluation-from-provided-set-of-prompts-(class)" title="Link to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">ResponseGenerator()</span></code> - Class for generating data for evaluation from provided set of prompts (class)</p>
 <section id="Class-parameters:">
 <h4>Class parameters:<a class="headerlink" href="#Class-parameters:" title="Link to this heading">#</a></h4>
 <ul class="simple">
@@ -568,17 +566,14 @@
 <section id="Methods:">
 <h3>Methods:<a class="headerlink" href="#Methods:" title="Link to this heading">#</a></h3>
 <hr class="docutils" />
-<section id="generate_responses()---Generates-evaluation-dataset-from-a-provided-set-of-prompts.-For-each-prompt,-self.count-responses-are-generated.">
-<h4><code class="docutils literal notranslate"><span class="pre">generate_responses()</span></code> - Generates evaluation dataset from a provided set of prompts. For each prompt, <code class="docutils literal notranslate"><span class="pre">self.count</span></code> responses are generated.<a class="headerlink" href="#generate_responses()---Generates-evaluation-dataset-from-a-provided-set-of-prompts.-For-each-prompt,-self.count-responses-are-generated." title="Link to this heading">#</a></h4>
+<p><code class="docutils literal notranslate"><span class="pre">generate_responses()</span></code> - Generates evaluation dataset from a provided set of prompts. For each prompt, <code class="docutils literal notranslate"><span class="pre">self.count</span></code> responses are generated.</p>
 <p>Method Parameters:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">prompts</span></code> - (<strong>list of strings</strong>) A list of prompts</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">system_prompt</span></code> - (<strong>str or None, default=”You are a helpful assistant.”</strong>) Specifies the system prompt used when generating LLM responses.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">count</span></code> - (<strong>int, default=25</strong>) Specifies number of responses to generate for each prompt.</p></li>
 </ul>
-</section>
-<section id="Returns:">
-<h4>Returns:<a class="headerlink" href="#Returns:" title="Link to this heading">#</a></h4>
+<p>Returns:</p>
 <p>A dictionary with two keys: <code class="docutils literal notranslate"><span class="pre">data</span></code> and <code class="docutils literal notranslate"><span class="pre">metadata</span></code>.</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">data</span></code> (<strong>dict</strong>) A dictionary containing the prompts and responses.</p></li>
@@ -823,7 +818,6 @@ memory usage: 5.6+ KB
 </div>
 </section>
 </section>
-</section>
 <section id="3.-Assessment">
 <h2>3. Assessment<a class="headerlink" href="#3.-Assessment" title="Link to this heading">#</a></h2>
 <p>This section shows two ways to evaluate stereotype metrics on a set of model responses.</p>
@@ -833,9 +827,7 @@ memory usage: 5.6+ KB
 </ol>
 <section id="3.1-Lazy-Implementation">
 <h3>3.1 Lazy Implementation<a class="headerlink" href="#3.1-Lazy-Implementation" title="Link to this heading">#</a></h3>
-</section>
-<section id="StereotypeMetrics()---Calculate-all-the-stereotype-metrics-(class)">
-<h3><code class="docutils literal notranslate"><span class="pre">StereotypeMetrics()</span></code> - Calculate all the stereotype metrics (class)<a class="headerlink" href="#StereotypeMetrics()---Calculate-all-the-stereotype-metrics-(class)" title="Link to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">StereotypeMetrics()</span></code> - Calculate all the stereotype metrics (class)</p>
 <p><strong>Class Attributes:</strong></p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">metrics</span></code> - (<strong>List of strings/Metric objects</strong>) Specifies which metrics to use. Default option is a list if strings (<code class="docutils literal notranslate"><span class="pre">metrics</span></code> = [“Stereotype Association”, “Cooccurrence Bias”, “Stereotype Classifier”]).</p></li>
@@ -979,9 +971,7 @@ Evaluating metrics...
 </section>
 <section id="3.2.1-Co-Occurrence-Bias-Score">
 <h3>3.2.1 Co-Occurrence Bias Score<a class="headerlink" href="#3.2.1-Co-Occurrence-Bias-Score" title="Link to this heading">#</a></h3>
-</section>
-<section id="CooccurrenceBiasMetric()---For-calculating-the-cooccurrence-bias-score-metric-(class)">
-<h3><code class="docutils literal notranslate"><span class="pre">CooccurrenceBiasMetric()</span></code> - For calculating the cooccurrence bias score metric (class)<a class="headerlink" href="#CooccurrenceBiasMetric()---For-calculating-the-cooccurrence-bias-score-metric-(class)" title="Link to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">CooccurrenceBiasMetric()</span></code> - For calculating the cooccurrence bias score metric (class)</p>
 <p><strong>Class Attributes:</strong></p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">target_category</span></code> - (<strong>{‘adjective’, ‘profession’}, default = ‘adjective’</strong>) The target category used to measure the COBS score with the COBS score. One of “adjective” or “profession”.</p></li>
@@ -991,7 +981,8 @@ Evaluating metrics...
 </ul>
 <p><strong>Methods:</strong></p>
 <ol class="arabic">
-<li><p><code class="docutils literal notranslate"><span class="pre">evaluate()</span></code> - Compute the mean stereotypical association bias of the target words and demographic groups Method Parameters:</p>
+<li><p><code class="docutils literal notranslate"><span class="pre">evaluate()</span></code> - Compute the mean stereotypical association bias of the target words and demographic groups</p>
+<p>Method Parameters:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">texts</span></code> - (<strong>list of strings</strong>) A list of generated outputs from a language model on which co-occurrence bias score metric will be calculated.</p></li>
 </ul>
@@ -1062,10 +1053,7 @@ Return Value:  None
 </section>
 <section id="3.2.2-Stereotypical-Assocations">
 <h3>3.2.2 Stereotypical Assocations<a class="headerlink" href="#3.2.2-Stereotypical-Assocations" title="Link to this heading">#</a></h3>
-</section>
-<section id="StereotypicalAssociations()---For-calculating-the-counterfactual-sentiment-bias-metric-(class)">
-<h3><code class="docutils literal notranslate"><span class="pre">StereotypicalAssociations()</span></code> - For calculating the counterfactual sentiment bias metric (class)<a class="headerlink" href="#StereotypicalAssociations()---For-calculating-the-counterfactual-sentiment-bias-metric-(class)" title="Link to this heading">#</a></h3>
-<p><strong>Class Attributes:</strong></p>
+<p><code class="docutils literal notranslate"><span class="pre">StereotypicalAssociations()</span></code> - For calculating the counterfactual sentiment bias metric (class) <strong>Class Attributes:</strong></p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">target_category</span></code> - (<strong>{‘profession’,’adjective’}</strong>) Specifies whether stereotypes should be assessed with respect to professions or adjectives.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">demographic_group_word_lists</span></code> - (<strong>Dict[str, List[str]], default = None</strong>) A dictionary with values that are demographic word lists. Each value must be a list of strings. If None, default gender word lists are used.</p></li>
@@ -1112,9 +1100,7 @@ Return Value:  None
 </section>
 <section id="3.2.3-Stereotype-Classifier-Metrics">
 <h3>3.2.3 Stereotype Classifier Metrics<a class="headerlink" href="#3.2.3-Stereotype-Classifier-Metrics" title="Link to this heading">#</a></h3>
-</section>
-<section id="StereotypeClassifier()---Compute-stereotype-metrics-for-bias-evaluation-of-language-models.-This-class-enables-calculation-of-expected-maximum-stereotype,-stereotype-fraction,-and-stereotype-probability.">
-<h3><code class="docutils literal notranslate"><span class="pre">StereotypeClassifier()</span></code> - Compute stereotype metrics for bias evaluation of language models. This class enables calculation of expected maximum stereotype, stereotype fraction, and stereotype probability.<a class="headerlink" href="#StereotypeClassifier()---Compute-stereotype-metrics-for-bias-evaluation-of-language-models.-This-class-enables-calculation-of-expected-maximum-stereotype,-stereotype-fraction,-and-stereotype-probability." title="Link to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">StereotypeClassifier()</span></code> - Compute stereotype metrics for bias evaluation of language models. This class enables calculation of expected maximum stereotype, stereotype fraction, and stereotype probability.</p>
 <p><strong>Class Attributes:</strong></p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">metrics</span></code> - (<strong>List of strings/Metric objects</strong>) Specifies which metrics to use. Default option is a list if strings (<code class="docutils literal notranslate"><span class="pre">metrics</span></code> = [“Stereotype Association”, “Cooccurrence Bias”, “Stereotype Classifier”]).</p></li>
@@ -1508,28 +1494,19 @@ responses <span class="math notranslate nohighlight">\(\hat{Y}_1,...,\hat{Y}_N\)
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#2.-Generate-Evaluation-Dataset-(skip-if-responses-already-generated)">2. Generate Evaluation Dataset (skip if responses already generated)</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Read-in-prompts">Read in prompts</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Evaluation-Dataset-Generation">Evaluation Dataset Generation</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ResponseGenerator()---Class-for-generating-data-for-evaluation-from-provided-set-of-prompts-(class)"><code class="docutils literal notranslate"><span class="pre">ResponseGenerator()</span></code> - Class for generating data for evaluation from provided set of prompts (class)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Evaluation-Dataset-Generation">Evaluation Dataset Generation</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#Class-parameters:">Class parameters:</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Methods:">Methods:</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#generate_responses()---Generates-evaluation-dataset-from-a-provided-set-of-prompts.-For-each-prompt,-self.count-responses-are-generated."><code class="docutils literal notranslate"><span class="pre">generate_responses()</span></code> - Generates evaluation dataset from a provided set of prompts. For each prompt, <code class="docutils literal notranslate"><span class="pre">self.count</span></code> responses are generated.</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#Returns:">Returns:</a></li>
-</ul>
-</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Methods:">Methods:</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#3.-Assessment">3. Assessment</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#3.1-Lazy-Implementation">3.1 Lazy Implementation</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#StereotypeMetrics()---Calculate-all-the-stereotype-metrics-(class)"><code class="docutils literal notranslate"><span class="pre">StereotypeMetrics()</span></code> - Calculate all the stereotype metrics (class)</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#3.2-Separate-Implementation">3.2 Separate Implementation</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#3.2.1-Co-Occurrence-Bias-Score">3.2.1 Co-Occurrence Bias Score</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#CooccurrenceBiasMetric()---For-calculating-the-cooccurrence-bias-score-metric-(class)"><code class="docutils literal notranslate"><span class="pre">CooccurrenceBiasMetric()</span></code> - For calculating the cooccurrence bias score metric (class)</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#3.2.2-Stereotypical-Assocations">3.2.2 Stereotypical Assocations</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#StereotypicalAssociations()---For-calculating-the-counterfactual-sentiment-bias-metric-(class)"><code class="docutils literal notranslate"><span class="pre">StereotypicalAssociations()</span></code> - For calculating the counterfactual sentiment bias metric (class)</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#3.2.3-Stereotype-Classifier-Metrics">3.2.3 Stereotype Classifier Metrics</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#StereotypeClassifier()---Compute-stereotype-metrics-for-bias-evaluation-of-language-models.-This-class-enables-calculation-of-expected-maximum-stereotype,-stereotype-fraction,-and-stereotype-probability."><code class="docutils literal notranslate"><span class="pre">StereotypeClassifier()</span></code> - Compute stereotype metrics for bias evaluation of language models. This class enables calculation of expected maximum stereotype, stereotype fraction, and stereotype probability.</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#4.-Metric-Definitions-and-Examples">4. Metric Definitions and Examples</a><ul class="nav section-nav flex-column">

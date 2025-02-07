@@ -559,25 +559,15 @@ Example prompt
 </section>
 <section id="Evaluation-Dataset-Generation">
 <h3>Evaluation Dataset Generation<a class="headerlink" href="#Evaluation-Dataset-Generation" title="Link to this heading">#</a></h3>
-<hr class="docutils" />
-<section id="ResponseGenerator()---Class-for-generating-data-for-evaluation-from-provided-set-of-prompts-(class)">
-<h4><code class="docutils literal notranslate"><span class="pre">ResponseGenerator()</span></code> - Class for generating data for evaluation from provided set of prompts (class)<a class="headerlink" href="#ResponseGenerator()---Class-for-generating-data-for-evaluation-from-provided-set-of-prompts-(class)" title="Link to this heading">#</a></h4>
-</section>
-</section>
-<section id="Class-parameters:">
-<h3>Class parameters:<a class="headerlink" href="#Class-parameters:" title="Link to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">ResponseGenerator()</span></code> - Class for generating data for evaluation from provided set of prompts (class)</p>
+<p><strong>Class Attributes:</strong></p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">langchain_llm</span></code> (<strong>langchain llm (Runnable), default=None</strong>) A langchain llm object to get passed to LLMChain <code class="docutils literal notranslate"><span class="pre">llm</span></code> argument.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">suppressed_exceptions</span></code> (<strong>tuple, default=None</strong>) Specifies which exceptions to handle as ‘Unable to get response’ rather than raising the exception</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">max_calls_per_min</span></code> (<strong>Deprecated as of 0.2.0</strong>) Use LangChain’s InMemoryRateLimiter instead.</p></li>
 </ul>
-</section>
-<section id="Methods:">
-<h3>Methods:<a class="headerlink" href="#Methods:" title="Link to this heading">#</a></h3>
-</section>
-<hr class="docutils" />
-<section id="generate_responses()---Generates-evaluation-dataset-from-a-provided-set-of-prompts.-For-each-prompt,-self.count-responses-are-generated.">
-<h3><code class="docutils literal notranslate"><span class="pre">generate_responses()</span></code> - Generates evaluation dataset from a provided set of prompts. For each prompt, <code class="docutils literal notranslate"><span class="pre">self.count</span></code> responses are generated.<a class="headerlink" href="#generate_responses()---Generates-evaluation-dataset-from-a-provided-set-of-prompts.-For-each-prompt,-self.count-responses-are-generated." title="Link to this heading">#</a></h3>
+<p><strong>Methods:</strong></p>
+<p><code class="docutils literal notranslate"><span class="pre">generate_responses()</span></code> - Generates evaluation dataset from a provided set of prompts. For each prompt, <code class="docutils literal notranslate"><span class="pre">self.count</span></code> responses are generated.</p>
 <p>Method Parameters:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">prompts</span></code> - (<strong>list of strings</strong>) A list of prompts</p></li>
@@ -848,8 +838,7 @@ If you have more context or a specific question related to this sentence, feel f
 </section>
 <section id="3.-Toxicity-Assessment">
 <h2>3. Toxicity Assessment<a class="headerlink" href="#3.-Toxicity-Assessment" title="Link to this heading">#</a></h2>
-<section id="ToxicityMetrics()---For-calculating-the-toxicity-bias-metrics-(class)">
-<h3><code class="docutils literal notranslate"><span class="pre">ToxicityMetrics()</span></code> - For calculating the toxicity bias metrics (class)<a class="headerlink" href="#ToxicityMetrics()---For-calculating-the-toxicity-bias-metrics-(class)" title="Link to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">ToxicityMetrics()</span></code> - For calculating the toxicity bias metrics (class)</p>
 <p><strong>Class Attributes:</strong></p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">classifiers</span></code> - (<strong>list containing subset of {‘detoxify_unbiased’, detoxify_original, ‘roberta-hate-speech-dynabench-r4-target’,’toxigen’}, default = [‘detoxify_unbiased’]</strong>) Specifies which LLM toxicity classifier to use.</p></li>
@@ -868,7 +857,8 @@ If you have more context or a specific question related to this sentence, feel f
 <li><p>vector of toxicity probabilities (<strong>List of floats</strong>)</p></li>
 </ul>
 </li>
-<li><p><code class="docutils literal notranslate"><span class="pre">evaluate_metrics()</span></code> - Calculate toxicity scores and calculate toxic fraction, expected maximum toxicity, and toxicity probability metrics. <strong>Method Parameters:</strong></p>
+<li><p><code class="docutils literal notranslate"><span class="pre">evaluate_metrics()</span></code> - Calculate toxicity scores and calculate toxic fraction, expected maximum toxicity, and toxicity probability metrics.</p>
+<p><strong>Method Parameters:</strong></p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">responses</span></code> - (<strong>List of strings</strong>) A list of generated output from an LLM</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">prompts</span></code> - (<strong>List of strings, default=None</strong>) A list of prompts from which <code class="docutils literal notranslate"><span class="pre">responses</span></code> were generated. If provided, expected maximum toxicity and toxicity probability are included in metrics.</p></li>
@@ -880,7 +870,6 @@ If you have more context or a specific question related to this sentence, feel f
 </ul>
 </li>
 </ol>
-</section>
 <section id="Calculate-toxicity-metrics">
 <h3>Calculate toxicity metrics<a class="headerlink" href="#Calculate-toxicity-metrics" title="Link to this heading">#</a></h3>
 <div class="nbinput docutils container">
@@ -1135,17 +1124,10 @@ Evaluating metrics...
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#1.-Introduction">1. Introduction</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#2.-Generate-Evaluation-Dataset-(skip-if-responses-already-generated)">2. Generate Evaluation Dataset (skip if responses already generated)</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Read-in-prompts">Read in prompts</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Evaluation-Dataset-Generation">Evaluation Dataset Generation</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#ResponseGenerator()---Class-for-generating-data-for-evaluation-from-provided-set-of-prompts-(class)"><code class="docutils literal notranslate"><span class="pre">ResponseGenerator()</span></code> - Class for generating data for evaluation from provided set of prompts (class)</a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Class-parameters:">Class parameters:</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Methods:">Methods:</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#generate_responses()---Generates-evaluation-dataset-from-a-provided-set-of-prompts.-For-each-prompt,-self.count-responses-are-generated."><code class="docutils literal notranslate"><span class="pre">generate_responses()</span></code> - Generates evaluation dataset from a provided set of prompts. For each prompt, <code class="docutils literal notranslate"><span class="pre">self.count</span></code> responses are generated.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Evaluation-Dataset-Generation">Evaluation Dataset Generation</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#3.-Toxicity-Assessment">3. Toxicity Assessment</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ToxicityMetrics()---For-calculating-the-toxicity-bias-metrics-(class)"><code class="docutils literal notranslate"><span class="pre">ToxicityMetrics()</span></code> - For calculating the toxicity bias metrics (class)</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Calculate-toxicity-metrics">Calculate toxicity metrics</a></li>
 </ul>
 </li>

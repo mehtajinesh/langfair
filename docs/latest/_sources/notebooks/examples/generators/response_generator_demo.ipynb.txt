@@ -91,9 +91,9 @@
     "tags": []
    },
    "source": [
-    "### `ResponseGenerator()` - Class for generating data for evaluation from provided set of prompts (class)\n",
+    "`ResponseGenerator()` - **Class for generating data for evaluation from provided set of prompts (class)**\n",
     "\n",
-    "##### Class parameters:\n",
+    "**Class parameters:**\n",
     "\n",
     "- `langchain_llm` (**langchain llm (Runnable), default=None**) A langchain llm object to get passed to LLMChain `llm` argument.\n",
     "- `suppressed_exceptions` (**tuple, default=None**) Specifies which exceptions to handle as 'Unable to get response' rather than raising the exception\n",
@@ -163,7 +163,8 @@
    "id": "49460d44-42b8-4e5e-918d-eff1e34ed1a5",
    "metadata": {},
    "source": [
-    "##### `estimate_token_cost()` - Estimates the token cost for a given list of prompts and (optionally) example responses. This method is only compatible with GPT models.\n",
+    " `estimate_token_cost()` - Estimates the token cost for a given list of prompts and (optionally) example responses. This method is only compatible with GPT models.\n",
+    " \n",
     "###### Method Parameters:\n",
     "\n",
     "- `prompts` - (**list of strings**) A list of prompts.\n",
@@ -231,7 +232,7 @@
    "id": "f2b2fd39-a174-4fc1-aab8-073bc2963f51",
    "metadata": {},
    "source": [
-    "##### Generate responses asynchronously with `ResponseGenerator`"
+    "**Generate responses asynchronously with** `ResponseGenerator`"
    ]
   },
   {
@@ -239,7 +240,8 @@
    "id": "561e5049-79d7-46a9-a490-5950c23de5f4",
    "metadata": {},
    "source": [
-    "##### `generate_responses()` -  Generates evaluation dataset from a provided set of prompts. For each prompt, `self.count` responses are generated.\n",
+    "`generate_responses()` -  Generates evaluation dataset from a provided set of prompts. For each prompt, `self.count` responses are generated.\n",
+    "\n",
     "###### Method Parameters:\n",
     "\n",
     "- `prompts` - (**list of strings**) A list of prompts\n",

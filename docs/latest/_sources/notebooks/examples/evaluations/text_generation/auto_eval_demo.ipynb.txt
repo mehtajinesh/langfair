@@ -122,7 +122,7 @@
    "cell_type": "markdown",
    "metadata": {},
    "source": [
-    "## `AutoEval()` - For calculating all toxicity, stereotype, and counterfactual metrics supported by LangFair\n",
+    "`AutoEval()` - **For calculating all toxicity, stereotype, and counterfactual metrics supported by LangFair**\n",
     "\n",
     "**Class Attributes:**\n",
     "- `prompts` - (**list of strings**)\n",

@@ -632,15 +632,15 @@
 <section id="id1">
 <h3>Recommendation Metrics<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
 <hr class="docutils" />
-<section id="RecommendationMetrics()---For-calculating-FaiRLLM-(Fairness-of-Recommendation-via-LLM)-metrics-(class)">
-<h4><code class="docutils literal notranslate"><span class="pre">RecommendationMetrics()</span></code> - For calculating FaiRLLM (Fairness of Recommendation via LLM) metrics (class)<a class="headerlink" href="#RecommendationMetrics()---For-calculating-FaiRLLM-(Fairness-of-Recommendation-via-LLM)-metrics-(class)" title="Link to this heading">#</a></h4>
+<p><code class="docutils literal notranslate"><span class="pre">RecommendationMetrics()</span></code> - For calculating FaiRLLM (Fairness of Recommendation via LLM) metrics (class)</p>
 <p><strong>Class parameters:</strong></p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">metrics</span></code> - (<strong>List of strings/Metric objects</strong>) Specifies which metrics to use. Default option is a list if strings (<code class="docutils literal notranslate"><span class="pre">metrics</span></code> = [“Jaccard”, “PRAG”, “SERP”]).</p></li>
 </ul>
 <p><strong>Methods:</strong></p>
 <ol class="arabic">
-<li><p><code class="docutils literal notranslate"><span class="pre">evaluate_against_neutral</span></code> - Returns min, max, range, and standard deviation of metrics across protected attribute groups. <strong>Method Parameters:</strong></p>
+<li><p><code class="docutils literal notranslate"><span class="pre">evaluate_against_neutral</span></code> - Returns min, max, range, and standard deviation of metrics across protected attribute groups.</p>
+<p><strong>Method Parameters:</strong></p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">neutral_dict</span></code> - (<strong>list of dict</strong>) Each value in the list corresponds to a recommendation list.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">group_dict_list</span></code> - (<strong>list of dict of list</strong>) Each element of the list corresponds to a protected attribute group. The values of each interior dictionary are recommendation lists in the format of <code class="docutils literal notranslate"><span class="pre">neutral_dict</span></code>.</p></li>
@@ -650,7 +650,8 @@
 <li><p>Dictionary containing mean, max, standard deviation of metrics across protected attribute group (<strong>Dictionary</strong>).</p></li>
 </ul>
 </li>
-<li><p><code class="docutils literal notranslate"><span class="pre">evaluate_pair_wise</span></code> - Returns pairwise values of similarity metrics for two protected attribute groups. <strong>Method Parameters:</strong></p>
+<li><p><code class="docutils literal notranslate"><span class="pre">evaluate_pair_wise</span></code> - Returns pairwise values of similarity metrics for two protected attribute groups.</p>
+<p><strong>Method Parameters:</strong></p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">rec_lists1</span></code> - (<strong>list of list of str</strong>) A list of recommendation lists, each of length K, generated from prompts containing mentions of the same protected attribute.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">rec_lists2</span></code> - (<strong>list of list of str</strong>) A list of recommendation lists, each of length K, generated from prompts containing mentions of the same protected attribute.</p></li>
@@ -723,7 +724,6 @@
   &#39;SNSV&#39;: 0.007954545454545464}}
 </pre></div></div>
 </div>
-</section>
 </section>
 </section>
 <section id="3.-Metric-Definitions">
@@ -815,10 +815,7 @@
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#1.-Introduction">1. Introduction</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#2.-Assessment">2. Assessment</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Calculate-recommendation-metrics">Calculate recommendation metrics</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Recommendation Metrics</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#RecommendationMetrics()---For-calculating-FaiRLLM-(Fairness-of-Recommendation-via-LLM)-metrics-(class)"><code class="docutils literal notranslate"><span class="pre">RecommendationMetrics()</span></code> - For calculating FaiRLLM (Fairness of Recommendation via LLM) metrics (class)</a></li>
-</ul>
-</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Recommendation Metrics</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#3.-Metric-Definitions">3. Metric Definitions</a><ul class="nav section-nav flex-column">

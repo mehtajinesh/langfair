@@ -558,11 +558,8 @@ Example prompt
 Corruption involving the contractors is the chief culprit for the prison’s problems, according to a recent
 </pre></div></div>
 </div>
-<section id="Counterfactual-Dataset-Generator">
-<h3>Counterfactual Dataset Generator<a class="headerlink" href="#Counterfactual-Dataset-Generator" title="Link to this heading">#</a></h3>
-<hr class="docutils" />
-<section id="CounterfactualGenerator()---Used-for-generating-data-for-counterfactual-fairness-assessment-(class)">
-<h4><code class="docutils literal notranslate"><span class="pre">CounterfactualGenerator()</span></code> - Used for generating data for counterfactual fairness assessment (class)<a class="headerlink" href="#CounterfactualGenerator()---Used-for-generating-data-for-counterfactual-fairness-assessment-(class)" title="Link to this heading">#</a></h4>
+<p><strong>Counterfactual Dataset Generator</strong></p>
+<p><code class="docutils literal notranslate"><span class="pre">CounterfactualGenerator()</span></code> - Used for generating data for counterfactual fairness assessment (class)</p>
 <p><strong>Class Attributes:</strong></p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">langchain_llm</span></code> (<strong>langchain llm (Runnable), default=None</strong>) A LangChain llm object to get passed to LangChain <code class="docutils literal notranslate"><span class="pre">RunnableSequence</span></code>.</p></li>
@@ -662,12 +659,9 @@ Corruption involving the contractors is the chief culprit for the prison’s pro
 </pre></div>
 </div>
 </div>
-</section>
-</section>
 <section id="2.1-Check-fairness-through-unawareness">
 <h3>2.1 Check fairness through unawareness<a class="headerlink" href="#2.1-Check-fairness-through-unawareness" title="Link to this heading">#</a></h3>
-<section id="CounterfactualGenerator.check_ftu()---Parses-prompts-to-check-for-fairness-through-unawareness.-Returns-dictionary-with-prompts,-corresponding-attribute-words-found,-and-applicable-metadata.">
-<h4><code class="docutils literal notranslate"><span class="pre">CounterfactualGenerator.check_ftu()</span></code> - Parses prompts to check for fairness through unawareness. Returns dictionary with prompts, corresponding attribute words found, and applicable metadata.<a class="headerlink" href="#CounterfactualGenerator.check_ftu()---Parses-prompts-to-check-for-fairness-through-unawareness.-Returns-dictionary-with-prompts,-corresponding-attribute-words-found,-and-applicable-metadata." title="Link to this heading">#</a></h4>
+<p><code class="docutils literal notranslate"><span class="pre">CounterfactualGenerator.check_ftu()</span></code> - Parses prompts to check for fairness through unawareness. Returns dictionary with prompts, corresponding attribute words found, and applicable metadata.</p>
 <p><strong>Method Parameters:</strong></p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">text</span></code> - (<strong>string</strong>) A text corpus to be parsed for protected attribute words and names</p></li>
@@ -764,11 +758,9 @@ Race words found in 246 prompts. FTU is not satisfied.
 </div>
 <p>As seen above, this use case does not satisfy fairness through unawareness, since 246 prompts contain mentions of race words.</p>
 </section>
-</section>
 <section id="2.2-Generate-counterfactual-responses">
 <h3>2.2 Generate counterfactual responses<a class="headerlink" href="#2.2-Generate-counterfactual-responses" title="Link to this heading">#</a></h3>
-<section id="CounterfactualGenerator.generate_responses()---Creates-counterfactual-prompts-obtained-by-counterfactual-substitution-and-generates-responses-asynchronously.">
-<h4><code class="docutils literal notranslate"><span class="pre">CounterfactualGenerator.generate_responses()</span></code> - Creates counterfactual prompts obtained by counterfactual substitution and generates responses asynchronously.<a class="headerlink" href="#CounterfactualGenerator.generate_responses()---Creates-counterfactual-prompts-obtained-by-counterfactual-substitution-and-generates-responses-asynchronously." title="Link to this heading">#</a></h4>
+<p><code class="docutils literal notranslate"><span class="pre">CounterfactualGenerator.generate_responses()</span></code> - Creates counterfactual prompts obtained by counterfactual substitution and generates responses asynchronously.</p>
 <p><strong>Method Parameters:</strong></p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">prompts</span></code> - (<strong>List of strings</strong>) A list of prompts on which counterfactual substitution and response generation will be done</p></li>
@@ -869,7 +861,6 @@ Responses successfully generated!
 </div>
 </section>
 </section>
-</section>
 <section id="3.-Assessment">
 <h2>3. Assessment<a class="headerlink" href="#3.-Assessment" title="Link to this heading">#</a></h2>
 <p>This section shows two ways to evaluate countefactual metrics on a given dataset.</p>
@@ -879,9 +870,7 @@ Responses successfully generated!
 </ol>
 <section id="3.1-Lazy-Implementation">
 <h3>3.1 Lazy Implementation<a class="headerlink" href="#3.1-Lazy-Implementation" title="Link to this heading">#</a></h3>
-</section>
-<section id="CounterfactualMetrics()---Calculate-all-the-counterfactual-metrics-(class)">
-<h3><code class="docutils literal notranslate"><span class="pre">CounterfactualMetrics()</span></code> - Calculate all the counterfactual metrics (class)<a class="headerlink" href="#CounterfactualMetrics()---Calculate-all-the-counterfactual-metrics-(class)" title="Link to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">CounterfactualMetrics()</span></code> - Calculate all the counterfactual metrics (class)</p>
 <p><strong>Class Attributes:</strong></p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">metrics</span></code> - (<strong>List of strings/Metric objects</strong>) Specifies which metrics to use. Default option is a list if strings (<code class="docutils literal notranslate"><span class="pre">metrics</span></code> = [“Cosine”, “Rougel”, “Bleu”, “Sentiment Bias”]).</p></li>
@@ -1096,8 +1085,7 @@ Responses successfully generated!
 </section>
 <section id="3.2.1-Counterfactual-Sentiment-Bias">
 <h3>3.2.1 Counterfactual Sentiment Bias<a class="headerlink" href="#3.2.1-Counterfactual-Sentiment-Bias" title="Link to this heading">#</a></h3>
-<section id="SentimentBias()---For-calculating-the-counterfactual-sentiment-bias-metric-(class)">
-<h4><code class="docutils literal notranslate"><span class="pre">SentimentBias()</span></code> - For calculating the counterfactual sentiment bias metric (class)<a class="headerlink" href="#SentimentBias()---For-calculating-the-counterfactual-sentiment-bias-metric-(class)" title="Link to this heading">#</a></h4>
+<p><code class="docutils literal notranslate"><span class="pre">SentimentBias()</span></code> - For calculating the counterfactual sentiment bias metric (class)</p>
 <p><strong>Class Attributes:</strong></p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">classifier</span></code> - (<strong>{‘vader’,’NLP API’}</strong>) Specifies which sentiment classifier to use. Currently, only vader is offered. <code class="docutils literal notranslate"><span class="pre">NLP</span> <span class="pre">API</span></code> coming soon.</p></li>
@@ -1153,11 +1141,9 @@ asian-hispanic Strict counterfactual sentiment parity:  0.009662447257383966
 </pre></div></div>
 </div>
 </section>
-</section>
 <section id="3.2.2-Cosine-Similarity">
 <h3>3.2.2 Cosine Similarity<a class="headerlink" href="#3.2.2-Cosine-Similarity" title="Link to this heading">#</a></h3>
-<section id="CosineSimilarity()---For-calculating-the-social-group-substitutions-metric-(class)">
-<h4><code class="docutils literal notranslate"><span class="pre">CosineSimilarity()</span></code> - For calculating the social group substitutions metric (class)<a class="headerlink" href="#CosineSimilarity()---For-calculating-the-social-group-substitutions-metric-(class)" title="Link to this heading">#</a></h4>
+<p><code class="docutils literal notranslate"><span class="pre">CosineSimilarity()</span></code> - For calculating the social group substitutions metric (class)</p>
 <p><strong>Class Attributes:</strong></p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">SentenceTransformer</span></code> - (<strong>sentence_transformers.SentenceTransformer.SentenceTransformer, default=None</strong>) Specifies which huggingface sentence transformer to use when computing cosine distance. See <a class="reference external" href="https://huggingface.co/sentence-transformers?sort_models=likes#models">https://huggingface.co/sentence-transformers?sort_models=likes#models</a> for more information. The recommended sentence transformer is ‘all-MiniLM-L6-v2’.</p></li>
@@ -1165,7 +1151,8 @@ asian-hispanic Strict counterfactual sentiment parity:  0.009662447257383966
 </ul>
 <p><strong>Methods:</strong></p>
 <ol class="arabic">
-<li><p><code class="docutils literal notranslate"><span class="pre">evaluate()</span></code> - Calculates social group substitutions using cosine similarity. Sentence embeddings are calculated with <code class="docutils literal notranslate"><span class="pre">self.transformer</span></code>. Method Parameters:</p>
+<li><p><code class="docutils literal notranslate"><span class="pre">evaluate()</span></code> - Calculates social group substitutions using cosine similarity. Sentence embeddings are calculated with <code class="docutils literal notranslate"><span class="pre">self.transformer</span></code>.</p>
+<p>Method Parameters:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">texts1</span></code> - (<strong>List of strings</strong>) A list of generated output from an LLM with mention of a protected attribute group</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">texts2</span></code> - (<strong>List of strings</strong>) A list of equal length to <code class="docutils literal notranslate"><span class="pre">texts1</span></code> containing counterfactually generated output from an LLM with mention of a different protected attribute group</p></li>
@@ -1208,11 +1195,9 @@ asian-hispanic Counterfactual Cosine Similarity:  0.56312436
 </pre></div></div>
 </div>
 </section>
-</section>
 <section id="3.2.3-RougeL-Similarity">
 <h3>3.2.3 RougeL Similarity<a class="headerlink" href="#3.2.3-RougeL-Similarity" title="Link to this heading">#</a></h3>
-<section id="RougeLSimilarity()---For-calculating-the-social-group-substitutions-metric-using-RougeL-similarity-(class)">
-<h4><code class="docutils literal notranslate"><span class="pre">RougeLSimilarity()</span></code> - For calculating the social group substitutions metric using RougeL similarity (class)<a class="headerlink" href="#RougeLSimilarity()---For-calculating-the-social-group-substitutions-metric-using-RougeL-similarity-(class)" title="Link to this heading">#</a></h4>
+<p><code class="docutils literal notranslate"><span class="pre">RougeLSimilarity()</span></code> - For calculating the social group substitutions metric using RougeL similarity (class)</p>
 <p><strong>Class Attributes:</strong></p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">rouge_metric</span></code> : (<strong>{‘rougeL’,’rougeLsum’}, default=’rougeL’</strong>) Specifies which ROUGE metric to use. If sentence-wise assessment is preferred, select ‘rougeLsum’.</p></li>
@@ -1220,7 +1205,8 @@ asian-hispanic Counterfactual Cosine Similarity:  0.56312436
 </ul>
 <p><strong>Methods:</strong></p>
 <ol class="arabic">
-<li><p><code class="docutils literal notranslate"><span class="pre">evaluate()</span></code> - Calculates social group substitutions using ROUGE-L. Method Parameters:</p>
+<li><p><code class="docutils literal notranslate"><span class="pre">evaluate()</span></code> - Calculates social group substitutions using ROUGE-L.</p>
+<p>Method Parameters:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">texts1</span></code> - (<strong>List of strings</strong>) A list of generated output from an LLM with mention of a protected attribute group</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">texts2</span></code> - (<strong>List of strings</strong>) A list of equal length to <code class="docutils literal notranslate"><span class="pre">texts1</span></code> containing counterfactually generated output from an LLM with mention of a different protected attribute group</p></li>
@@ -1268,18 +1254,17 @@ asian-hispanic Counterfactual RougeL Similarity:  0.284519369252381
 </pre></div></div>
 </div>
 </section>
-</section>
 <section id="3.2.4-BLEU-Similarity">
 <h3>3.2.4 BLEU Similarity<a class="headerlink" href="#3.2.4-BLEU-Similarity" title="Link to this heading">#</a></h3>
-<section id="Bleu-Similarity()---For-calculating-the-social-group-substitutions-metric-using-BLEU-similarity-(class)">
-<h4><code class="docutils literal notranslate"><span class="pre">Bleu</span> <span class="pre">Similarity()</span></code> - For calculating the social group substitutions metric using BLEU similarity (class)<a class="headerlink" href="#Bleu-Similarity()---For-calculating-the-social-group-substitutions-metric-using-BLEU-similarity-(class)" title="Link to this heading">#</a></h4>
+<p><code class="docutils literal notranslate"><span class="pre">Bleu</span> <span class="pre">Similarity()</span></code> - For calculating the social group substitutions metric using BLEU similarity (class)</p>
 <p><strong>Class parameters:</strong></p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">how</span></code> - (<strong>{‘mean’,’pairwise’} default=’mean’</strong>) Specifies whether to return the mean cosine distance value over all counterfactual pairs or a list containing consine distance for each pair.</p></li>
 </ul>
 <p><strong>Methods:</strong></p>
 <ol class="arabic">
-<li><p><code class="docutils literal notranslate"><span class="pre">evaluate()</span></code> - Calculates social group substitutions using BLEU metric. Method Parameters:</p>
+<li><p><code class="docutils literal notranslate"><span class="pre">evaluate()</span></code> - Calculates social group substitutions using BLEU metric.</p>
+<p>Method Parameters:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">texts1</span></code> - (<strong>List of strings</strong>) A list of generated output from an LLM with mention of a protected attribute group</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">texts2</span></code> - (<strong>List of strings</strong>) A list of equal length to <code class="docutils literal notranslate"><span class="pre">texts1</span></code> containing counterfactually generated output from an LLM with mention of a different protected attribute group</p></li>
@@ -1326,7 +1311,6 @@ black-hispanic Counterfactual BLEU Similarity:  0.09003935749986568
 asian-hispanic Counterfactual BLEU Similarity:  0.1271323479290026
 </pre></div></div>
 </div>
-</section>
 </section>
 </section>
 <section id="4.-Metric-Definitions">
@@ -1429,40 +1413,17 @@ documentation</a>.</p>
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#1.-Introduction">1. Introduction</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#2.-Generate-Counterfactual-Dataset">2. Generate Counterfactual Dataset</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Counterfactual-Dataset-Generator">Counterfactual Dataset Generator</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#CounterfactualGenerator()---Used-for-generating-data-for-counterfactual-fairness-assessment-(class)"><code class="docutils literal notranslate"><span class="pre">CounterfactualGenerator()</span></code> - Used for generating data for counterfactual fairness assessment (class)</a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#2.1-Check-fairness-through-unawareness">2.1 Check fairness through unawareness</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#CounterfactualGenerator.check_ftu()---Parses-prompts-to-check-for-fairness-through-unawareness.-Returns-dictionary-with-prompts,-corresponding-attribute-words-found,-and-applicable-metadata."><code class="docutils literal notranslate"><span class="pre">CounterfactualGenerator.check_ftu()</span></code> - Parses prompts to check for fairness through unawareness. Returns dictionary with prompts, corresponding attribute words found, and applicable metadata.</a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#2.2-Generate-counterfactual-responses">2.2 Generate counterfactual responses</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#CounterfactualGenerator.generate_responses()---Creates-counterfactual-prompts-obtained-by-counterfactual-substitution-and-generates-responses-asynchronously."><code class="docutils literal notranslate"><span class="pre">CounterfactualGenerator.generate_responses()</span></code> - Creates counterfactual prompts obtained by counterfactual substitution and generates responses asynchronously.</a></li>
-</ul>
-</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#2.1-Check-fairness-through-unawareness">2.1 Check fairness through unawareness</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#2.2-Generate-counterfactual-responses">2.2 Generate counterfactual responses</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#3.-Assessment">3. Assessment</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#3.1-Lazy-Implementation">3.1 Lazy Implementation</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#CounterfactualMetrics()---Calculate-all-the-counterfactual-metrics-(class)"><code class="docutils literal notranslate"><span class="pre">CounterfactualMetrics()</span></code> - Calculate all the counterfactual metrics (class)</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#3.2-Separate-Implementation">3.2 Separate Implementation</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#3.2.1-Counterfactual-Sentiment-Bias">3.2.1 Counterfactual Sentiment Bias</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#SentimentBias()---For-calculating-the-counterfactual-sentiment-bias-metric-(class)"><code class="docutils literal notranslate"><span class="pre">SentimentBias()</span></code> - For calculating the counterfactual sentiment bias metric (class)</a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#3.2.2-Cosine-Similarity">3.2.2 Cosine Similarity</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#CosineSimilarity()---For-calculating-the-social-group-substitutions-metric-(class)"><code class="docutils literal notranslate"><span class="pre">CosineSimilarity()</span></code> - For calculating the social group substitutions metric (class)</a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#3.2.3-RougeL-Similarity">3.2.3 RougeL Similarity</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#RougeLSimilarity()---For-calculating-the-social-group-substitutions-metric-using-RougeL-similarity-(class)"><code class="docutils literal notranslate"><span class="pre">RougeLSimilarity()</span></code> - For calculating the social group substitutions metric using RougeL similarity (class)</a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#3.2.4-BLEU-Similarity">3.2.4 BLEU Similarity</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#Bleu-Similarity()---For-calculating-the-social-group-substitutions-metric-using-BLEU-similarity-(class)"><code class="docutils literal notranslate"><span class="pre">Bleu</span> <span class="pre">Similarity()</span></code> - For calculating the social group substitutions metric using BLEU similarity (class)</a></li>
-</ul>
-</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#3.2.1-Counterfactual-Sentiment-Bias">3.2.1 Counterfactual Sentiment Bias</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#3.2.2-Cosine-Similarity">3.2.2 Cosine Similarity</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#3.2.3-RougeL-Similarity">3.2.3 RougeL Similarity</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#3.2.4-BLEU-Similarity">3.2.4 BLEU Similarity</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#4.-Metric-Definitions">4. Metric Definitions</a><ul class="nav section-nav flex-column">

@@ -503,10 +503,8 @@
 </pre></div>
 </div>
 </div>
-<section id="ResponseGenerator()---Class-for-generating-data-for-evaluation-from-provided-set-of-prompts-(class)">
-<h2><code class="docutils literal notranslate"><span class="pre">ResponseGenerator()</span></code> - Class for generating data for evaluation from provided set of prompts (class)<a class="headerlink" href="#ResponseGenerator()---Class-for-generating-data-for-evaluation-from-provided-set-of-prompts-(class)" title="Link to this heading">#</a></h2>
-<section id="Class-parameters:">
-<h3>Class parameters:<a class="headerlink" href="#Class-parameters:" title="Link to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">ResponseGenerator()</span></code> - <strong>Class for generating data for evaluation from provided set of prompts (class)</strong></p>
+<p><strong>Class parameters:</strong></p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">langchain_llm</span></code> (<strong>langchain llm (Runnable), default=None</strong>) A langchain llm object to get passed to LLMChain <code class="docutils literal notranslate"><span class="pre">llm</span></code> argument.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">suppressed_exceptions</span></code> (<strong>tuple, default=None</strong>) Specifies which exceptions to handle as ‘Unable to get response’ rather than raising the exception</p></li>
@@ -547,12 +545,9 @@
 </pre></div>
 </div>
 </div>
-</section>
-</section>
 <section id="Estimate-token-costs-before-generation">
 <h2>Estimate token costs before generation<a class="headerlink" href="#Estimate-token-costs-before-generation" title="Link to this heading">#</a></h2>
-<section id="estimate_token_cost()---Estimates-the-token-cost-for-a-given-list-of-prompts-and-(optionally)-example-responses.-This-method-is-only-compatible-with-GPT-models.">
-<h3><code class="docutils literal notranslate"><span class="pre">estimate_token_cost()</span></code> - Estimates the token cost for a given list of prompts and (optionally) example responses. This method is only compatible with GPT models.<a class="headerlink" href="#estimate_token_cost()---Estimates-the-token-cost-for-a-given-list-of-prompts-and-(optionally)-example-responses.-This-method-is-only-compatible-with-GPT-models." title="Link to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">estimate_token_cost()</span></code> - Estimates the token cost for a given list of prompts and (optionally) example responses. This method is only compatible with GPT models.</p>
 <p>Method Parameters:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">prompts</span></code> - (<strong>list of strings</strong>) A list of prompts.</p></li>
@@ -597,14 +592,10 @@ Estimated cost for gpt-4-32k-0613: $ 9.16
 </div>
 <p>Note that using GPT-4 is considerably more expensive than GPT-3.5</p>
 </section>
-</section>
 <section id="Evaluating-Response-Time:-Asynchronous-Generation-with-ResponseGenerator-vs-Synchronous-Generation-with-openai.chat.completions.create">
 <h2>Evaluating Response Time: Asynchronous Generation with <code class="docutils literal notranslate"><span class="pre">ResponseGenerator</span></code> vs Synchronous Generation with <code class="docutils literal notranslate"><span class="pre">openai.chat.completions.create</span></code><a class="headerlink" href="#Evaluating-Response-Time:-Asynchronous-Generation-with-ResponseGenerator-vs-Synchronous-Generation-with-openai.chat.completions.create" title="Link to this heading">#</a></h2>
-<section id="Generate-responses-asynchronously-with-ResponseGenerator">
-<h3>Generate responses asynchronously with <code class="docutils literal notranslate"><span class="pre">ResponseGenerator</span></code><a class="headerlink" href="#Generate-responses-asynchronously-with-ResponseGenerator" title="Link to this heading">#</a></h3>
-</section>
-<section id="generate_responses()---Generates-evaluation-dataset-from-a-provided-set-of-prompts.-For-each-prompt,-self.count-responses-are-generated.">
-<h3><code class="docutils literal notranslate"><span class="pre">generate_responses()</span></code> - Generates evaluation dataset from a provided set of prompts. For each prompt, <code class="docutils literal notranslate"><span class="pre">self.count</span></code> responses are generated.<a class="headerlink" href="#generate_responses()---Generates-evaluation-dataset-from-a-provided-set-of-prompts.-For-each-prompt,-self.count-responses-are-generated." title="Link to this heading">#</a></h3>
+<p><strong>Generate responses asynchronously with</strong> <code class="docutils literal notranslate"><span class="pre">ResponseGenerator</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">generate_responses()</span></code> - Generates evaluation dataset from a provided set of prompts. For each prompt, <code class="docutils literal notranslate"><span class="pre">self.count</span></code> responses are generated.</p>
 <p>Method Parameters:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">prompts</span></code> - (<strong>list of strings</strong>) A list of prompts</p></li>
@@ -758,7 +749,6 @@ Time elapsed for asynchronous generation: 17.648038625717163
  &#39;count&#39;: 1}
 </pre></div></div>
 </div>
-</section>
 <section id="Generate-responses-synchronously-for-comparison">
 <h3>Generate responses synchronously for comparison<a class="headerlink" href="#Generate-responses-synchronously-for-comparison" title="Link to this heading">#</a></h3>
 <div class="nbinput nblast docutils container">
@@ -1255,17 +1245,8 @@ Responses successfully generated!
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ResponseGenerator()---Class-for-generating-data-for-evaluation-from-provided-set-of-prompts-(class)"><code class="docutils literal notranslate"><span class="pre">ResponseGenerator()</span></code> - Class for generating data for evaluation from provided set of prompts (class)</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Class-parameters:">Class parameters:</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Estimate-token-costs-before-generation">Estimate token costs before generation</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#estimate_token_cost()---Estimates-the-token-cost-for-a-given-list-of-prompts-and-(optionally)-example-responses.-This-method-is-only-compatible-with-GPT-models."><code class="docutils literal notranslate"><span class="pre">estimate_token_cost()</span></code> - Estimates the token cost for a given list of prompts and (optionally) example responses. This method is only compatible with GPT models.</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Estimate-token-costs-before-generation">Estimate token costs before generation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Evaluating-Response-Time:-Asynchronous-Generation-with-ResponseGenerator-vs-Synchronous-Generation-with-openai.chat.completions.create">Evaluating Response Time: Asynchronous Generation with <code class="docutils literal notranslate"><span class="pre">ResponseGenerator</span></code> vs Synchronous Generation with <code class="docutils literal notranslate"><span class="pre">openai.chat.completions.create</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Generate-responses-asynchronously-with-ResponseGenerator">Generate responses asynchronously with <code class="docutils literal notranslate"><span class="pre">ResponseGenerator</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#generate_responses()---Generates-evaluation-dataset-from-a-provided-set-of-prompts.-For-each-prompt,-self.count-responses-are-generated."><code class="docutils literal notranslate"><span class="pre">generate_responses()</span></code> - Generates evaluation dataset from a provided set of prompts. For each prompt, <code class="docutils literal notranslate"><span class="pre">self.count</span></code> responses are generated.</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Generate-responses-synchronously-for-comparison">Generate responses synchronously for comparison</a></li>
 </ul>
 </li>
