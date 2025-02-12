@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Demo of ResponseGenerator class &#8212; LangFair 0.3 documentation</title>
+    <title>Demo of ResponseGenerator class &#8212; LangFair 0.4 documentation</title>
   
   
   
@@ -30,7 +30,7 @@
   <link href="../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 <link href="../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../../_static/nbsphinx-code-cells.css?v=2aa19091" />
     <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=3ffa509f" />
   
@@ -40,7 +40,7 @@
   <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
 <link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script src="../../../_static/documentation_options.js?v=b489f392"></script>
+    <script src="../../../_static/documentation_options.js?v=7f00635f"></script>
     <script src="../../../_static/doctools.js?v=9a2dae69"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
@@ -50,7 +50,7 @@
     <script>
         DOCUMENTATION_OPTIONS.theme_version = '0.16.1';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://cvs-health.github.io/langfair/versions.json';
-        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '0.3';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '0.4';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
             false;
         </script>
@@ -61,7 +61,7 @@
     <link rel="prev" title="Toxicity Assessment" href="../evaluations/text_generation/toxicity_metrics_demo.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="0.3.2" />
+  <meta name="docsearch:version" content="0.4.0a0" />
   </head>
   
   
@@ -127,8 +127,8 @@
       
     
     
-    <img src="../../../_static/langfair-logo.png" class="logo__image only-light" alt="LangFair 0.3 documentation - Home"/>
-    <img src="../../../_static/langfair-logo2.png" class="logo__image only-dark pst-js-only" alt="LangFair 0.3 documentation - Home"/>
+    <img src="../../../_static/langfair-logo.png" class="logo__image only-light" alt="LangFair 0.4 documentation - Home"/>
+    <img src="../../../_static/langfair-logo2.png" class="logo__image only-dark pst-js-only" alt="LangFair 0.4 documentation - Home"/>
   
   
 </a></div>
@@ -462,14 +462,14 @@
 <span class="c1"># import sys</span>
 <span class="c1"># !{sys.executable} -m pip install python-dotenv</span>
 
-<span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
 
-<span class="kn">import</span> <span class="nn">openai</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">from</span> <span class="nn">dotenv</span> <span class="kn">import</span> <span class="n">load_dotenv</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">openai</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dotenv</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_dotenv</span>
 
-<span class="kn">from</span> <span class="nn">langfair.generator</span> <span class="kn">import</span> <span class="n">ResponseGenerator</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">langfair.generator</span><span class="w"> </span><span class="kn">import</span> <span class="n">ResponseGenerator</span>
 </pre></div>
 </div>
 </div>
@@ -496,7 +496,7 @@
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># THIS IS AN EXAMPLE SET OF PROMPTS. USER TO REPLACE WITH THEIR OWN PROMPTS</span>
-<span class="kn">from</span> <span class="nn">langfair.utils.dataloader</span> <span class="kn">import</span> <span class="n">load_realtoxicity</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">langfair.utils.dataloader</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_realtoxicity</span>
 
 <span class="n">prompts</span> <span class="o">=</span> <span class="n">load_realtoxicity</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Example prompt</span><span class="se">\n</span><span class="si">{</span><span class="s1">&#39;-&#39;</span><span class="o">*</span><span class="mi">14</span><span class="si">}</span><span class="se">\n</span><span class="s2">&#39;</span><span class="si">{</span><span class="n">prompts</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
@@ -520,7 +520,7 @@
 <span class="c1"># !{sys.executable} -m pip install langchain-openai</span>
 
 <span class="c1"># Example with AzureChatOpenAI. REPLACE WITH YOUR LLM OF CHOICE.</span>
-<span class="kn">from</span> <span class="nn">langchain_openai</span> <span class="kn">import</span> <span class="n">AzureChatOpenAI</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">langchain_openai</span><span class="w"> </span><span class="kn">import</span> <span class="n">AzureChatOpenAI</span>
 
 <span class="n">llm</span> <span class="o">=</span> <span class="n">AzureChatOpenAI</span><span class="p">(</span>
     <span class="n">deployment_name</span><span class="o">=</span><span class="n">DEPLOYMENT_NAME</span><span class="p">,</span>
@@ -755,7 +755,7 @@ Time elapsed for asynchronous generation: 17.648038625717163
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">openai_api_call</span><span class="p">(</span><span class="n">prompt</span><span class="p">,</span> <span class="n">system_prompt</span><span class="o">=</span><span class="s2">&quot;You are a helpful assistant.&quot;</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="s2">&quot;exai-gpt-35-turbo-16k&quot;</span><span class="p">):</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">openai_api_call</span><span class="p">(</span><span class="n">prompt</span><span class="p">,</span> <span class="n">system_prompt</span><span class="o">=</span><span class="s2">&quot;You are a helpful assistant.&quot;</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="s2">&quot;exai-gpt-35-turbo-16k&quot;</span><span class="p">):</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="n">completion</span> <span class="o">=</span> <span class="n">openai</span><span class="o">.</span><span class="n">chat</span><span class="o">.</span><span class="n">completions</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
             <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span>
@@ -1060,7 +1060,7 @@ File <span class="ansi-green-fg">/opt/conda/envs/langfair/lib/python3.9/site-pac
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">langchain_core.rate_limiters</span> <span class="kn">import</span> <span class="n">InMemoryRateLimiter</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">langchain_core.rate_limiters</span><span class="w"> </span><span class="kn">import</span> <span class="n">InMemoryRateLimiter</span>
 
 <span class="n">rate_limiter</span> <span class="o">=</span> <span class="n">InMemoryRateLimiter</span><span class="p">(</span>
     <span class="n">requests_per_second</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>

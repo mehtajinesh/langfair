@@ -25,6 +25,14 @@ Static benchmark assessments, which are typically assumed to be sufficiently rep
 
 LangFair addresses this gap by adopting a Bring Your Own Prompts (BYOP) approach, allowing users to tailor bias and fairness evaluations to their specific use cases. This ensures that the metrics computed reflect the true performance of the LLMs in real-world scenarios, where prompt-specific risks are critical. Additionally, LangFair's focus is on output-based metrics that are practical for governance audits and real-world testing, without needing access to internal model states.
 
+.. image:: ./_static/images/langfair_graphic.png
+   :width: 800
+   :align: center
+   :alt: LangFair Graphic
+
+.. note::
+
+   This diagram illustrates the workflow for assessing bias and fairness in text generation and summarization use cases.
 
 Featured Resources
 ------------------

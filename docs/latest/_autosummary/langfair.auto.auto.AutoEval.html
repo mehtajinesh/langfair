@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>langfair.auto.auto.AutoEval &#8212; LangFair 0.3 documentation</title>
+    <title>langfair.auto.auto.AutoEval &#8212; LangFair 0.4 documentation</title>
   
   
   
@@ -30,7 +30,7 @@
   <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 <link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=3ffa509f" />
   
   <!-- So that users can add custom icons -->
@@ -39,7 +39,7 @@
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script src="../_static/documentation_options.js?v=b489f392"></script>
+    <script src="../_static/documentation_options.js?v=7f00635f"></script>
     <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
@@ -47,7 +47,7 @@
     <script>
         DOCUMENTATION_OPTIONS.theme_version = '0.16.1';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://cvs-health.github.io/langfair/versions.json';
-        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '0.3';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '0.4';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
             false;
         </script>
@@ -58,7 +58,7 @@
     <link rel="prev" title="langfair.auto.auto" href="langfair.auto.auto.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="0.3.2" />
+  <meta name="docsearch:version" content="0.4.0a0" />
   </head>
   
   
@@ -124,8 +124,8 @@
       
     
     
-    <img src="../_static/langfair-logo.png" class="logo__image only-light" alt="LangFair 0.3 documentation - Home"/>
-    <img src="../_static/langfair-logo2.png" class="logo__image only-dark pst-js-only" alt="LangFair 0.3 documentation - Home"/>
+    <img src="../_static/langfair-logo.png" class="logo__image only-light" alt="LangFair 0.4 documentation - Home"/>
+    <img src="../_static/langfair-logo2.png" class="logo__image only-dark pst-js-only" alt="LangFair 0.4 documentation - Home"/>
   
   
 </a></div>
@@ -543,21 +543,24 @@
 <h1>langfair.auto.auto.AutoEval<a class="headerlink" href="#langfair-auto-auto-autoeval" title="Link to this heading">#</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="langfair.auto.auto.AutoEval">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">langfair.auto.auto.</span></span><span class="sig-name descname"><span class="pre">AutoEval</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prompts</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">responses</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">langchain_llm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">suppressed_exceptions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metrics</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">toxicity_device</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'cpu'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">neutralize_tokens</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_calls_per_min</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langfair.auto.auto.AutoEval" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">langfair.auto.auto.</span></span><span class="sig-name descname"><span class="pre">AutoEval</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prompts</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">responses</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">langchain_llm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">suppressed_exceptions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_n_param</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metrics</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">toxicity_device</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'cpu'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">neutralize_tokens</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_calls_per_min</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langfair.auto.auto.AutoEval" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <dl class="py method">
 <dt class="sig sig-object py" id="langfair.auto.auto.AutoEval.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prompts</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">responses</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">langchain_llm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">suppressed_exceptions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metrics</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">toxicity_device</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'cpu'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">neutralize_tokens</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_calls_per_min</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langfair.auto.auto.AutoEval.__init__" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prompts</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">responses</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">langchain_llm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">suppressed_exceptions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_n_param</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metrics</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">toxicity_device</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'cpu'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">neutralize_tokens</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_calls_per_min</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langfair.auto.auto.AutoEval.__init__" title="Link to this definition">#</a></dt>
 <dd><p>This class calculates all toxicity, stereotype, and counterfactual metrics support by langfair</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>prompts</strong> (<em>list</em><em> of </em><em>strings</em><em> or </em><em>DataFrame</em><em> of </em><em>strings</em>) – A list of input prompts for the model.</p></li>
 <li><p><strong>responses</strong> (<em>list</em><em> of </em><em>strings</em><em> or </em><em>DataFrame</em><em> of </em><em>strings</em><em>, </em><em>default is None</em>) – A list of generated output from an LLM. If not available, responses are generated using the model.</p></li>
-<li><p><strong>langchain_llm</strong> (<em>langchain llm object</em><em>, </em><em>default=None</em>) – A langchain llm object to get passed to chain constructor. User is responsible for specifying
-temperature and other relevant parameters to the constructor of their <cite>langchain_llm</cite> object.</p></li>
-<li><p><strong>suppressed_exceptions</strong> (<em>tuple</em><em>, </em><em>default=None</em>) – Specifies which exceptions to handle as ‘Unable to get response’ rather than raising the
-exception</p></li>
+<li><p><strong>langchain_llm</strong> (langchain <cite>BaseChatModel</cite>, default=None) – A langchain llm <cite>BaseChatModel</cite>. User is responsible for specifying temperature and other
+relevant parameters to the constructor of their <cite>langchain_llm</cite> object.</p></li>
+<li><p><strong>suppressed_exceptions</strong> (<em>tuple</em><em> or </em><em>dict</em><em>, </em><em>default=None</em>) – If a tuple, specifies which exceptions to handle as ‘Unable to get response’ rather than raising the
+exception. If a dict, enables users to specify exception-specific failure messages with keys being subclasses
+of BaseException</p></li>
+<li><p><strong>use_n_param</strong> (<em>bool</em><em>, </em><em>default=False</em>) – Specifies whether to use <cite>n</cite> parameter for <cite>BaseChatModel</cite>. Not compatible with all
+<cite>BaseChatModel</cite> classes. If used, it speeds up the generation process substantially when count &gt; 1.</p></li>
 <li><p><strong>metrics</strong> (<em>dict</em><em> or </em><em>list</em><em> of </em><em>str</em><em>, </em><em>default option compute all supported metrics.</em>) – Specifies which metrics to evaluate.</p></li>
 <li><p><strong>toxicity_device</strong> (<em>str</em><em> or </em><em>torch.device input</em><em> or </em><em>torch.device object</em><em>, </em><em>default=&quot;cpu&quot;</em>) – Specifies the device that toxicity classifiers use for prediction. Set to “cuda” for classifiers to be able
 to leverage the GPU. Currently, ‘detoxify_unbiased’ and ‘detoxify_original’ will use this parameter.</p></li>
@@ -575,7 +578,7 @@ responses are masked using <cite>CounterfactualGenerator.neutralize_tokens</cite
 <tr class="row-odd"><td><p><a class="reference internal" href="#langfair.auto.auto.AutoEval.__init__" title="langfair.auto.auto.AutoEval.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>(prompts[, responses, ...])</p></td>
 <td><p>This class calculates all toxicity, stereotype, and counterfactual metrics support by langfair</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#langfair.auto.auto.AutoEval.evaluate" title="langfair.auto.auto.AutoEval.evaluate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">evaluate</span></code></a>([metrics, return_data])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#langfair.auto.auto.AutoEval.evaluate" title="langfair.auto.auto.AutoEval.evaluate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">evaluate</span></code></a>([count, metrics, return_data])</p></td>
 <td><p>Compute all the metrics based on the provided data.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#langfair.auto.auto.AutoEval.export_results" title="langfair.auto.auto.AutoEval.export_results"><code class="xref py py-obj docutils literal notranslate"><span class="pre">export_results</span></code></a>([file_name])</p></td>
@@ -601,11 +604,14 @@ responses are masked using <cite>CounterfactualGenerator.neutralize_tokens</cite
 </div>
 <dl class="py method">
 <dt class="sig sig-object py" id="langfair.auto.auto.AutoEval.evaluate">
-<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">evaluate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">metrics</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langfair.auto.auto.AutoEval.evaluate" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">evaluate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">count</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">25</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metrics</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langfair.auto.auto.AutoEval.evaluate" title="Link to this definition">#</a></dt>
 <dd><p>Compute all the metrics based on the provided data.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
+<li><p><strong>count</strong> (<em>int</em><em>, </em><em>default=25</em>) – Specifies number of responses to generate for each prompt. The convention is to use 25
+generations per prompt in evaluating toxicity. See, for example DecodingTrust (<a class="reference external" href="https://arxiv.org/abs//2306.11698">https://arxiv.org/abs//2306.11698</a>)
+or Gehman et al., 2020 (<a class="reference external" href="https://aclanthology.org/2020.findings-emnlp.301/">https://aclanthology.org/2020.findings-emnlp.301/</a>).</p></li>
 <li><p><strong>metrics</strong> (<em>dict</em><em> or </em><em>list</em><em> of </em><em>str</em><em>, </em><em>optional</em>) – Specifies which metrics to evaluate. If None, computes all supported metrics.</p></li>
 <li><p><strong>return_data</strong> (<em>bool</em><em>, </em><em>default=False</em>) – Indicates whether to include response-level scores in results dictionary returned by this method.</p></li>
 </ul>
