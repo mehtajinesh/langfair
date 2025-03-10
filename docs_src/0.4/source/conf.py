@@ -1,0 +1,64 @@
+# Configuration file for the Sphinx documentation builder.
+#
+# For the full list of built-in configuration values, see the documentation:
+# https://www.sphinx-doc.org/en/master/usage/configuration.html
+
+import importlib.metadata
+import os
+import sys
+
+sys.path.insert(
+    0, os.path.abspath("../../../langfair")
+)  # lets sphinx find langfair code
+
+project = "LangFair"
+copyright = "2024, CVS Health"
+author = "Dylan Bouchard"
+version = importlib.metadata.version("langfair")
+release = ".".join(version.rsplit(".")[:-1])
+
+extensions = [
+    "sphinx.ext.duration",
+    "sphinx.ext.autodoc",
+    "sphinx.ext.doctest",
+    "sphinx.ext.autosummary",
+    "sphinx.ext.napoleon",
+    "sphinx_autodoc_typehints",
+    "sphinxcontrib.bibtex",
+    'nbsphinx'
+]
+nbsphinx_execute='never'
+
+bibtex_bibfiles = ["refs.bib"]
+
+autodoc_mock_imports = ["sentence_transformers", "transformers"]
+
+autosummary_generate = True
+
+templates_path = ["_templates"]
+
+html_static_path = ["_static"]
+
+html_css_files = ['custom.css']
+
+exclude_patterns = []
+
+html_theme = "pydata_sphinx_theme"
+
+html_theme_options = {
+    "github_url": "https://github.com/cvs-health/langfair",
+    "navbar_align": "left",
+    "navbar_end": ["version-switcher", "theme-switcher", "navbar-icon-links"],
+    "switcher": {
+        "json_url": "https://cvs-health.github.io/langfair/versions.json",
+        "version_match": release,
+    },
+    "logo": {
+        "image_light": "_static/images/langfair-logo.png",
+        "image_dark": "_static/images/langfair-logo2.png",
+    },
+}
+
+html_favicon = "_static/images/langfair-logo-only.png"
+
+source_suffix = [".rst"]

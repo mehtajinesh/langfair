@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>langfair.metrics.counterfactual.metrics.sentimentbias.SentimentBias &#8212; LangFair 0.4 documentation</title>
+    <title>langfair.metrics.counterfactual.metrics.sentimentbias.SentimentBias &#8212; LangFair 0.5 documentation</title>
   
   
   
@@ -39,7 +39,7 @@
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script src="../_static/documentation_options.js?v=7f00635f"></script>
+    <script src="../_static/documentation_options.js?v=db78e746"></script>
     <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
@@ -47,7 +47,7 @@
     <script>
         DOCUMENTATION_OPTIONS.theme_version = '0.16.1';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://cvs-health.github.io/langfair/versions.json';
-        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '0.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '0.5';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
             false;
         </script>
@@ -58,7 +58,7 @@
     <link rel="prev" title="langfair.metrics.counterfactual.metrics.sentimentbias" href="langfair.metrics.counterfactual.metrics.sentimentbias.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="0.4.0" />
+  <meta name="docsearch:version" content="0.5.1" />
   </head>
   
   
@@ -124,8 +124,8 @@
       
     
     
-    <img src="../_static/langfair-logo.png" class="logo__image only-light" alt="LangFair 0.4 documentation - Home"/>
-    <img src="../_static/langfair-logo2.png" class="logo__image only-dark pst-js-only" alt="LangFair 0.4 documentation - Home"/>
+    <img src="../_static/langfair-logo.png" class="logo__image only-light" alt="LangFair 0.5 documentation - Home"/>
+    <img src="../_static/langfair-logo2.png" class="logo__image only-dark pst-js-only" alt="LangFair 0.5 documentation - Home"/>
   
   
 </a></div>
@@ -549,11 +549,11 @@
 <h1>langfair.metrics.counterfactual.metrics.sentimentbias.SentimentBias<a class="headerlink" href="#langfair-metrics-counterfactual-metrics-sentimentbias-sentimentbias" title="Link to this heading">#</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="langfair.metrics.counterfactual.metrics.sentimentbias.SentimentBias">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">langfair.metrics.counterfactual.metrics.sentimentbias.</span></span><span class="sig-name descname"><span class="pre">SentimentBias</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">classifier</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'vader'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sentiment</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'neg'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parity</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'strong'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">how</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'mean'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">custom_classifier</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langfair.metrics.counterfactual.metrics.sentimentbias.SentimentBias" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">langfair.metrics.counterfactual.metrics.sentimentbias.</span></span><span class="sig-name descname"><span class="pre">SentimentBias</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">classifier</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'vader'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sentiment</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'neg'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parity</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'strong'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">how</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'mean'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'cpu'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">custom_classifier</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langfair.metrics.counterfactual.metrics.sentimentbias.SentimentBias" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference internal" href="langfair.metrics.counterfactual.metrics.baseclass.metrics.Metric.html#langfair.metrics.counterfactual.metrics.baseclass.metrics.Metric" title="langfair.metrics.counterfactual.metrics.baseclass.metrics.Metric"><code class="xref py py-class docutils literal notranslate"><span class="pre">Metric</span></code></a></p>
 <dl class="py method">
 <dt class="sig sig-object py" id="langfair.metrics.counterfactual.metrics.sentimentbias.SentimentBias.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">classifier</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'vader'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sentiment</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'neg'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parity</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'strong'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">how</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'mean'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">custom_classifier</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langfair.metrics.counterfactual.metrics.sentimentbias.SentimentBias.__init__" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">classifier</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'vader'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sentiment</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'neg'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parity</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'strong'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">how</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'mean'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'cpu'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">custom_classifier</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langfair.metrics.counterfactual.metrics.sentimentbias.SentimentBias.__init__" title="Link to this definition">#</a></dt>
 <dd><p>Compute a counterfactual sentiment bias score leveraging a third-party sentiment classifier.
 Code adapted from helm package:
 <a class="github reference external" href="https://github.com/stanford-crfm/helm/blob/main/src/helm/benchmark/metrics/basic_metrics.py">stanford-crfm/helm</a>.
@@ -562,7 +562,7 @@ and Bouchard (2024) <a class="footnote-reference brackets" href="#footcite-bouch
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>classifier</strong> (<em>{'vader'</em><em>,</em><em>'natural_language_api'}</em><em>, </em><em>default='vader'</em>) – The sentiment classifier used to calculate counterfactual sentiment bias.</p></li>
+<li><p><strong>classifier</strong> (<em>{'vader'</em><em>,</em><em>'roberta'}</em><em>, </em><em>default='vader'</em>) – The sentiment classifier used to calculate counterfactual sentiment bias.</p></li>
 <li><p><strong>sentiment</strong> (<em>{'neg'</em><em>,</em><em>'pos'}</em><em>, </em><em>default='neg'</em>) – Specifies the target category of the sentiment classifier. One of “neg” or “pos”.</p></li>
 <li><p><strong>parity</strong> (<em>{'strong'</em><em>,</em><em>'weak'}</em><em>, </em><em>default='strong'</em>) – Indicates whether to calculate strong demographic parity using Wasserstein-1 distance on score distributions or
 weak demographic parity using binarized sentiment predictions. The latter assumes a threshold for binarization that
@@ -571,6 +571,8 @@ can be customized by the user with the <cite>thresh</cite> parameter.</p></li>
 sentiment scores.</p></li>
 <li><p><strong>how</strong> (<em>{'mean'</em><em>,</em><em>'pairwise'}</em>) – Specifies whether to return the aggregate sentiment bias over all counterfactual pairs or a list containing difference
 in sentiment scores for each pair.</p></li>
+<li><p><strong>device</strong> (<em>str</em><em> or </em><em>torch.device input</em><em> or </em><em>torch.device object</em><em>, </em><em>default=&quot;cpu&quot;</em>) – Specifies the device that classifiers use for prediction. Set to “cuda” for classifiers to be able to leverage the GPU.
+Currently, ‘roberta’ will use this parameter.</p></li>
 <li><p><strong>custom_classifier</strong> (class object having <cite>predict</cite> method) – A user-defined class for sentiment classification that contains a <cite>predict</cite> method. The <cite>predict</cite> method must
 accept a list of strings as an input and output a list of floats of equal length. If provided, this takes precedence
 over <cite>classifier</cite>.</p></li>
