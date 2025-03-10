@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "langfair"
-version = "0.4.0"
+version = "0.5.1"
 description = "LangFair is a Python library for conducting use-case level LLM bias and fairness assessments"
 readme = "README.md"
 authors = ["Dylan Bouchard <dylan.bouchard@cvshealth.com>",
@@ -30,7 +30,7 @@ exclude = ["docs", "docs_src"] # never include documentation in build
 keywords = ["LLM", "large language model", "bias", "fairness", "Responsible AI"]  # Add your keywords here
 
 [tool.poetry.dependencies]
-python = ">=3.9,<3.12"
+python = ">=3.9,<3.13"
 numpy = "^1.26.4"
 vadersentiment = "^3.3.2"
 evaluate = "^0.4.1"
@@ -41,7 +41,7 @@ detoxify = "^0.5.2"
 langchain = "^0.3.7"
 asyncio = "^3.4.3"
 sentence-transformers = "^2.7.0"
-typing = "<3.10"
+typing = {version = "^3.7.4", python = "<3.10"}
 tiktoken = "^0.7.0"
 transformers = ">=4.48.0"
 
