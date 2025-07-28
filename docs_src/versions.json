@@ -1,9 +1,14 @@
 [
     {
-        "name": "v0.5 (latest)",
-        "version": "0.5",
+        "name": "v0.6 (latest)",
+        "version": "0.6",
         "url": "https://cvs-health.github.io/langfair/latest/index.html",
         "preferred": true
+    },
+    {
+        "name": "v0.5",
+        "version": "0.5",
+        "url": "https://cvs-health.github.io/langfair/0.5/index.html",
     },
     {
         "name": "v0.4",

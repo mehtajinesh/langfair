@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>langfair.metrics.counterfactual.counterfactual.CounterfactualMetrics &#8212; LangFair 0.5 documentation</title>
+    <title>langfair.metrics.counterfactual.counterfactual.CounterfactualMetrics &#8212; LangFair 0.6 documentation</title>
   
   
   
@@ -39,7 +39,7 @@
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script src="../_static/documentation_options.js?v=db78e746"></script>
+    <script src="../_static/documentation_options.js?v=ec806d2c"></script>
     <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
@@ -47,7 +47,7 @@
     <script>
         DOCUMENTATION_OPTIONS.theme_version = '0.16.1';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://cvs-health.github.io/langfair/versions.json';
-        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '0.5';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '0.6';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
             false;
         </script>
@@ -58,7 +58,7 @@
     <link rel="prev" title="langfair.metrics.counterfactual.counterfactual" href="langfair.metrics.counterfactual.counterfactual.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="0.5.1" />
+  <meta name="docsearch:version" content="0.6.6" />
   </head>
   
   
@@ -124,8 +124,8 @@
       
     
     
-    <img src="../_static/langfair-logo.png" class="logo__image only-light" alt="LangFair 0.5 documentation - Home"/>
-    <img src="../_static/langfair-logo2.png" class="logo__image only-dark pst-js-only" alt="LangFair 0.5 documentation - Home"/>
+    <img src="../_static/langfair-logo.png" class="logo__image only-light" alt="LangFair 0.6 documentation - Home"/>
+    <img src="../_static/langfair-logo2.png" class="logo__image only-dark pst-js-only" alt="LangFair 0.6 documentation - Home"/>
   
   
 </a></div>
@@ -546,11 +546,11 @@
 <h1>langfair.metrics.counterfactual.counterfactual.CounterfactualMetrics<a class="headerlink" href="#langfair-metrics-counterfactual-counterfactual-counterfactualmetrics" title="Link to this heading">#</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="langfair.metrics.counterfactual.counterfactual.CounterfactualMetrics">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">langfair.metrics.counterfactual.counterfactual.</span></span><span class="sig-name descname"><span class="pre">CounterfactualMetrics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">metrics</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['Cosine',</span> <span class="pre">'Rougel',</span> <span class="pre">'Bleu',</span> <span class="pre">'Sentiment</span> <span class="pre">Bias']</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">neutralize_tokens</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langfair.metrics.counterfactual.counterfactual.CounterfactualMetrics" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">langfair.metrics.counterfactual.counterfactual.</span></span><span class="sig-name descname"><span class="pre">CounterfactualMetrics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">metrics</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['Cosine',</span> <span class="pre">'Rougel',</span> <span class="pre">'Bleu',</span> <span class="pre">'Sentiment</span> <span class="pre">Bias']</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">neutralize_tokens</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sentiment_classifier</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'vader'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'cpu'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langfair.metrics.counterfactual.counterfactual.CounterfactualMetrics" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <dl class="py method">
 <dt class="sig sig-object py" id="langfair.metrics.counterfactual.counterfactual.CounterfactualMetrics.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">metrics</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['Cosine',</span> <span class="pre">'Rougel',</span> <span class="pre">'Bleu',</span> <span class="pre">'Sentiment</span> <span class="pre">Bias']</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">neutralize_tokens</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langfair.metrics.counterfactual.counterfactual.CounterfactualMetrics.__init__" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">metrics</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['Cosine',</span> <span class="pre">'Rougel',</span> <span class="pre">'Bleu',</span> <span class="pre">'Sentiment</span> <span class="pre">Bias']</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">neutralize_tokens</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sentiment_classifier</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'vader'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'cpu'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#langfair.metrics.counterfactual.counterfactual.CounterfactualMetrics.__init__" title="Link to this definition">#</a></dt>
 <dd><p>This class computes few or all counterfactual metrics supported LangFair. For more information on these metrics,
 see Huang et al. (2020) <a class="footnote-reference brackets" href="#footcite-huang2020reducingsentimentbiaslanguage" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> and Bouchard (2024) <a class="footnote-reference brackets" href="#footcite-bouchard2024actionableframeworkassessingbias" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a>.</p>
 <dl class="field-list simple">
@@ -559,6 +559,9 @@ see Huang et al. (2020) <a class="footnote-reference brackets" href="#footcite-h
 <li><p><strong>metrics</strong> (<em>list</em><em> of </em><em>string/objects</em><em>, </em><em>default=</em><em>[</em><em>&quot;Cosine&quot;</em><em>, </em><em>&quot;Rougel&quot;</em><em>, </em><em>&quot;Bleu&quot;</em><em>, </em><em>&quot;Sentiment Bias&quot;</em><em>]</em>) – A list containing name or class object of metrics.</p></li>
 <li><p><strong>neutralize_tokens</strong> (<em>boolean</em><em>, </em><em>default=True</em>) – An indicator attribute to use masking for the computation of Blue and RougeL metrics. If True, counterfactual
 responses are masked using <cite>CounterfactualGenerator.neutralize_tokens</cite> method before computing the aforementioned metrics.</p></li>
+<li><p><strong>sentiment_classifier</strong> (<em>{'vader'</em><em>,</em><em>'roberta'}</em><em>, </em><em>default='vader'</em>) – The sentiment classifier used to calculate counterfactual sentiment bias.</p></li>
+<li><p><strong>device</strong> (<em>str</em><em> or </em><em>torch.device input</em><em> or </em><em>torch.device object</em><em>, </em><em>default=&quot;cpu&quot;</em>) – Specifies the device that classifiers use for prediction. Set to “cuda” for classifiers to be able to leverage the GPU.
+Only ‘SentimentBias’ class will use this parameter for ‘roberta’ sentiment classifier.</p></li>
 </ul>
 </dd>
 </dl>
@@ -567,7 +570,7 @@ responses are masked using <cite>CounterfactualGenerator.neutralize_tokens</cite
 <p class="rubric">Methods</p>
 <div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#langfair.metrics.counterfactual.counterfactual.CounterfactualMetrics.__init__" title="langfair.metrics.counterfactual.counterfactual.CounterfactualMetrics.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>([metrics, neutralize_tokens])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#langfair.metrics.counterfactual.counterfactual.CounterfactualMetrics.__init__" title="langfair.metrics.counterfactual.counterfactual.CounterfactualMetrics.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>([metrics, neutralize_tokens, ...])</p></td>
 <td><p>This class computes few or all counterfactual metrics supported LangFair.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#langfair.metrics.counterfactual.counterfactual.CounterfactualMetrics.evaluate" title="langfair.metrics.counterfactual.counterfactual.CounterfactualMetrics.evaluate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">evaluate</span></code></a>(texts1, texts2[, attribute, ...])</p></td>
