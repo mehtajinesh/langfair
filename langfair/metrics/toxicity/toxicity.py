@@ -30,9 +30,13 @@ DefaultMetricNames = list(DefaultMetricObjects.keys())
 AvailableClassifiers = [
     "detoxify_unbiased",
     "detoxify_original",
+    "detoxify_multilingual",
     "roberta-hate-speech-dynabench-r4-target",
     "toxigen",
 ]
+
+
+
 
 
 ################################################################################
@@ -95,33 +99,29 @@ class ToxicityMetrics:
         if custom_classifier:
             if not hasattr(custom_classifier, "predict"):
                 raise TypeError("custom_classifier must have an predict method")
-
-        elif not custom_classifier:
+                
+        else:
             self._validate_classifiers(classifiers=classifiers)
-            if "detoxify_unbiased" in classifiers:
-                from detoxify import Detoxify
+            self.classifier_objects = dict()
+            for classifier in self.classifiers:
+                if classifier not in self.classifier_objects:
+                    if classifier in AvailableClassifiers[:3]:
+                        from detoxify import Detoxify
 
-                self.detoxify_unbiased = Detoxify("unbiased", device=self.device)
+                        self.classifier_objects[classifier] = Detoxify(classifier.split("_")[-1], device=self.device)
+                    elif "roberta-hate-speech-dynabench-r4-target" in classifiers:
+                        import evaluate
 
-            if "detoxify_original" in classifiers:
-                from detoxify import Detoxify
+                        self.classifier_objects[classifier] = evaluate.load("toxicity")
+                    elif "toxigen" in classifiers:
+                            from transformers import pipeline
 
-                self.detoxify_original = Detoxify("original", device=self.device)
-
-            if "roberta-hate-speech-dynabench-r4-target" in classifiers:
-                import evaluate
-
-                self.roberta = evaluate.load("toxicity")
-
-            if "toxigen" in classifiers:
-                from transformers import pipeline
-
-                self.toxigen = pipeline(
-                    "text-classification",
-                    model="tomh/toxigen_hatebert",
-                    tokenizer="bert-base-cased",
-                    truncation=True,
-                )
+                            self.classifier_objects[classifier] = pipeline(
+                                "text-classification",
+                                model="tomh/toxigen_hatebert",
+                                tokenizer="bert-base-cased",
+                                truncation=True,
+                            )
 
     def get_toxicity_scores(self, responses: List[str]) -> List[float]:
         """
@@ -145,7 +145,7 @@ class ToxicityMetrics:
         if self.custom_classifier:
             return self.custom_classifier.predict(responses)
 
-        elif not self.custom_classifier:
+        else:
             results_dict = {
                 classifier: self._get_classifier_scores(responses, classifier)
                 for classifier in self.classifiers
@@ -256,22 +256,18 @@ class ToxicityMetrics:
         scores = []
         if classifier == "roberta-hate-speech-dynabench-r4-target":
             for t in texts_partition:
-                scores.extend(self.roberta.compute(predictions=t)["toxicity"])
+                scores.extend(self.classifier_objects[classifier].compute(predictions=t)["toxicity"])
             return scores
 
-        elif classifier in ["detoxify_unbiased", "detoxify_original"]:
+        elif classifier in AvailableClassifiers[:3]:
             for t in texts_partition:
-                results_t = (
-                    self.detoxify_unbiased.predict(t)
-                    if classifier == "detoxify_unbiased"
-                    else self.detoxify_original.predict(t)
-                )
+                results_t = self.classifier_objects[classifier].predict(t)
                 scores.extend([max(values) for values in zip(*results_t.values())])
             return scores
 
         elif classifier == "toxigen":
             for t in texts_partition:
-                results_t = self.toxigen(t)
+                results_t = self.classifier_objects[classifier](t)
                 scores_t = [
                     r["score"] if r["label"][-1] == 1 else 1 - r["score"]
                     for r in results_t
