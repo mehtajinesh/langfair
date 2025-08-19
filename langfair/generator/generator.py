@@ -11,6 +11,7 @@
 import asyncio
 import itertools
 import random
+import time
 import warnings
 from typing import Any, Dict, List, Optional, Tuple, Union
 
@@ -19,6 +20,13 @@ import numpy as np
 import tiktoken
 from langchain_core.messages.human import HumanMessage
 from langchain_core.messages.system import SystemMessage
+from rich.progress import (
+    BarColumn,
+    Progress,
+    SpinnerColumn,
+    TextColumn,
+    TimeElapsedColumn,
+)
 
 from langfair.constants.cost_data import COST_MAPPING, FAILURE_MESSAGE, TOKEN_COST_DATE
 
@@ -64,6 +72,8 @@ class ResponseGenerator:
         self.token_cost_date = TOKEN_COST_DATE
         self.llm = langchain_llm
         self.use_n_param = use_n_param
+        self.progress_bar = None
+        self.progress_task = None
         if isinstance(suppressed_exceptions, Dict):
             if self._valid_exceptions(tuple(suppressed_exceptions.keys())):
                 self.suppressed_exceptions = suppressed_exceptions
@@ -89,6 +99,7 @@ class ResponseGenerator:
         response_sample_size: int = 30,
         system_prompt: str = "You are a helpful assistant",
         count: int = 25,
+        show_progress_bars: bool = True,
     ) -> Dict[str, float]:
         """
         Estimates the token cost for a given list of prompts and (optionally) example responses.
@@ -115,6 +126,9 @@ class ResponseGenerator:
         count : int, default=25
             The number of generations per prompt used when estimating cost.
 
+        show_progress_bars : bool, default=True
+            If True, displays progress bars while generating and scoring responses
+
         Returns
         -------
         dict
@@ -123,22 +137,20 @@ class ResponseGenerator:
         """
         # TODO: Add token costs for other models
         # TODO: Scrape rather than hard-code costs.
-        print(
-            f"Token costs were last updated on {self.token_cost_date} and may have changed since then."
-        )
+        print(f"Token costs were last updated on {self.token_cost_date} and may have changed since then.", flush=True)
         assert (
             tiktoken_model_name in self.cost_mapping.keys()
         ), f"Only {list(self.cost_mapping.keys())} are supported"
 
-        print(f"Estimating cost based on {count} generations per prompt...")
+        print(f"Estimating cost based on {count} generations per prompt...", flush=True)
 
         if example_responses is None:
-            print("Generating sample of responses for cost estimation...")
+            print("Generating sample of responses for cost estimation...", flush=True)
             prompts = list(prompts)
             sampled_prompts = random.sample(
                 prompts, min(response_sample_size, len(prompts))
             )  # nosec - bandit thinks this insecure use of random.sample could be used in a crypto context
-            generation = await self.generate_responses(sampled_prompts, count=1)
+            generation = await self.generate_responses(sampled_prompts, count=1, show_progress_bars=show_progress_bars)
             example_responses = generation["data"]["response"]
 
         # Get input token counts
@@ -191,6 +203,7 @@ class ResponseGenerator:
         prompts: List[str],
         system_prompt: str = "You are a helpful assistant.",
         count: int = 25,
+        show_progress_bars: bool = True,
     ) -> Dict[str, Any]:
         """
         Generates evaluation dataset from a provided set of prompts. For each prompt,
@@ -208,6 +221,9 @@ class ResponseGenerator:
             Specifies number of responses to generate for each prompt. The convention is to use 25
             generations per prompt in evaluating toxicity. See, for example DecodingTrust (https://arxiv.org/abs//2306.11698)
             or Gehman et al., 2020 (https://aclanthology.org/2020.findings-emnlp.301/).
+
+        show_progress_bars : bool, default=True
+            If True, displays progress bars while generating responses
 
         Returns
         -------
@@ -248,20 +264,41 @@ class ResponseGenerator:
             if not ((count > 1) and (hasattr(self.llm, "n"))):
                 self.use_n_param = False
 
-        print(f"Generating {count} responses per prompt...")
         if self.llm.temperature == 0:
             assert count == 1, "temperature must be greater than 0 if count > 1"
         self._update_count(count)
         self.system_message = SystemMessage(system_prompt)
 
-        tasks, duplicated_prompts = self._create_tasks(prompts=prompts)
-        response_lists = await asyncio.gather(*tasks)
+        if show_progress_bars:
+            self.progress_bar = Progress(TextColumn("[progress.description]{task.description}"), BarColumn(),TimeElapsedColumn(), TextColumn("[progress.percentage]{task.percentage:>3.0f}%"), SpinnerColumn())
+            self.progress_bar.start()
 
+        if self.progress_bar:
+            if self.count == 1:
+                self.progress_task = self.progress_bar.add_task("Generating responses...", total=len(prompts))
+            else:
+                self.progress_task = self.progress_bar.add_task(f"Generating {self.count} responses per prompt...", total=len(prompts) * self.count)
+        
+        try:
+            tasks, duplicated_prompts = self._create_tasks(prompts=prompts)
+            response_lists = await asyncio.gather(*tasks)
+        except Exception as e:
+            if self.progress_bar:
+                self.progress_bar.stop()
+                self.progress_bar = None
+            raise e
+
+        time.sleep(0.1)
+
+        if self.progress_bar:
+            self.progress_bar.stop()
+            self.progress_bar = None
         responses = []
         for response in response_lists:
             responses.extend(response)
 
-        print("Responses successfully generated!")
+
+        print("Responses successfully generated!", flush=True)
         return {
             "data": {
                 "prompt": self._enforce_strings(duplicated_prompts),
@@ -315,6 +352,9 @@ class ResponseGenerator:
         messages = [self.system_message, HumanMessage(prompt)]
         try:
             result = await self.llm.agenerate([messages])
+            if self.progress_bar:
+                for _ in range(count):
+                    self.progress_bar.update(self.progress_task, advance=1)
             generations = [result.generations[0][i].text for i in range(count)]
             if len(generations) != count:
                 raise ValueError("Incorrect number of generations")

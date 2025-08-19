@@ -10,6 +10,7 @@
 
 import asyncio
 import itertools
+import time
 import warnings
 from typing import Any, Dict, List, Optional, Tuple, Union
 
@@ -17,6 +18,13 @@ import nltk
 import sacremoses
 from langchain_core.messages.system import SystemMessage
 from nltk.tokenize import word_tokenize
+from rich.progress import (
+    BarColumn,
+    Progress,
+    SpinnerColumn,
+    TextColumn,
+    TimeElapsedColumn,
+)
 
 from langfair.constants.cost_data import FAILURE_MESSAGE
 from langfair.constants.word_lists import (
@@ -315,6 +323,7 @@ class CounterfactualGenerator(ResponseGenerator):
         system_prompt: str = "You are a helpful assistant.",
         count: int = 25,
         custom_dict: Optional[Dict[str, List[str]]] = None,
+        show_progress_bars: bool = True,
     ) -> Dict[str, Any]:
         """
         Creates prompts by counterfactual substitution and generates responses asynchronously
@@ -338,6 +347,9 @@ class CounterfactualGenerator(ResponseGenerator):
 
         count: int, default=25
             Specifies number of responses to generate for each prompt.
+
+        show_progress_bars : bool, default=True
+            If True, displays progress bars while generating responses.
 
         Returns
         ----------
@@ -377,9 +389,11 @@ class CounterfactualGenerator(ResponseGenerator):
             custom_dict=custom_dict,
         )
 
-        print(f"""Generating {count} responses for each {
-            attribute if attribute else 'group-specific'
-        } prompt...""")
+        print(f"""Generating {count} responses for each {attribute if attribute else 'group-specific'} prompt...""", flush=True)
+        
+        if show_progress_bars:
+            self.progress_bar = Progress(TextColumn("[progress.description]{task.description}"), BarColumn(),TimeElapsedColumn(), TextColumn("[progress.percentage]{task.percentage:>3.0f}%"), SpinnerColumn())
+            self.progress_bar.start()
 
         # generate responses with async
         responses_dict, duplicated_prompts_dict = {}, {}
@@ -387,6 +401,16 @@ class CounterfactualGenerator(ResponseGenerator):
             prompt_key = group + "_prompt"
             # start = time.time()
             # generate with async
+            if self.count == 1:
+                if self.progress_bar:
+                    self.progress_task = self.progress_bar.add_task(f"Generating response for group '{group}' prompts...", total=len(prompts))
+                else:
+                    print(f"Generating response for group '{group}'...")
+            else:
+                if self.progress_bar:
+                    self.progress_task = self.progress_bar.add_task(f"Generating {count} responses for group '{group}' prompts...", total=len(prompts) * self.count)
+                else:
+                    print(f"Generating {count} responses for group '{group}' prompts...")
             (
                 tasks,
                 duplicated_prompts_dict[prompt_key],
@@ -398,7 +422,10 @@ class CounterfactualGenerator(ResponseGenerator):
                 tmp_responses.extend(response)
             responses_dict[group + "_response"] = self._enforce_strings(tmp_responses)
             # stop = time.time()
-
+        time.sleep(0.1)
+        if self.progress_bar:
+            self.progress_bar.stop()
+            self.progress_bar = None
         print("Responses successfully generated!")
         return {
             "data": {
@@ -487,7 +514,7 @@ class CounterfactualGenerator(ResponseGenerator):
 
         ftu_print = f"FTU is{ftu_text}satisfied."
         print(
-            f"{attribute_to_print} words found in {len(prompts_subset)} prompts. {ftu_print}"
+            f"{attribute_to_print} words found in {len(prompts_subset)} prompts. {ftu_print}", flush=True
         )
 
         return {
@@ -528,7 +555,7 @@ class CounterfactualGenerator(ResponseGenerator):
         assert len(prompts_subset) > 0, f"""
         Provided prompts do not contain any {attribute_to_print} words.
         """
-        print(f"{attribute_to_print} words found in {len(prompts_subset)} prompts.")
+        print(f"{attribute_to_print} words found in {len(prompts_subset)} prompts.", flush=True)
         return prompts_subset, attribute_words
 
     def _counterfactual_sub_race(
