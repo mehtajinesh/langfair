@@ -55,8 +55,7 @@ Please ensure your pull request adheres to the following guidelines:
 3. Create and activate a virtual environment (using `venv` or `conda`)
 4. Install dependencies: `poetry install`
 5. Install our pre-commit hooks to ensure code style compliance: `pre-commit install`
-6. `pre-commit` will run the `snyk` CLI. While it will install the CLI, it doesn't handle authentication very well. In order to work around this issue, `brew install snyk-cli` and `snyk auth` using your preferred identity provider to obtain the necessary Snyk token.
-7. Run tests to ensure everything is working: `pre-commit run --all-files`
+6. Run tests to ensure everything is working: `pre-commit run --all-files`
 
 You're ready to develop!
 

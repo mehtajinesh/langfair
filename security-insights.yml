@@ -1,7 +1,7 @@
 header:
   schema-version: 2.0.0
-  last-updated: '2025-07-19'
-  last-reviewed: '2025-07-19'
+  last-updated: '2025-08-17'
+  last-reviewed: '2025-08-17'
   url: https://github.com/cvs-health/langfair
 
 project:
@@ -106,13 +106,35 @@ repository:
           adhoc: true
           ci: true
           release: true
-      - name: Snyk Open Source
-        comment: Used in pre-commit to check for vulnerabilities in dependencies.
+      - name: Semgrep
+        comment: Used in CI to check for security issues in Python dependencies and code.
+        type: SAST
+        version: "1.132.1"
+        rulesets:
+          - default
+          - trailofbits
+        integration:
+          adhoc: false
+          ci: true
+          release: true
+      - name: Semgrep
+        comment: Used in CI to check for security issues in Python dependencies and code.
         type: SCA
-        version: "1.1298.0"
+        version: "1.132.1"
+        rulesets:
+          - default
+          - trailofbits
+        integration:
+          adhoc: false
+          ci: true
+          release: true
+      - name: Snyk Open Source
+        comment: Used in CI to check for vulnerabilities in dependencies.
+        type: SCA
+        version: v1.1298.3
         rulesets:
           - default
         integration:
-          adhoc: true
-          ci: false
-          release: false
+          adhoc: false
+          ci: true
+          release: true

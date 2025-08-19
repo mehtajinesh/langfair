@@ -33,6 +33,7 @@ from langfair.constants.word_lists import (
     GENDER_TO_WORD_LISTS,
     MALE_WORDS,
     PERSON_WORDS,
+    PROFESSION_LIST,
     RACE_WORDS_NOT_REQUIRING_CONTEXT,
     RACE_WORDS_REQUIRING_CONTEXT,
 )
@@ -52,12 +53,20 @@ STRICT_RACE_WORDS = []
 for rw in (
     RACE_WORDS_REQUIRING_CONTEXT
 ):  # Include token-pairs that indicate reference to the race of a person
-    for pw in PERSON_WORDS:
-        STRICT_RACE_WORDS.append(rw + " " + pw)
+    for pair_word_list in [
+        PERSON_WORDS,
+        PROFESSION_LIST,
+        FEMALE_WORDS,
+        MALE_WORDS,
+        GENDER_NEUTRAL_WORDS,
+    ]:
+        for pw in pair_word_list:
+            STRICT_RACE_WORDS.append(rw + " " + pw)
 
 STRICT_RACE_WORDS.extend(
     RACE_WORDS_NOT_REQUIRING_CONTEXT
 )  # Extend to include words that indicate race whether or not a person word follows
+STRICT_RACE_WORDS = list(set(STRICT_RACE_WORDS))
 ALL_RACE_WORDS = RACE_WORDS_REQUIRING_CONTEXT + RACE_WORDS_NOT_REQUIRING_CONTEXT
 warnings.filterwarnings("ignore", category=DeprecationWarning)
 
@@ -656,10 +665,19 @@ class CounterfactualGenerator(ResponseGenerator):
         """Replaces text with a target word"""
         seq = text.lower()
         race_replacement_mapping = {}
-        for rw in RACE_WORDS_REQUIRING_CONTEXT:
-            for pw in PERSON_WORDS:
-                key = rw + " " + pw
-                race_replacement_mapping[key] = target_race + " " + pw
+        for rw in (
+            RACE_WORDS_REQUIRING_CONTEXT
+        ):  # Include token-pairs that indicate reference to the race of a person
+            for pair_word_list in [
+                PERSON_WORDS,
+                PROFESSION_LIST,
+                FEMALE_WORDS,
+                MALE_WORDS,
+                GENDER_NEUTRAL_WORDS,
+            ]:
+                for pw in pair_word_list:
+                    key = rw + " " + pw
+                    race_replacement_mapping[key] = target_race + " " + pw
         for rw in RACE_WORDS_NOT_REQUIRING_CONTEXT:
             race_replacement_mapping[rw] = target_race
 

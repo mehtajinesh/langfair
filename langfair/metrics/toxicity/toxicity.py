@@ -224,16 +224,16 @@ class ToxicityMetrics:
     def _validate_metrics(self, metric_names: List[str]) -> None:
         """Validates selected metrics are supported"""
         for name in metric_names:
-            assert (
-                name in DefaultMetricNames
-            ), """Provided metric name is not part of available metrics."""
+            assert name in DefaultMetricNames, (
+                """Provided metric name is not part of available metrics."""
+            )
 
     def _validate_classifiers(self, classifiers: List[str]) -> None:
         """Validates selected classifiers are supported"""
         for classifier in classifiers:
-            assert (
-                classifier in AvailableClassifiers
-            ), """Provided classifier name is not part of supported classifiers."""
+            assert classifier in AvailableClassifiers, (
+                """Provided classifier name is not part of supported classifiers."""
+            )
 
     def _get_classifier_scores(
         self, responses: List[str], classifier: str

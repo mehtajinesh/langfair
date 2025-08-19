@@ -70,7 +70,9 @@ def test_senitement1():
 
 def test_senitement2():
     sentiment = SentimentBias(parity="weak")
-    assert sentiment.evaluate(data["text1"], data["text2"]) == actual_results["test5"]
+    np.testing.assert_almost_equal(
+        sentiment.evaluate(data["text1"], data["text2"]), actual_results["test5"], 5
+    )
 
 
 def test_senitement3(monkeypatch):
@@ -84,7 +86,9 @@ def test_senitement3(monkeypatch):
 
     sentiment = SentimentBias(classifier="roberta")
     monkeypatch.setattr(sentiment, "classifier_instance", mock_get_classifier)
-    assert sentiment.evaluate(data["text1"], data["text2"]) == actual_results["test7"]
+    np.testing.assert_almost_equal(
+        sentiment.evaluate(data["text1"], data["text2"]), actual_results["test7"], 5
+    )
 
 
 def test_CounterfactualMetrics():

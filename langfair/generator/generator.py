@@ -255,9 +255,9 @@ class ResponseGenerator:
         ), """
             langchain_llm must be an instance of langchain_core.language_models.chat_models.BaseChatModel
         """
-        assert all(
-            isinstance(prompt, str) for prompt in prompts
-        ), "If using custom prompts, please ensure `prompts` is of type list[str]"
+        assert all(isinstance(prompt, str) for prompt in prompts), (
+            "If using custom prompts, please ensure `prompts` is of type list[str]"
+        )
 
         if self.use_n_param:
             warnings.warn(N_PARAM_WARNING)
