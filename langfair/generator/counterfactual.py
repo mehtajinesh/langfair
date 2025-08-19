@@ -420,11 +420,17 @@ class CounterfactualGenerator(ResponseGenerator):
                     self.progress_task = self.progress_bar.add_task(f"Generating {count} responses for group '{group}' prompts...", total=len(prompts) * self.count)
                 else:
                     print(f"Generating {count} responses for group '{group}' prompts...")
-            (
-                tasks,
-                duplicated_prompts_dict[prompt_key],
-            ) = self._create_tasks(prompts=prompts_dict[prompt_key])
-            tmp_response_list = await asyncio.gather(*tasks)
+            try:
+                (
+                    tasks,
+                    duplicated_prompts_dict[prompt_key],
+                ) = self._create_tasks(prompts=prompts_dict[prompt_key])
+                tmp_response_list = await asyncio.gather(*tasks)
+            except Exception as e:
+                if self.progress_bar:
+                    self.progress_bar.stop()
+                    self.progress_bar = None
+                raise e
 
             tmp_responses = []
             for response in tmp_response_list:
