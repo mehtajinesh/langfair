@@ -65,12 +65,12 @@ class FalseOmissionRateParity(Metric):
             np.unique(y_true),
             np.unique(groups),
         )
-        assert np.array_equal(
-            unique_preds, [0, 1]
-        ), "y_pred must contain exactly two unique values: 0 and 1"
-        assert np.array_equal(
-            unique_labels, [0, 1]
-        ), "y_true must contain exactly two unique values: 0 and 1"
+        assert np.array_equal(unique_preds, [0, 1]), (
+            "y_pred must contain exactly two unique values: 0 and 1"
+        )
+        assert np.array_equal(unique_labels, [0, 1]), (
+            "y_true must contain exactly two unique values: 0 and 1"
+        )
         assert len(unique_groups) == 2, "groups must contain exactly two unique values"
 
         cm1 = self.binary_confusion_matrix(

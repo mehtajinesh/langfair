@@ -62,9 +62,9 @@ class PredictedPrevalenceRateParity(Metric):
         .. footbibliography::
         """
         unique_preds = np.unique(y_pred)
-        assert np.array_equal(
-            unique_preds, [0, 1]
-        ), "y_pred must contain exactly two unique values: 0 and 1"
+        assert np.array_equal(unique_preds, [0, 1]), (
+            "y_pred must contain exactly two unique values: 0 and 1"
+        )
 
         unique_groups = np.unique(groups)
         assert len(unique_groups) == 2, "groups must contain exactly two unique values"

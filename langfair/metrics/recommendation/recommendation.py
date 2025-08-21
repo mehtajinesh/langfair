@@ -191,17 +191,17 @@ class RecommendationMetrics:
         ----------
         .. footbibliography::
         """
-        assert len(rec_lists1) == len(
-            rec_lists2
-        ), "The same number of recommendation lists must be provided for both groups"
+        assert len(rec_lists1) == len(rec_lists2), (
+            "The same number of recommendation lists must be provided for both groups"
+        )
         K = len(rec_lists1[0])
         for i in range(len(rec_lists1)):
-            assert (
-                len(rec_lists1[i]) == K
-            ), "Recommendation lists must all be of equal length"
-            assert (
-                len(rec_lists2[i]) == K
-            ), "Recommendation lists must all be of equal length"
+            assert len(rec_lists1[i]) == K, (
+                "Recommendation lists must all be of equal length"
+            )
+            assert len(rec_lists2[i]) == K, (
+                "Recommendation lists must all be of equal length"
+            )
         return {
             metric.name: self._pairwise_calculations(rec_lists1, rec_lists2, metric)
             for metric in self.metrics
@@ -252,9 +252,9 @@ class RecommendationMetrics:
     def _validate_metrics(self, metric_names: List[str]) -> None:
         """Validate that specified metrics are supported."""
         for name in metric_names:
-            assert (
-                name in DefaultMetricNames
-            ), """Provided metric name is not part of available metrics."""
+            assert name in DefaultMetricNames, (
+                """Provided metric name is not part of available metrics."""
+            )
 
     @staticmethod
     def _run_input_checks(
@@ -278,16 +278,16 @@ class RecommendationMetrics:
             assert isinstance(neutral_dict, dict), type_msg
             for key in neutral_dict.keys():
                 assert isinstance(neutral_dict[key], list), type_msg
-                assert (
-                    len(neutral_dict[key]) == K
-                ), "Recommendation lists must all be of equal length."
+                assert len(neutral_dict[key]) == K, (
+                    "Recommendation lists must all be of equal length."
+                )
         for group_dict in group_dict_list:
             assert isinstance(group_dict, dict), type_msg
             for key in group_dict.keys():
                 assert isinstance(group_dict[key], list), type_msg
-                assert (
-                    len(group_dict[key]) == K
-                ), "Recommendation lists must all be of equal length."
+                assert len(group_dict[key]) == K, (
+                    "Recommendation lists must all be of equal length."
+                )
         return
 
     @staticmethod

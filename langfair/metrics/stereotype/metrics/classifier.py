@@ -167,7 +167,10 @@ class StereotypeClassifier:
                     )
             else:
                 result["Stereotype Fraction - " + category] = (
-                    Fraction().metric_function(evaluation_data["stereotype_score_" + category.lower()], self.threshold)
+                    Fraction().metric_function(
+                        evaluation_data["stereotype_score_" + category.lower()],
+                        self.threshold,
+                    )
                 )
 
         # If specified, return dataframe
@@ -186,13 +189,13 @@ class StereotypeClassifier:
     def _validate_metrics(self, metric_names: List[str]) -> None:
         """Validate that specified metrics are supported."""
         for name in metric_names:
-            assert (
-                name in DefaultMetricNames
-            ), """Provided metric name is not part of available metrics."""
+            assert name in DefaultMetricNames, (
+                """Provided metric name is not part of available metrics."""
+            )
 
     def _validate_categories(self, categories: List[str]) -> None:
         """Validate that specified categories are supported."""
         for category in categories:
-            assert (
-                category.lower() in AvailableCategories
-            ), """Provided category name is not part of supported categories."""
+            assert category.lower() in AvailableCategories, (
+                """Provided category name is not part of supported categories."""
+            )

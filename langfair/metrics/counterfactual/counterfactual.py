@@ -35,9 +35,9 @@ DefaultMetricNames = list(DefaultMetricObjects.keys())
 ################################################################################
 class CounterfactualMetrics:
     def __init__(
-        self, 
-        metrics: MetricType = DefaultMetricNames, 
-        neutralize_tokens: str = True,
+        self,
+        metrics: MetricType = DefaultMetricNames,
+        neutralize_tokens: bool = True,
         sentiment_classifier: str = "vader",
         transformer: str = "all-MiniLM-L6-v2",
         device: str = "cpu",
@@ -55,15 +55,15 @@ class CounterfactualMetrics:
         neutralize_tokens: boolean, default=True
             An indicator attribute to use masking for the computation of Blue and RougeL metrics. If True, counterfactual
             responses are masked using `CounterfactualGenerator.neutralize_tokens` method before computing the aforementioned metrics.
-            
+
         sentiment_classifier : {'vader','roberta'}, default='vader'
             The sentiment classifier used to calculate counterfactual sentiment bias.
-            
+
         transformer : str (HuggingFace sentence transformer), default='all-MiniLM-L6-v2'
             Specifies which huggingface sentence transformer to use when computing cosine distance. See
             https://huggingface.co/sentence-transformers?sort_models=likes#models
             for more information. The recommended sentence transformer is 'all-MiniLM-L6-v2'. User can also specify a local path to a model.
-            
+
         device: str or torch.device input or torch.device object, default="cpu"
             Specifies the device that classifiers use for prediction. Set to "cuda" for classifiers to be able to leverage the GPU.
             Only 'SentimentBias' class will use this parameter for 'roberta' sentiment classifier.
@@ -89,7 +89,7 @@ class CounterfactualMetrics:
         self,
         texts1: list,
         texts2: list,
-        attribute: str = None,
+        attribute: str = "gender",
         return_data: bool = False,
     ) -> Dict[str, Any]:
         """
@@ -162,7 +162,11 @@ class CounterfactualMetrics:
             "Cosine": {"transformer": self.transformer, "how": self.how},
             "Rougel": {"how": self.how},
             "Bleu": {"how": self.how},
-            "Sentiment Bias": {"classifier":self.sentiment_classifier, "device": self.device, "how":self.how},
+            "Sentiment Bias": {
+                "classifier": self.sentiment_classifier,
+                "device": self.device,
+                "how": self.how,
+            },
         }
         self.metrics = []
         for name in self.metric_names:
@@ -171,6 +175,6 @@ class CounterfactualMetrics:
     def _validate_metrics(self, metric_names):
         """Validate that specified metrics metrics are supported."""
         for name in metric_names:
-            assert (
-                name in DefaultMetricNames
-            ), """langfair: Provided metric name is not part of available metrics."""
+            assert name in DefaultMetricNames, (
+                """langfair: Provided metric name is not part of available metrics."""
+            )

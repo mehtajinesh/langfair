@@ -126,9 +126,9 @@ class ResponseGenerator:
         print(
             f"Token costs were last updated on {self.token_cost_date} and may have changed since then."
         )
-        assert (
-            tiktoken_model_name in self.cost_mapping.keys()
-        ), f"Only {list(self.cost_mapping.keys())} are supported"
+        assert tiktoken_model_name in self.cost_mapping.keys(), (
+            f"Only {list(self.cost_mapping.keys())} are supported"
+        )
 
         print(f"Estimating cost based on {count} generations per prompt...")
 
@@ -137,7 +137,7 @@ class ResponseGenerator:
             prompts = list(prompts)
             sampled_prompts = random.sample(
                 prompts, min(response_sample_size, len(prompts))
-            )
+            )  # nosec - bandit thinks this insecure use of random.sample could be used in a crypto context
             generation = await self.generate_responses(sampled_prompts, count=1)
             example_responses = generation["data"]["response"]
 
@@ -239,9 +239,9 @@ class ResponseGenerator:
         ), """
             langchain_llm must be an instance of langchain_core.language_models.chat_models.BaseChatModel
         """
-        assert all(
-            isinstance(prompt, str) for prompt in prompts
-        ), "If using custom prompts, please ensure `prompts` is of type list[str]"
+        assert all(isinstance(prompt, str) for prompt in prompts), (
+            "If using custom prompts, please ensure `prompts` is of type list[str]"
+        )
 
         if self.use_n_param:
             warnings.warn(N_PARAM_WARNING)

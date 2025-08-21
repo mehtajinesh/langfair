@@ -36,9 +36,6 @@ AvailableClassifiers = [
 ]
 
 
-
-
-
 ################################################################################
 # Compute toxicity metrics - EMT, TP, TF
 ################################################################################
@@ -99,7 +96,7 @@ class ToxicityMetrics:
         if custom_classifier:
             if not hasattr(custom_classifier, "predict"):
                 raise TypeError("custom_classifier must have an predict method")
-                
+
         else:
             self._validate_classifiers(classifiers=classifiers)
             self.classifier_objects = dict()
@@ -108,20 +105,22 @@ class ToxicityMetrics:
                     if classifier in AvailableClassifiers[:3]:
                         from detoxify import Detoxify
 
-                        self.classifier_objects[classifier] = Detoxify(classifier.split("_")[-1], device=self.device)
+                        self.classifier_objects[classifier] = Detoxify(
+                            classifier.split("_")[-1], device=self.device
+                        )
                     elif "roberta-hate-speech-dynabench-r4-target" in classifiers:
                         import evaluate
 
                         self.classifier_objects[classifier] = evaluate.load("toxicity")
                     elif "toxigen" in classifiers:
-                            from transformers import pipeline
+                        from transformers import pipeline
 
-                            self.classifier_objects[classifier] = pipeline(
-                                "text-classification",
-                                model="tomh/toxigen_hatebert",
-                                tokenizer="bert-base-cased",
-                                truncation=True,
-                            )
+                        self.classifier_objects[classifier] = pipeline(
+                            "text-classification",
+                            model="tomh/toxigen_hatebert",
+                            tokenizer="bert-base-cased",
+                            truncation=True,
+                        )
 
     def get_toxicity_scores(self, responses: List[str]) -> List[float]:
         """
@@ -225,16 +224,16 @@ class ToxicityMetrics:
     def _validate_metrics(self, metric_names: List[str]) -> None:
         """Validates selected metrics are supported"""
         for name in metric_names:
-            assert (
-                name in DefaultMetricNames
-            ), """Provided metric name is not part of available metrics."""
+            assert name in DefaultMetricNames, (
+                """Provided metric name is not part of available metrics."""
+            )
 
     def _validate_classifiers(self, classifiers: List[str]) -> None:
         """Validates selected classifiers are supported"""
         for classifier in classifiers:
-            assert (
-                classifier in AvailableClassifiers
-            ), """Provided classifier name is not part of supported classifiers."""
+            assert classifier in AvailableClassifiers, (
+                """Provided classifier name is not part of supported classifiers."""
+            )
 
     def _get_classifier_scores(
         self, responses: List[str], classifier: str
@@ -256,7 +255,11 @@ class ToxicityMetrics:
         scores = []
         if classifier == "roberta-hate-speech-dynabench-r4-target":
             for t in texts_partition:
-                scores.extend(self.classifier_objects[classifier].compute(predictions=t)["toxicity"])
+                scores.extend(
+                    self.classifier_objects[classifier].compute(predictions=t)[
+                        "toxicity"
+                    ]
+                )
             return scores
 
         elif classifier in AvailableClassifiers[:3]:

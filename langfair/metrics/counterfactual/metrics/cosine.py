@@ -44,14 +44,16 @@ class CosineSimilarity(Metric):
             "mean",
             "pairwise",
         ], "langfair: Only 'mean' and 'pairwise' are supported."
-        assert (
-            transformer is not None
-        ), "langfair: A HuggingFace sentence transformer must be specified when initializing the class to compute cosine similarity."
+        assert transformer is not None, (
+            "langfair: A HuggingFace sentence transformer must be specified when initializing the class to compute cosine similarity."
+        )
         self.name = "Cosine Similarity"
         self.how = how
         self.transformer = transformer
         self.transformer_instance = SentenceTransformer(
-            f"sentence-transformers/{transformer}" if not os.path.exists(transformer) else transformer
+            f"sentence-transformers/{transformer}"
+            if not os.path.exists(transformer)
+            else transformer
         )
 
     def evaluate(
@@ -77,9 +79,9 @@ class CosineSimilarity(Metric):
         float
             Mean cosine similarity score for provided lists of texts.
         """
-        assert len(texts1) == len(
-            texts2
-        ), """langfair: Lists 'texts1' and 'texts2' must be of equal length."""
+        assert len(texts1) == len(texts2), (
+            """langfair: Lists 'texts1' and 'texts2' must be of equal length."""
+        )
 
         embeddings1, embeddings2 = self._get_embeddings(
             transformer=self.transformer_instance,

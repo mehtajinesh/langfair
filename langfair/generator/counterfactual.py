@@ -50,6 +50,7 @@ for rw in (
 STRICT_RACE_WORDS.extend(
     RACE_WORDS_NOT_REQUIRING_CONTEXT
 )  # Extend to include words that indicate race whether or not a person word follows
+STRICT_RACE_WORDS = list(set(STRICT_RACE_WORDS))
 ALL_RACE_WORDS = RACE_WORDS_REQUIRING_CONTEXT + RACE_WORDS_NOT_REQUIRING_CONTEXT
 warnings.filterwarnings("ignore", category=DeprecationWarning)
 
@@ -377,9 +378,11 @@ class CounterfactualGenerator(ResponseGenerator):
             custom_dict=custom_dict,
         )
 
-        print(f"""Generating {count} responses for each {
-            attribute if attribute else 'group-specific'
-        } prompt...""")
+        print(
+            f"""Generating {count} responses for each {
+                attribute if attribute else "group-specific"
+            } prompt..."""
+        )
 
         # generate responses with async
         responses_dict, duplicated_prompts_dict = {}, {}
@@ -629,7 +632,9 @@ class CounterfactualGenerator(ResponseGenerator):
         """Replaces text with a target word"""
         seq = text.lower()
         race_replacement_mapping = {}
-        for rw in RACE_WORDS_REQUIRING_CONTEXT:
+        for rw in (
+            RACE_WORDS_REQUIRING_CONTEXT
+        ):  # Include token-pairs that indicate reference to the race of a person
             for pw in PERSON_WORDS:
                 key = rw + " " + pw
                 race_replacement_mapping[key] = target_race + " " + pw
