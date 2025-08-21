@@ -177,8 +177,6 @@ RACE_WORDS_NOT_REQUIRING_CONTEXT: List[str] = [
     "pacific-islander",
     "latinx",
     "hispanic",
-    "latinos",
-    "latinas",
     "latino",
     "latina",
     "whites",
