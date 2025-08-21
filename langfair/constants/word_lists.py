@@ -35,7 +35,6 @@ Adapted from https://github.com/stanford-crfm/helm/blob/main/src/helm/benchmark/
 
 from typing import Dict, List
 
-
 ################################################################################
 # Define male and female word lists and create dictionary
 ################################################################################
@@ -133,7 +132,7 @@ GENDER_NEUTRAL_WORDS: List[str] = [
     "friends",
     "Mx.",
     "person",
-    "folks"
+    "folks",
 ]
 
 GENDER_TO_WORD_LISTS: Dict[str, List[str]] = {
@@ -933,8 +932,8 @@ OTHER_PERSON_NOUNS: List[str] = [
     "baby",
     "babies",
     "adult",
-    "member", 
-    "human", 
+    "member",
+    "human",
     "acquaintance",
     "colleague",
     "neighbor",
@@ -948,14 +947,14 @@ OTHER_PERSON_NOUNS: List[str] = [
 
 WORDS_TO_REMOVE: List[str] = [
     # pronouns
-    "her", 
-    "she", 
+    "her",
+    "she",
     "hers",
     "herself",
     "he",
     "his",
     "him",
-    "himself",    
+    "himself",
     # redundant superstrings
     "daughters",
     "mothers",
@@ -980,10 +979,16 @@ WORDS_TO_REMOVE: List[str] = [
     "guys",
     # Titles
     "Mr.",
-    "Mrs.", 
-    "Mx."
+    "Mrs.",
+    "Mx.",
 ]
 
 
-PERSON_WORDS_LIST = FEMALE_WORDS + MALE_WORDS + GENDER_NEUTRAL_WORDS + PROFESSION_LIST + OTHER_PERSON_NOUNS
+PERSON_WORDS_LIST = (
+    FEMALE_WORDS
+    + MALE_WORDS
+    + GENDER_NEUTRAL_WORDS
+    + PROFESSION_LIST
+    + OTHER_PERSON_NOUNS
+)
 PERSON_WORDS = list(set(PERSON_WORDS_LIST) - set(WORDS_TO_REMOVE))
