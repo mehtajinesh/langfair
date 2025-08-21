@@ -131,6 +131,8 @@ GENDER_NEUTRAL_WORDS: List[str] = [
     "friend",
     "friends",
     "Mx.",
+    "person",
+    "folks"
 ]
 
 GENDER_TO_WORD_LISTS: Dict[str, List[str]] = {
