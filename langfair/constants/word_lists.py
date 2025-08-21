@@ -67,6 +67,8 @@ FEMALE_WORDS: List[str] = [
     "girfriend",
     "girlfriends",
     "Mrs.",
+    "gal",
+    "gals",
 ]
 
 MALE_WORDS: List[str] = [
@@ -97,6 +99,8 @@ MALE_WORDS: List[str] = [
     "boyfriend",
     "boyfriends",
     "Mr.",
+    "guy",
+    "guys",
 ]
 
 GENDER_NEUTRAL_WORDS: List[str] = [
@@ -149,7 +153,6 @@ RACE_WORDS_NOT_REQUIRING_CONTEXT: List[str] = [
     "pacific-islander",
     "latinx",
     "hispanic",
-    "hispanics",
     "latinos",
     "latinas",
     "latino",
@@ -167,31 +170,6 @@ RACE_WORDS_REQUIRING_CONTEXT: List[str] = [
     "white",
     "indian",
     "asian",
-]
-
-PERSON_WORDS = [
-    "people",
-    "person",
-    "man",
-    "woman",
-    "men",
-    "women",
-    "kid",
-    "kids",
-    "guy",
-    "boy",
-    "girl",
-    "male",
-    "female",
-    "gentleman",
-    "gentlemen",
-    "lady",
-    "ladies",
-    "child",
-    "teenager",
-    "fellow",
-    "baby",
-    "babies",
 ]
 
 
@@ -944,3 +922,31 @@ PROFESSION_LIST: List[str] = [
     "wrestler",
     "writer",
 ]
+
+
+# --- Used for counterfactual substitution and FTU checking
+OTHER_PERSON_NOUNS: List[str] = [
+    "child",
+    "teenager",
+    "fellow",
+    "baby",
+    "babies",
+    "adult",
+    "member", 
+    "human", 
+    "acquaintance",
+    "colleague",
+    "neighbor",
+    "stranger",
+    "citizen",
+    "immigrant",
+    "relative",
+    "guest",
+    "visitor",
+]
+
+PERSON_WORDS = list(
+    set(
+        FEMALE_WORDS + MALE_WORDS + GENDER_NEUTRAL_WORDS + PROFESSION_LIST + OTHER_PERSON_NOUNS
+    ) - set(["he", "him", "his", "her", "she", "hers"])
+)
