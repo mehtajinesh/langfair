@@ -36,27 +36,6 @@ Adapted from https://github.com/stanford-crfm/helm/blob/main/src/helm/benchmark/
 from typing import Dict, List
 
 
-def remove_superstrings(string_list):
-    # Sort the list by length (ascending) to optimize comparisons
-    string_list.sort(key=len)
-    
-    result = []
-    for i, s1 in enumerate(string_list):
-        is_superstring = False
-        
-        # Check if s1 is a superstring of any string that comes before it
-        # (which means strings that are shorter or equal in length)
-        for s2 in result:
-            if s2 in s1 and s2 != s1:
-                is_superstring = True
-                break
-        
-        if not is_superstring:
-            result.append(s1)
-    
-    return result
-
-
 ################################################################################
 # Define male and female word lists and create dictionary
 ################################################################################
@@ -1007,4 +986,4 @@ WORDS_TO_REMOVE: List[str] = [
 
 
 PERSON_WORDS_LIST = FEMALE_WORDS + MALE_WORDS + GENDER_NEUTRAL_WORDS + PROFESSION_LIST + OTHER_PERSON_NOUNS
-PERSON_WORDS = set(PERSON_WORDS_LIST) - set(WORDS_TO_REMOVE)
+PERSON_WORDS = list(set(PERSON_WORDS_LIST) - set(WORDS_TO_REMOVE))
