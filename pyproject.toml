@@ -59,7 +59,7 @@ bandit = "^1.8.6"
 jupyter-core = ">=5.8.1"
 
 [tool.poetry.group.docs.dependencies]
-sphinx = "7.3.7"
+sphinx = "7.4.7"
 pydata_sphinx_theme = "0.16.1"
 sphinxcontrib-bibtex = "2.6.3"
 sphinx-autodoc-typehints = "2.2.0"
