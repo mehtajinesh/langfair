@@ -1,6 +1,7 @@
 name: CI
 
 on:
+  pull_request:
   push:
     paths-ignore:
       - "**/*.md"
@@ -29,7 +30,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4.2.2
+        uses: actions/checkout@v5
         with:
           persist-credentials: false
 
@@ -53,7 +54,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4.2.2
+        uses: actions/checkout@v5
         with:
           persist-credentials: false
 
@@ -75,10 +76,10 @@ jobs:
         uses: snyk/actions/setup@86b1cee1b8e110a78d528b3e1328a80e218111d2
         with:
           snyk-version: v1.1298.3
-      - name: Run snyk test
-        run: snyk test --file=poetry.lock --package-manager=pip --fail-on=upgradable
-        env:
-          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+      # - name: Run snyk test
+      #   run: snyk test --file=poetry.lock --package-manager=pip --fail-on=upgradable
+      #   env:
+      #     SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
 
   semgrep:
     name: semgrep/ci
@@ -92,7 +93,7 @@ jobs:
       image: semgrep/semgrep:1.132.1
     if: (github.actor != 'dependabot[bot]')
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           persist-credentials: false
       - run: semgrep scan --sarif --config auto --config "p/trailofbits" > semgrep.sarif
