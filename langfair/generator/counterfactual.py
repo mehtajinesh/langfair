@@ -390,10 +390,19 @@ class CounterfactualGenerator(ResponseGenerator):
             custom_dict=custom_dict,
         )
 
-        print(f"""Generating {count} responses for each {attribute if attribute else 'group-specific'} prompt...""", flush=True)
-        
+        print(
+            f"""Generating {count} responses for each {attribute if attribute else "group-specific"} prompt...""",
+            flush=True,
+        )
+
         if show_progress_bars:
-            self.progress_bar = Progress(TextColumn("[progress.description]{task.description}"), BarColumn(),TimeElapsedColumn(), TextColumn("[progress.percentage]{task.percentage:>3.0f}%"), SpinnerColumn())
+            self.progress_bar = Progress(
+                TextColumn("[progress.description]{task.description}"),
+                BarColumn(),
+                TimeElapsedColumn(),
+                TextColumn("[progress.percentage]{task.percentage:>3.0f}%"),
+                SpinnerColumn(),
+            )
             self.progress_bar.start()
 
         # generate responses with async
@@ -404,14 +413,22 @@ class CounterfactualGenerator(ResponseGenerator):
             # generate with async
             if self.count == 1:
                 if self.progress_bar:
-                    self.progress_task = self.progress_bar.add_task(f"Generating response for group '{group}' prompts...", total=len(prompts))
+                    self.progress_task = self.progress_bar.add_task(
+                        f"Generating response for group '{group}' prompts...",
+                        total=len(prompts),
+                    )
                 else:
                     print(f"Generating response for group '{group}'...")
             else:
                 if self.progress_bar:
-                    self.progress_task = self.progress_bar.add_task(f"Generating {count} responses for group '{group}' prompts...", total=len(prompts) * self.count)
+                    self.progress_task = self.progress_bar.add_task(
+                        f"Generating {count} responses for group '{group}' prompts...",
+                        total=len(prompts) * self.count,
+                    )
                 else:
-                    print(f"Generating {count} responses for group '{group}' prompts...")
+                    print(
+                        f"Generating {count} responses for group '{group}' prompts..."
+                    )
             try:
                 (
                     tasks,
@@ -521,7 +538,8 @@ class CounterfactualGenerator(ResponseGenerator):
 
         ftu_print = f"FTU is{ftu_text}satisfied."
         print(
-            f"{attribute_to_print} words found in {len(prompts_subset)} prompts. {ftu_print}", flush=True
+            f"{attribute_to_print} words found in {len(prompts_subset)} prompts. {ftu_print}",
+            flush=True,
         )
 
         return {
@@ -562,7 +580,10 @@ class CounterfactualGenerator(ResponseGenerator):
         assert len(prompts_subset) > 0, f"""
         Provided prompts do not contain any {attribute_to_print} words.
         """
-        print(f"{attribute_to_print} words found in {len(prompts_subset)} prompts.", flush=True)
+        print(
+            f"{attribute_to_print} words found in {len(prompts_subset)} prompts.",
+            flush=True,
+        )
         return prompts_subset, attribute_words
 
     def _counterfactual_sub_race(

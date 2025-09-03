@@ -137,10 +137,13 @@ class ResponseGenerator:
         """
         # TODO: Add token costs for other models
         # TODO: Scrape rather than hard-code costs.
-        print(f"Token costs were last updated on {self.token_cost_date} and may have changed since then.", flush=True)
-        assert (
-            tiktoken_model_name in self.cost_mapping.keys()
-        ), f"Only {list(self.cost_mapping.keys())} are supported"
+        print(
+            f"Token costs were last updated on {self.token_cost_date} and may have changed since then.",
+            flush=True,
+        )
+        assert tiktoken_model_name in self.cost_mapping.keys(), (
+            f"Only {list(self.cost_mapping.keys())} are supported"
+        )
 
         print(f"Estimating cost based on {count} generations per prompt...", flush=True)
 
@@ -150,7 +153,9 @@ class ResponseGenerator:
             sampled_prompts = random.sample(
                 prompts, min(response_sample_size, len(prompts))
             )  # nosec - bandit thinks this insecure use of random.sample could be used in a crypto context
-            generation = await self.generate_responses(sampled_prompts, count=1, show_progress_bars=show_progress_bars)
+            generation = await self.generate_responses(
+                sampled_prompts, count=1, show_progress_bars=show_progress_bars
+            )
             example_responses = generation["data"]["response"]
 
         # Get input token counts
@@ -270,15 +275,26 @@ class ResponseGenerator:
         self.system_message = SystemMessage(system_prompt)
 
         if show_progress_bars:
-            self.progress_bar = Progress(TextColumn("[progress.description]{task.description}"), BarColumn(),TimeElapsedColumn(), TextColumn("[progress.percentage]{task.percentage:>3.0f}%"), SpinnerColumn())
+            self.progress_bar = Progress(
+                TextColumn("[progress.description]{task.description}"),
+                BarColumn(),
+                TimeElapsedColumn(),
+                TextColumn("[progress.percentage]{task.percentage:>3.0f}%"),
+                SpinnerColumn(),
+            )
             self.progress_bar.start()
 
         if self.progress_bar:
             if self.count == 1:
-                self.progress_task = self.progress_bar.add_task("Generating responses...", total=len(prompts))
+                self.progress_task = self.progress_bar.add_task(
+                    "Generating responses...", total=len(prompts)
+                )
             else:
-                self.progress_task = self.progress_bar.add_task(f"Generating {self.count} responses per prompt...", total=len(prompts) * self.count)
-        
+                self.progress_task = self.progress_bar.add_task(
+                    f"Generating {self.count} responses per prompt...",
+                    total=len(prompts) * self.count,
+                )
+
         try:
             tasks, duplicated_prompts = self._create_tasks(prompts=prompts)
             response_lists = await asyncio.gather(*tasks)
@@ -296,7 +312,6 @@ class ResponseGenerator:
         responses = []
         for response in response_lists:
             responses.extend(response)
-
 
         print("Responses successfully generated!", flush=True)
         return {
