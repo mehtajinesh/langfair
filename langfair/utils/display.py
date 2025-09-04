@@ -29,11 +29,15 @@ class ConditionalTimeElapsedColumn(TimeElapsedColumn):
             return ""
         return super().render(task)
 
+
 class ConditionalTextColumn(TextColumn):
     def render(self, task):
-        if task.description.startswith("[No Progress Bar]") or task.description.startswith("[Task]"):
+        if task.description.startswith(
+            "[No Progress Bar]"
+        ) or task.description.startswith("[Task]"):
             return f"[progress.description]{task.description.replace('[No Progress Bar]', '').replace('[Task]', '')}"
         return super().render(task)
+
 
 class ConditionalTextPercentageColumn(TextColumn):
     def render(self, task):

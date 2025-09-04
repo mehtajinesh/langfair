@@ -101,7 +101,9 @@ class StereotypeMetrics:
         for metric in self.metrics:
             if metric.name in ["Stereotype Classifier"]:
                 if existing_progress_bar:
-                    existing_progress_bar.add_task("[No Progress Bar] Computing stereotype scores and evaluating metrics...")
+                    existing_progress_bar.add_task(
+                        "[No Progress Bar] Computing stereotype scores and evaluating metrics..."
+                    )
                 else:
                     print("Computing stereotype scores and evaluating metrics...")
                 tmp_value = metric.evaluate(

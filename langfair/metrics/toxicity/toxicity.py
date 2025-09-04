@@ -192,7 +192,9 @@ class ToxicityMetrics:
         """
         if scores is None:
             if existing_progress_bar:
-                existing_progress_bar.add_task("[No Progress Bar] Computing toxicity scores...")
+                existing_progress_bar.add_task(
+                    "[No Progress Bar] Computing toxicity scores..."
+                )
             else:
                 print("Computing toxicity scores...")
             scores = self.get_toxicity_scores(responses)
