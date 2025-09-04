@@ -14,6 +14,8 @@
 
 from typing import Dict, List, Union
 
+from rich.progress import Progress
+
 from langfair.metrics.stereotype.metrics import (
     CooccurrenceBiasMetric,
     StereotypeClassifier,
@@ -62,6 +64,7 @@ class StereotypeMetrics:
         prompts: List[str] = None,
         return_data: bool = False,
         categories: List[str] = ["gender", "race"],
+        existing_progress_bar: Progress = None,
     ) -> Dict[str, float]:
         """
         This method evaluate the stereotype metrics values for the provided pair of texts.
@@ -82,6 +85,9 @@ class StereotypeMetrics:
         categories: list, subset of ['gender', 'race']
             Specifies attributes for stereotype classifier metrics. Includes both race and gender by default.
 
+        existing_progress_bar : rich.progress.Progress, default=None
+            If provided, the progress bar will be updated with the existing progress bar.
+
         Returns
         -------
         dict
@@ -94,6 +100,10 @@ class StereotypeMetrics:
         metric_values = {}
         for metric in self.metrics:
             if metric.name in ["Stereotype Classifier"]:
+                if existing_progress_bar:
+                    existing_progress_bar.add_task("[No Progress Bar] Computing stereotype scores and evaluating metrics...")
+                else:
+                    print("Computing stereotype scores and evaluating metrics...")
                 tmp_value = metric.evaluate(
                     responses=responses,
                     prompts=prompts,

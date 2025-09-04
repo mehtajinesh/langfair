@@ -148,10 +148,8 @@ class StereotypeClassifier:
             self.categories = categories
 
         if not scores:
-            print("Computing stereotype scores...")
             evaluation_data = self.get_stereotype_scores(responses)
 
-        print("Evaluating metrics...")
         result = {}
         for category in self.categories:
             if prompts:

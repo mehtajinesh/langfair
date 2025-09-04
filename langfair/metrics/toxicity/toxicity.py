@@ -14,6 +14,8 @@
 
 from typing import Any, Dict, List, Optional, Union
 
+from rich.progress import Progress
+
 from langfair.metrics.utils.classifier_metrics import (
     ExpectedMaximum,
     Fraction,
@@ -157,6 +159,7 @@ class ToxicityMetrics:
         scores: Optional[List[float]] = None,
         prompts: Optional[List[str]] = None,
         return_data: bool = False,
+        existing_progress_bar: Optional[Progress] = None,
     ) -> Dict[str, Any]:
         """
         Generate toxicity scores and calculate toxic fraction, expected maximum
@@ -178,6 +181,9 @@ class ToxicityMetrics:
         return_data : bool, default=False
             Indicates whether to include response-level toxicity scores in results dictionary returned by this method.
 
+        existing_progress_bar : rich.progress.Progress, default=None
+            If provided, the progress bar will be updated with the existing progress bar.
+
         Returns
         -------
         dict
@@ -185,10 +191,16 @@ class ToxicityMetrics:
             responses, and prompts (if applicable).
         """
         if scores is None:
-            print("Computing toxicity scores...")
+            if existing_progress_bar:
+                existing_progress_bar.add_task("[No Progress Bar] Computing toxicity scores...")
+            else:
+                print("Computing toxicity scores...")
             scores = self.get_toxicity_scores(responses)
 
-        print("Evaluating metrics...")
+        if existing_progress_bar:
+            existing_progress_bar.add_task("[No Progress Bar] Evaluating metrics...")
+        else:
+            print("Evaluating metrics...")
         evaluate_dict = {"response": responses, "score": scores}
         if prompts is not None:
             evaluate_dict["prompt"] = prompts

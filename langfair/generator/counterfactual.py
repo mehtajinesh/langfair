@@ -19,11 +19,7 @@ import sacremoses
 from langchain_core.messages.system import SystemMessage
 from nltk.tokenize import word_tokenize
 from rich.progress import (
-    BarColumn,
     Progress,
-    SpinnerColumn,
-    TextColumn,
-    TimeElapsedColumn,
 )
 
 from langfair.constants.cost_data import FAILURE_MESSAGE
@@ -37,6 +33,13 @@ from langfair.constants.word_lists import (
     RACE_WORDS_REQUIRING_CONTEXT,
 )
 from langfair.generator.generator import ResponseGenerator
+from langfair.utils.display import (
+    ConditionalBarColumn,
+    ConditionalSpinnerColumn,
+    ConditionalTextColumn,
+    ConditionalTextPercentageColumn,
+    ConditionalTimeElapsedColumn,
+)
 
 # Constants for CounterfactualDatasetGenerator class
 ALL_GENDER_WORDS = MALE_WORDS + FEMALE_WORDS
@@ -325,6 +328,7 @@ class CounterfactualGenerator(ResponseGenerator):
         count: int = 25,
         custom_dict: Optional[Dict[str, List[str]]] = None,
         show_progress_bars: bool = True,
+        existing_progress_bar: Optional[Progress] = None
     ) -> Dict[str, Any]:
         """
         Creates prompts by counterfactual substitution and generates responses asynchronously
@@ -349,9 +353,11 @@ class CounterfactualGenerator(ResponseGenerator):
         count: int, default=25
             Specifies number of responses to generate for each prompt.
 
-        show_progress_bars : bool, default=True
+        show_progress_bars: bool, default=True
             If True, displays progress bars while generating responses.
 
+        existing_progress_bar: Optional[Progress], default=None
+            If provided, uses the existing progress bar to display progress bars while generating responses.
         Returns
         ----------
         dict
@@ -382,6 +388,13 @@ class CounterfactualGenerator(ResponseGenerator):
         self._update_count(count)
         self.system_message = SystemMessage(system_prompt)
 
+        if show_progress_bars:
+            if existing_progress_bar:
+                self.progress_bar = existing_progress_bar
+            else:
+                completion_text = "[progress.percentage]{task.completed}/{task.total}"
+                self.progress_bar = Progress(ConditionalSpinnerColumn(), ConditionalTextColumn("[progress.description]{task.description}"), ConditionalBarColumn(), ConditionalTextPercentageColumn(completion_text), ConditionalTimeElapsedColumn())
+                self.progress_bar.start()
         # create counterfactual prompts
         groups = self.group_mapping[attribute] if attribute else custom_dict.keys()
         prompts_dict = self.create_prompts(
@@ -390,21 +403,11 @@ class CounterfactualGenerator(ResponseGenerator):
             custom_dict=custom_dict,
         )
 
-        print(
-            f"""Generating {count} responses for each {attribute if attribute else "group-specific"} prompt...""",
-            flush=True,
-        )
-
         if show_progress_bars:
-            self.progress_bar = Progress(
-                TextColumn("[progress.description]{task.description}"),
-                BarColumn(),
-                TimeElapsedColumn(),
-                TextColumn("[progress.percentage]{task.percentage:>3.0f}%"),
-                SpinnerColumn(),
-            )
-            self.progress_bar.start()
-
+            self.progress_bar.add_task(f"""[No Progress Bar] Generating {count} responses for each {attribute if attribute else "group-specific"} prompt...""")
+        else:
+            print(
+            f"""Generating {count} responses for each {attribute if attribute else "group-specific"} prompt...""")
         # generate responses with async
         responses_dict, duplicated_prompts_dict = {}, {}
         for group in groups:
@@ -414,7 +417,7 @@ class CounterfactualGenerator(ResponseGenerator):
             if self.count == 1:
                 if self.progress_bar:
                     self.progress_task = self.progress_bar.add_task(
-                        f"Generating response for group '{group}' prompts...",
+                        f"[Task] Generating response for group '{group}' prompts...",
                         total=len(prompts),
                     )
                 else:
@@ -422,7 +425,7 @@ class CounterfactualGenerator(ResponseGenerator):
             else:
                 if self.progress_bar:
                     self.progress_task = self.progress_bar.add_task(
-                        f"Generating {count} responses for group '{group}' prompts...",
+                        f"[Task] Generating {count} responses for group '{group}' prompts...",
                         total=len(prompts) * self.count,
                     )
                 else:
@@ -447,10 +450,12 @@ class CounterfactualGenerator(ResponseGenerator):
             responses_dict[group + "_response"] = self._enforce_strings(tmp_responses)
             # stop = time.time()
         time.sleep(0.1)
-        if self.progress_bar:
+        if self.progress_bar and not existing_progress_bar:
+            self.progress_bar.add_task("[No Progress Bar] Responses successfully generated!")
             self.progress_bar.stop()
             self.progress_bar = None
-        print("Responses successfully generated!")
+        elif not existing_progress_bar:
+            print("Responses successfully generated!")
         return {
             "data": {
                 **duplicated_prompts_dict,
@@ -580,10 +585,10 @@ class CounterfactualGenerator(ResponseGenerator):
         assert len(prompts_subset) > 0, f"""
         Provided prompts do not contain any {attribute_to_print} words.
         """
-        print(
-            f"{attribute_to_print} words found in {len(prompts_subset)} prompts.",
-            flush=True,
-        )
+        if self.progress_bar:
+            self.progress_bar.add_task(f"[No Progress Bar] {attribute_to_print} words found in {len(prompts_subset)} prompts.")
+        else:
+            print(f"{attribute_to_print} words found in {len(prompts_subset)} prompts.")
         return prompts_subset, attribute_words
 
     def _counterfactual_sub_race(

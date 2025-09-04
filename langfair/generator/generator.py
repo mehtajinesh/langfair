@@ -209,6 +209,7 @@ class ResponseGenerator:
         system_prompt: str = "You are a helpful assistant.",
         count: int = 25,
         show_progress_bars: bool = True,
+        existing_progress_bar: Optional[Progress] = None,
     ) -> Dict[str, Any]:
         """
         Generates evaluation dataset from a provided set of prompts. For each prompt,
@@ -229,6 +230,9 @@ class ResponseGenerator:
 
         show_progress_bars : bool, default=True
             If True, displays progress bars while generating responses
+
+        existing_progress_bar : rich.progress.Progress, default=None
+            If provided, the progress bar will be updated with the existing progress bar.
 
         Returns
         -------
@@ -275,23 +279,26 @@ class ResponseGenerator:
         self.system_message = SystemMessage(system_prompt)
 
         if show_progress_bars:
-            self.progress_bar = Progress(
-                TextColumn("[progress.description]{task.description}"),
-                BarColumn(),
-                TimeElapsedColumn(),
-                TextColumn("[progress.percentage]{task.percentage:>3.0f}%"),
-                SpinnerColumn(),
-            )
-            self.progress_bar.start()
+            if existing_progress_bar:
+                self.progress_bar = existing_progress_bar
+            else:
+                self.progress_bar = Progress(
+                    TextColumn("[progress.description]{task.description}"),
+                    BarColumn(),
+                    TimeElapsedColumn(),
+                    TextColumn("[progress.percentage]{task.percentage:>3.0f}%"),
+                    SpinnerColumn(),
+                )
+                self.progress_bar.start()
 
         if self.progress_bar:
             if self.count == 1:
                 self.progress_task = self.progress_bar.add_task(
-                    "Generating responses...", total=len(prompts)
+                    " Generating responses...", total=len(prompts)
                 )
             else:
                 self.progress_task = self.progress_bar.add_task(
-                    f"Generating {self.count} responses per prompt...",
+                    f" Generating {self.count} responses per prompt...",
                     total=len(prompts) * self.count,
                 )
 
@@ -306,14 +313,15 @@ class ResponseGenerator:
 
         time.sleep(0.1)
 
-        if self.progress_bar:
+        if self.progress_bar and not existing_progress_bar:
             self.progress_bar.stop()
             self.progress_bar = None
         responses = []
         for response in response_lists:
             responses.extend(response)
 
-        print("Responses successfully generated!", flush=True)
+        if not existing_progress_bar:
+            print("Responses successfully generated!", flush=True)
         return {
             "data": {
                 "prompt": self._enforce_strings(duplicated_prompts),
