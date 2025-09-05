@@ -408,15 +408,6 @@ class CounterfactualGenerator(ResponseGenerator):
             attribute=attribute,
             custom_dict=custom_dict,
         )
-
-        if show_progress_bars:
-            self.progress_bar.add_task(
-                f"""[No Progress Bar] Generating {count} responses for each {attribute if attribute else "group-specific"} prompt..."""
-            )
-        else:
-            print(
-                f"""Generating {count} responses for each {attribute if attribute else "group-specific"} prompt..."""
-            )
         # generate responses with async
         responses_dict, duplicated_prompts_dict = {}, {}
         for group in groups:
@@ -434,12 +425,12 @@ class CounterfactualGenerator(ResponseGenerator):
             else:
                 if self.progress_bar:
                     self.progress_task = self.progress_bar.add_task(
-                        f"[Task] Generating {count} responses for group '{group}' prompts...",
-                        total=len(prompts) * self.count,
+                        f"[Task] Generating {count} responses for each {group} prompt",
+                        total=len(prompts_dict[prompt_key]) * self.count,
                     )
                 else:
                     print(
-                        f"Generating {count} responses for group '{group}' prompts..."
+                        f"Generating {count} responses for each {group} prompt ..."
                     )
             try:
                 (
