@@ -20,15 +20,16 @@ import numpy as np
 import tiktoken
 from langchain_core.messages.human import HumanMessage
 from langchain_core.messages.system import SystemMessage
-from rich.progress import (
-    BarColumn,
-    Progress,
-    SpinnerColumn,
-    TextColumn,
-    TimeElapsedColumn,
-)
+from rich.progress import Progress
 
 from langfair.constants.cost_data import COST_MAPPING, FAILURE_MESSAGE, TOKEN_COST_DATE
+from langfair.utils.display import (
+    ConditionalBarColumn,
+    ConditionalSpinnerColumn,
+    ConditionalTextColumn,
+    ConditionalTextPercentageColumn,
+    ConditionalTimeElapsedColumn,
+)
 
 N_PARAM_WARNING = """
 The 'use_n_param' parameter may not be compatible with all BaseChatModel instances. 
@@ -100,6 +101,7 @@ class ResponseGenerator:
         system_prompt: str = "You are a helpful assistant",
         count: int = 25,
         show_progress_bars: bool = True,
+        existing_progress_bar: Optional[Progress] = None,
     ) -> Dict[str, float]:
         """
         Estimates the token cost for a given list of prompts and (optionally) example responses.
@@ -129,6 +131,9 @@ class ResponseGenerator:
         show_progress_bars : bool, default=True
             If True, displays progress bars while generating and scoring responses
 
+        existing_progress_bar : rich.progress.Progress, default=None
+            If provided, the progress bar will be updated with the existing progress bar.
+
         Returns
         -------
         dict
@@ -137,24 +142,51 @@ class ResponseGenerator:
         """
         # TODO: Add token costs for other models
         # TODO: Scrape rather than hard-code costs.
-        print(
-            f"Token costs were last updated on {self.token_cost_date} and may have changed since then.",
-            flush=True,
-        )
         assert tiktoken_model_name in self.cost_mapping.keys(), (
             f"Only {list(self.cost_mapping.keys())} are supported"
         )
-
-        print(f"Estimating cost based on {count} generations per prompt...", flush=True)
+        if show_progress_bars:
+            if existing_progress_bar:
+                self.progress_bar = existing_progress_bar
+            else:
+                completion_text = "[progress.percentage]{task.completed}/{task.total}"
+                self.progress_bar = Progress(
+                    ConditionalTextColumn("[progress.description]{task.description}"),
+                    ConditionalBarColumn(),
+                    ConditionalTextPercentageColumn(completion_text),
+                    ConditionalTimeElapsedColumn(),
+                    ConditionalSpinnerColumn(),
+                )
+                self.progress_bar.start()
+                self.progress_bar.add_task(
+                    f"[No Progress Bar]- Estimating cost for model '{tiktoken_model_name}'... "
+                )
+                self.progress_bar.add_task(
+                    f"[No Progress Bar]- Token costs were last updated on {self.token_cost_date} \n   and may have changed since then."
+                )
+                self.progress_bar.add_task(
+                    f"[No Progress Bar]- Estimating cost based on {count} generations per prompt..."
+                )
+        else:
+            print(f"Estimating cost for model '{tiktoken_model_name}'... ")
+            print(
+                f"Token costs were last updated on {self.token_cost_date} and may have changed since then."
+            )
+            print(f"Estimating cost based on {count} generations per prompt...")
 
         if example_responses is None:
-            print("Generating sample of responses for cost estimation...", flush=True)
+            if show_progress_bars:
+                self.progress_bar.add_task(
+                    "[No Progress Bar]- Generating sample of responses for cost estimation..."
+                )
+            else:
+                print("Generating sample of responses for cost estimation...")
             prompts = list(prompts)
             sampled_prompts = random.sample(
                 prompts, min(response_sample_size, len(prompts))
             )  # nosec - bandit thinks this insecure use of random.sample could be used in a crypto context
             generation = await self.generate_responses(
-                sampled_prompts, count=1, show_progress_bars=show_progress_bars
+                sampled_prompts, count=1, show_progress_bars=show_progress_bars, existing_progress_bar=self.progress_bar
             )
             example_responses = generation["data"]["response"]
 
@@ -201,6 +233,15 @@ class ResponseGenerator:
             "Estimated Completion Token Cost (USD)": estimated_completion_token_cost,
             "Estimated Total Token Cost (USD)": estimated_total_token_cost,
         }
+        time.sleep(0.1)
+        if self.progress_bar and not existing_progress_bar:
+            self.progress_bar.add_task(
+                f"[No Progress Bar]- Estimated cost for model '{tiktoken_model_name}': $ {round(estimated_total_token_cost, 2)}")
+            self.progress_bar.stop()
+            self.progress_bar = None
+        elif not existing_progress_bar:
+            print(f"Estimated cost for model '{tiktoken_model_name}': $ {round(estimated_total_token_cost, 2)}")
+            print("--------------------------------------------------")
         return results
 
     async def generate_responses(
@@ -282,31 +323,37 @@ class ResponseGenerator:
             if existing_progress_bar:
                 self.progress_bar = existing_progress_bar
             else:
+                completion_text = "[progress.percentage]{task.completed}/{task.total}"
                 self.progress_bar = Progress(
-                    TextColumn("[progress.description]{task.description}"),
-                    BarColumn(),
-                    TimeElapsedColumn(),
-                    TextColumn("[progress.percentage]{task.percentage:>3.0f}%"),
-                    SpinnerColumn(),
+                    ConditionalTextColumn("[progress.description]{task.description}"),
+                    ConditionalBarColumn(),
+                    ConditionalTextPercentageColumn(completion_text),
+                    ConditionalTimeElapsedColumn(),
+                    ConditionalSpinnerColumn(),
                 )
                 self.progress_bar.start()
 
-        if self.progress_bar:
-            if self.count == 1:
+        if self.count == 1:
+            if show_progress_bars:
                 self.progress_task = self.progress_bar.add_task(
-                    " Generating responses...", total=len(prompts)
+                    "- Generating responses...", total=len(prompts)
                 )
             else:
+                print("Generating responses...")
+        else:
+            if show_progress_bars:
                 self.progress_task = self.progress_bar.add_task(
-                    f" Generating {self.count} responses per prompt...",
+                f"- Generating {self.count} responses per prompt...",
                     total=len(prompts) * self.count,
                 )
+            else:
+                print(f"Generating {self.count} responses per prompt...")
 
         try:
             tasks, duplicated_prompts = self._create_tasks(prompts=prompts)
             response_lists = await asyncio.gather(*tasks)
         except Exception as e:
-            if self.progress_bar:
+            if self.progress_bar and not existing_progress_bar:
                 self.progress_bar.stop()
                 self.progress_bar = None
             raise e
@@ -314,14 +361,17 @@ class ResponseGenerator:
         time.sleep(0.1)
 
         if self.progress_bar and not existing_progress_bar:
+            self.progress_bar.add_task(
+                "[No Progress Bar]- Responses successfully generated!"
+            )
             self.progress_bar.stop()
             self.progress_bar = None
+        elif not existing_progress_bar:
+            print("Responses successfully generated!")
         responses = []
         for response in response_lists:
             responses.extend(response)
 
-        if not existing_progress_bar:
-            print("Responses successfully generated!", flush=True)
         return {
             "data": {
                 "prompt": self._enforce_strings(duplicated_prompts),

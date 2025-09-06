@@ -44,7 +44,7 @@ class ConditionalTextPercentageColumn(TextColumn):
         if task.description.startswith("[No Progress Bar]"):
             return ""
         elif task.description.startswith("[Task]"):
-            return f"[progress.percentage]{task.percentage:>3.0f}%"
+            return f"[progress.percentage]{task.completed}/{task.total}"
         return super().render(task)
 
 
