@@ -195,7 +195,6 @@ class AutoEval:
                             )
                         except AssertionError as e:
                             # Handle case where prompts don't contain the specific attribute words
-                            # This can happen due to differences in parsing logic
                             print(
                                 f"Warning: Could not generate counterfactual responses for {attribute}: {e}"
                             )
