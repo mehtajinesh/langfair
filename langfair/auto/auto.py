@@ -187,11 +187,20 @@ class AutoEval:
                 self.counterfactual_response_metadata = {}
                 for attribute in protected_words.keys():
                     if protected_words[attribute] > 0:
-                        self.counterfactual_responses[
-                            attribute
-                        ] = await self.cf_generator_object.generate_responses(
-                            count=count, prompts=self.prompts, attribute=attribute
-                        )
+                        try:
+                            self.counterfactual_responses[
+                                attribute
+                            ] = await self.cf_generator_object.generate_responses(
+                                count=count, prompts=self.prompts, attribute=attribute
+                            )
+                        except AssertionError as e:
+                            # Handle case where prompts don't contain the specific attribute words
+                            # This can happen due to differences in parsing logic
+                            print(
+                                f"Warning: Could not generate counterfactual responses for {attribute}: {e}"
+                            )
+                            # Remove this attribute from protected_words to prevent KeyError later
+                            protected_words[attribute] = 0
         else:
             print(
                 "Fairness through unawareness is satisfied. Toxicity and stereotype assessments will be conducted."
@@ -249,8 +258,8 @@ class AutoEval:
         self.stereotype_scores = stereotype_results["data"]
         del stereotype_results
 
-        # 6. Calculate CF metrics (if FTU not satisfied)
-        if total_protected_words > 0:
+        # 6. Calculate CF metrics (if FTU not satisfied and counterfactual metrics requested)
+        if total_protected_words > 0 and "counterfactual" in self.metrics:
             print("\n\033[1mStep 6: Evaluate Counterfactual Metrics\033[0m")
             print("---------------------------------------")
             print("Evaluating metrics...")
@@ -262,7 +271,10 @@ class AutoEval:
                 sentiment_classifier=self.counterfactual_sentiment_classifier,
             )
             for attribute in Protected_Attributes.keys():
-                if protected_words[attribute] > 0:
+                if (
+                    protected_words[attribute] > 0
+                    and attribute in self.counterfactual_responses
+                ):
                     for group1, group2 in combinations(
                         Protected_Attributes[attribute], 2
                     ):
@@ -295,6 +307,8 @@ class AutoEval:
         else:
             print("\n\033[1m(Skipping) Step 6: Evaluate Counterfactual Metrics\033[0m")
             print("--------------------------------------------------")
+            # Initialize empty counterfactual_data when metrics are skipped
+            self.counterfactual_data = {}
 
         if return_data:
             self.results["data"]["Toxicity"] = self.toxicity_data
