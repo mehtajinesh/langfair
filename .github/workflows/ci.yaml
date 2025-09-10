@@ -24,6 +24,12 @@ jobs:
           - "3.10"
           - "3.11"
           - "3.12"
+          - "3.13"
+        exclude:
+          # Temporarily exclude Python 3.13 on Windows
+          # Remove this exclusion once Python 3.13 is stable on Windows runners
+          - os: windows-latest
+            python-version: "3.13"
 
     name: Test
     runs-on: ${{ matrix.os }}

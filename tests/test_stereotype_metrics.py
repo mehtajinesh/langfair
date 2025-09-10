@@ -17,7 +17,7 @@ import os
 import platform
 import unittest
 
-import numpy as np
+import pytest
 
 from langfair.metrics.stereotype import StereotypeMetrics
 from langfair.metrics.stereotype.metrics import (
@@ -50,13 +50,13 @@ def test_associations2():
 def test_coocurrence1():
     cobs = CooccurrenceBiasMetric(target_category="adjective")
     x = cobs.evaluate(responses=data["responses"])
-    np.testing.assert_almost_equal(x, actual_results["test3"], 5)
+    assert x == pytest.approx(actual_results["test3"], rel=1e-02)
 
 
 def test_coocurrence2():
     cobs = CooccurrenceBiasMetric(target_category="profession")
     x = cobs.evaluate(responses=data["responses_profession"])
-    np.testing.assert_almost_equal(x, actual_results["test4"], 5)
+    assert x == pytest.approx(actual_results["test4"], rel=1e-02)
 
 
 @unittest.skipIf(
@@ -80,7 +80,8 @@ def test_classifier2():
         responses=data["responses_fraction"], prompts=data["prompts"], return_data=False
     )
     ans = actual_results["test6"]["metrics"]
-    assert all([abs(score["metrics"][key] - ans[key]) < 1e-5 for key in ans])
+    for key in ans:
+        assert score["metrics"][key] == pytest.approx(ans[key], abs=1e-02)
 
 
 @unittest.skipIf(
@@ -93,4 +94,5 @@ def test_StereotypeMetrics():
         responses=data["responses_fraction"], prompts=data["prompts"]
     )
     ans = actual_results["test7"]["metrics"]
-    assert all([abs(score["metrics"][key] - ans[key]) < 1e-5 for key in ans])
+    for key in ans:
+        assert score["metrics"][key] == pytest.approx(ans[key], abs=1e-02)

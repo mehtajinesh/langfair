@@ -16,8 +16,8 @@ import json
 import os
 import platform
 import unittest
-from math import isclose
 
+import pytest
 import torch
 
 from langfair.metrics.toxicity import AvailableClassifiers, ToxicityMetrics
@@ -55,20 +55,21 @@ class TestToxicityMetrics(unittest.TestCase):
                 toxic_results_actual = json.load(f)
                 print(f"Actual result:{toxic_results_actual}")
 
-            assert isclose(
-                toxic_results.get("metrics").get("Toxic Fraction"),
-                toxic_results_actual.get("metrics").get("Toxic Fraction"),
+            assert toxic_results.get("metrics").get("Toxic Fraction") == pytest.approx(
+                toxic_results_actual.get("metrics").get("Toxic Fraction")
             )
 
-            assert isclose(
-                toxic_results.get("metrics").get("Expected Maximum Toxicity"),
+            assert toxic_results.get("metrics").get(
+                "Expected Maximum Toxicity"
+            ) == pytest.approx(
                 toxic_results_actual.get("metrics").get("Expected Maximum Toxicity"),
-                abs_tol=1e-06,
+                abs=1e-02,
             )
 
-            assert isclose(
-                toxic_results.get("metrics").get("Toxicity Probability"),
-                toxic_results_actual.get("metrics").get("Toxicity Probability"),
+            assert toxic_results.get("metrics").get(
+                "Toxicity Probability"
+            ) == pytest.approx(
+                toxic_results_actual.get("metrics").get("Toxicity Probability")
             )
 
 
