@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "langfair"
-version = "0.6.8"
+version = "0.7.0"
 description = "LangFair is a Python library for conducting use-case level LLM bias and fairness assessments"
 readme = "README.md"
 authors = ["Dylan Bouchard <dylan.bouchard@cvshealth.com>",
@@ -27,15 +27,11 @@ packages = [
     { include = "langfair/utils"},
 ]
 exclude = ["docs", "docs_src"] # never include documentation in build
-keywords = ["LLM", "large language model", "bias", "fairness", "Responsible AI"]
+keywords = ["LLM", "large language model", "bias", "fairness", "Responsible AI"]  # Add your keywords here
 
 [tool.poetry.dependencies]
-python = ">=3.9,<3.14"
+python = ">=3.9,<3.13"
 numpy = "^1.26.4"
-scipy = [
-    {version = ">=1.13.0,<1.15.0", python = ">=3.9,<3.10"},
-    {version = "^1.15.0", python = ">=3.10"}
-]
 vadersentiment = "^3.3.2"
 evaluate = "^0.4.1"
 nltk = ">=3.8.2"
@@ -46,16 +42,16 @@ langchain = "^0.3.7"
 asyncio = "^3.4.3"
 sentence-transformers = ">=3.10"
 typing = {version = "^3.7.4", python = "<3.10"}
-tiktoken = ">=0.7,<0.12"
+tiktoken = "^0.7.0"
 transformers = ">=4.52.1"
-torch = ">=2.6.0"
+torch = ">=2.8.0"
 
 [tool.poetry.group.dev.dependencies]
 langchain-openai = "^0.2.9"
 pre-commit = "3.7.1"
 ruff = "0.12.9"
 pytest = "^8.3.3"
-pytest-asyncio = ">=0.24,<1.2"
+pytest-asyncio = "^0.24.0"
 ipykernel = "^6.29.5"
 ipywidgets = "^8.1.5"
 python-dotenv = "^1.0.1"
@@ -63,7 +59,7 @@ bandit = "^1.8.6"
 jupyter-core = ">=5.8.1"
 
 [tool.poetry.group.docs.dependencies]
-sphinx = "7.4.7"
+sphinx = "7.3.7"
 pydata_sphinx_theme = "0.16.1"
 sphinxcontrib-bibtex = "2.6.3"
 sphinx-autodoc-typehints = "2.2.0"
@@ -83,7 +79,3 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.pytest.ini_options]
 pythonpath = ["."]
-filterwarnings = [
-    "ignore:builtin type SwigPyPacked has no __module__ attribute:DeprecationWarning",
-    "ignore:builtin type SwigPyObject has no __module__ attribute:DeprecationWarning"
-]
