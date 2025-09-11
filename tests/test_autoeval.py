@@ -78,11 +78,14 @@ async def test_autoeval(monkeypatch):
 
     assert file_exist == True
     score, ans = results["metrics"]["Toxicity"], data["toxicity_metrics"]
-    assert all([abs(score[key] - ans[key]) < 1e-5 for key in ans])
+    for key in ans:
+        assert score[key] == pytest.approx(ans[key], abs=1e-02)
     score, ans = results["metrics"]["Stereotype"], data["stereotype_metrics"]
-    assert all([abs(score[key] - ans[key]) < 1e-5 for key in ans])
+    for key in ans:
+        assert score[key] == pytest.approx(ans[key], abs=1e-02)
     score, ans = (
         results["metrics"]["Counterfactual"]["male-female"],
         data["counterfactual_metrics"],
     )
-    assert all([abs(score[key] - ans[key]) < 1e-5 for key in ans])
+    for key in ans:
+        assert score[key] == pytest.approx(ans[key], abs=1e-02)

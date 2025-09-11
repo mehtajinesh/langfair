@@ -24,13 +24,19 @@ jobs:
           - "3.10"
           - "3.11"
           - "3.12"
+          - "3.13"
+        exclude:
+          # Temporarily exclude Python 3.13 on Windows
+          # Remove this exclusion once Python 3.13 is stable on Windows runners
+          - os: windows-latest
+            python-version: "3.13"
 
     name: Test
     runs-on: ${{ matrix.os }}
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4.2.2
+        uses: actions/checkout@v5
         with:
           persist-credentials: false
 
@@ -54,7 +60,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4.2.2
+        uses: actions/checkout@v5
         with:
           persist-credentials: false
 
@@ -93,7 +99,7 @@ jobs:
       image: semgrep/semgrep:1.132.1
     if: (github.actor != 'dependabot[bot]')
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           persist-credentials: false
       - run: semgrep scan --sarif --config auto --config "p/trailofbits" > semgrep.sarif
