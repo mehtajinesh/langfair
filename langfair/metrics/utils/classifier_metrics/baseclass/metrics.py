@@ -33,7 +33,12 @@ class Metric(ABC):
         pass
 
     def evaluate(
-        self, data: Dict[str, Any], threshold: float, score_column: str = "score", show_progress_bars: bool = True, existing_progress_bar: Optional[Progress] = None
+        self,
+        data: Dict[str, Any],
+        threshold: float,
+        score_column: str = "score",
+        show_progress_bars: bool = True,
+        existing_progress_bar: Optional[Progress] = None,
     ) -> float:
         """
         This method compute metric function for unique input prompts and return the mean value over all
@@ -58,7 +63,10 @@ class Metric(ABC):
         """
         results = []
         if show_progress_bars and existing_progress_bar:
-            self.progress_bar_task = existing_progress_bar.add_task(f"    -  Evaluating {self.name} metric for {len(data['prompt'])} prompts...", total=len(set(data["prompt"])))
+            self.progress_bar_task = existing_progress_bar.add_task(
+                f"    -  Evaluating {self.name} metric for {len(data['prompt'])} prompts...",
+                total=len(set(data["prompt"])),
+            )
         else:
             print(f"Evaluating {self.name} metric for {len(data['prompt'])} prompts...")
         for prompt in set(data["prompt"]):

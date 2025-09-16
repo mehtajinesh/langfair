@@ -123,7 +123,12 @@ class CooccurrenceBiasMetric:
         self.name = "Cooccurrence Bias"
         self.progress_bar = None
 
-    def evaluate(self, responses: List[str], show_progress_bars: bool = True, existing_progress_bar: Progress = None) -> Union[float, Dict[str, float]]:
+    def evaluate(
+        self,
+        responses: List[str],
+        show_progress_bars: bool = True,
+        existing_progress_bar: Progress = None,
+    ) -> Union[float, Dict[str, float]]:
         """
         Compute the relative co-occurrence rates of target words with
         protected attribute words.
@@ -133,7 +138,7 @@ class CooccurrenceBiasMetric:
         responses : list of strings
             A list of generated outputs from a language model on which co-occurrence bias score
             metric will be calculated.
-        
+
         show_progress_bars : bool, default=True
             If True, displays progress bars while evaluating metrics.
 
@@ -163,7 +168,9 @@ class CooccurrenceBiasMetric:
                 )
                 self.progress_bar.start()
         if show_progress_bars:
-            self.progress_bar.add_task("[No Progress Bar] -  Calculating COBS scores...")
+            self.progress_bar.add_task(
+                "[No Progress Bar] -  Calculating COBS scores..."
+            )
         else:
             print("Calculating COBS scores...")
         # Conduct intermediate operations before COBS calculations
@@ -187,9 +194,14 @@ class CooccurrenceBiasMetric:
         cobs_scores = {}
         cobs_scores_list = None
         if show_progress_bars and self.progress_bar:
-            progress_bar_task = self.progress_bar.add_task(f"    -  Calculating COBS scores for {len(self.target_word_list)} target words...", total=len(self.target_word_list))
+            progress_bar_task = self.progress_bar.add_task(
+                f"    -  Calculating COBS scores for {len(self.target_word_list)} target words...",
+                total=len(self.target_word_list),
+            )
         else:
-            print(f"Calculating COBS scores for {len(self.target_word_list)} target words...")
+            print(
+                f"Calculating COBS scores for {len(self.target_word_list)} target words..."
+            )
         for target_word in self.target_word_list:
             # skip target word if not contained in text corpus
             if target_word not in all_words:
@@ -220,10 +232,8 @@ class CooccurrenceBiasMetric:
 
         if show_progress_bars and self.progress_bar:
             self.progress_bar.add_task(
-                "[No Progress Bar] - Saving valid COBS scores..."
+                "[No Progress Bar] -  Saving valid COBS scores..."
             )
-            self.progress_bar.stop()
-            self.progress_bar = None
         elif not existing_progress_bar:
             print("Saving valid COBS scores...")
         # Save valid COBS scores
@@ -238,19 +248,19 @@ class CooccurrenceBiasMetric:
                 self.progress_bar = None
             elif not existing_progress_bar:
                 print(
-                "None of the target words co-occur with both lists of attribute words. Unable to calculate COBS score."
-            )
+                    "None of the target words co-occur with both lists of attribute words. Unable to calculate COBS score."
+                )
             return None
         if self.progress_bar and not existing_progress_bar:
             self.progress_bar.add_task(
                 "[No Progress Bar] -  Calculating Mean COBS score..."
             )
-            self.progress_bar.stop()
-            self.progress_bar = None
         elif not existing_progress_bar:
             print("Calculating Mean COBS score...")
         # Return either average COBS score or dictinary with COBS(w) for each w
-        mean_cobs_score = np.mean(cobs_scores_list) if self.how == "mean" else cobs_scores
+        mean_cobs_score = (
+            np.mean(cobs_scores_list) if self.how == "mean" else cobs_scores
+        )
         if show_progress_bars and not existing_progress_bar:
             self.progress_bar.add_task(
                 "[No Progress Bar] -  Calculated Mean COBS score successfully!"
@@ -262,17 +272,20 @@ class CooccurrenceBiasMetric:
         return mean_cobs_score
 
     def _prep_lists(
-        self, responses: List[str], show_progress_bars: bool = True, existing_progress_bar: Progress = None
+        self,
+        responses: List[str],
+        show_progress_bars: bool = True,
+        existing_progress_bar: Progress = None,
     ) -> Tuple[List[str], List[str], List[str], List[str], List[str]]:
         """
         Create lists for COBS(w) calculation from list of responses.
-        
+
         Parameters
         ----------
         responses : list of strings
             A list of generated outputs from a language model on which co-occurrence bias score
             metric will be calculated.
-        
+
         show_progress_bars : bool, default=True
             If True, displays progress bars while evaluating metrics.
 
@@ -313,9 +326,14 @@ class CooccurrenceBiasMetric:
             return None, None, None, None, None
         tot_co_counts = {}
         if show_progress_bars and existing_progress_bar:
-            progress_bar_task = existing_progress_bar.add_task(f"    -  Calculating cooccurrence scores for {len(tokenized_texts)} responses...", total=len(tokenized_texts))
+            progress_bar_task = existing_progress_bar.add_task(
+                f"    -  Calculating cooccurrence scores for {len(tokenized_texts)} responses...",
+                total=len(tokenized_texts),
+            )
         else:
-            print(f"Calculating cooccurrence scores for {len(tokenized_texts)} responses...")
+            print(
+                f"Calculating cooccurrence scores for {len(tokenized_texts)} responses..."
+            )
         for text in tokenized_texts:
             # Get procted attribute cooccurrence counts for current sentence
             co_counts = self._calculate_cooccurrence_scores(text, self.beta)

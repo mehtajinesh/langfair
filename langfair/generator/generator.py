@@ -186,7 +186,10 @@ class ResponseGenerator:
                 prompts, min(response_sample_size, len(prompts))
             )  # nosec - bandit thinks this insecure use of random.sample could be used in a crypto context
             generation = await self.generate_responses(
-                sampled_prompts, count=1, show_progress_bars=show_progress_bars, existing_progress_bar=self.progress_bar
+                sampled_prompts,
+                count=1,
+                show_progress_bars=show_progress_bars,
+                existing_progress_bar=self.progress_bar,
             )
             example_responses = generation["data"]["response"]
 
@@ -236,11 +239,14 @@ class ResponseGenerator:
         time.sleep(0.1)
         if self.progress_bar and not existing_progress_bar:
             self.progress_bar.add_task(
-                f"[No Progress Bar]- Estimated cost for model '{tiktoken_model_name}': $ {round(estimated_total_token_cost, 2)}")
+                f"[No Progress Bar]- Estimated cost for model '{tiktoken_model_name}': $ {round(estimated_total_token_cost, 2)}"
+            )
             self.progress_bar.stop()
             self.progress_bar = None
         elif not existing_progress_bar:
-            print(f"Estimated cost for model '{tiktoken_model_name}': $ {round(estimated_total_token_cost, 2)}")
+            print(
+                f"Estimated cost for model '{tiktoken_model_name}': $ {round(estimated_total_token_cost, 2)}"
+            )
             print("--------------------------------------------------")
         return results
 
@@ -343,7 +349,7 @@ class ResponseGenerator:
         else:
             if show_progress_bars:
                 self.progress_task = self.progress_bar.add_task(
-                f"- Generating {self.count} responses per prompt...",
+                    f"- Generating {self.count} responses per prompt...",
                     total=len(prompts) * self.count,
                 )
             else:

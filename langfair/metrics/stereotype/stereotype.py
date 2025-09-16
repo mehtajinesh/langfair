@@ -95,7 +95,7 @@ class StereotypeMetrics:
 
         categories: list, subset of ['gender', 'race']
             Specifies attributes for stereotype classifier metrics. Includes both race and gender by default.
-        
+
         show_progress_bars : bool, default=True
             If True, displays progress bars while evaluating metrics.
 
@@ -142,7 +142,11 @@ class StereotypeMetrics:
                 )
                 metric_values.update(tmp_value["metrics"])
             else:
-                metric_values[metric.name] = metric.evaluate(responses=responses, show_progress_bars=show_progress_bars, existing_progress_bar=self.progress_bar)
+                metric_values[metric.name] = metric.evaluate(
+                    responses=responses,
+                    show_progress_bars=show_progress_bars,
+                    existing_progress_bar=self.progress_bar,
+                )
         time.sleep(0.1)
         if self.progress_bar and not existing_progress_bar:
             self.progress_bar.add_task(

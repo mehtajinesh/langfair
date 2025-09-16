@@ -429,9 +429,7 @@ class CounterfactualGenerator(ResponseGenerator):
                         total=len(prompts_dict[prompt_key]) * self.count,
                     )
                 else:
-                    print(
-                        f"Generating {count} responses for each {group} prompt ..."
-                    )
+                    print(f"Generating {count} responses for each {group} prompt ...")
             try:
                 (
                     tasks,

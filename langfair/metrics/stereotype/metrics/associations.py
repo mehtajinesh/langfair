@@ -125,7 +125,12 @@ class StereotypicalAssociations:
         except LookupError:
             nltk.download("punkt_tab")
 
-    def evaluate(self, responses: List[str], show_progress_bars: bool = True, existing_progress_bar: Progress = None) -> Optional[float]:
+    def evaluate(
+        self,
+        responses: List[str],
+        show_progress_bars: bool = True,
+        existing_progress_bar: Progress = None,
+    ) -> Optional[float]:
         """
         Compute the mean stereotypical association bias of the target words and demographic groups.
 
@@ -143,7 +148,7 @@ class StereotypicalAssociations:
         responses : list of strings
             A list of generated outputs from a language model on which Stereotypical Associations
             metric will be calculated.
-        
+
         show_progress_bars : bool, default=True
             If True, displays progress bars while evaluating metrics.
 
@@ -170,7 +175,10 @@ class StereotypicalAssociations:
                     ConditionalTimeElapsedColumn(),
                 )
                 self.progress_bar.start()
-            progress_bar_task = self.progress_bar.add_task("    -  Counting the number of times each target_word and group co-occur...", total=len(responses))
+            progress_bar_task = self.progress_bar.add_task(
+                "    -  Counting the number of times each target_word and group co-occur...",
+                total=len(responses),
+            )
         else:
             print("Counting the number of times each target_word and group co-occur...")
         for response in responses:
@@ -191,9 +199,11 @@ class StereotypicalAssociations:
                 pair_to_count[(target_word, group)] += count
             if show_progress_bars and self.progress_bar:
                 self.progress_bar.update(progress_bar_task, advance=1)
-        
+
         if show_progress_bars and self.progress_bar:
-            self.progress_bar.add_task("[No Progress Bar] -  Computing a bias score for each target word...")
+            self.progress_bar.add_task(
+                "[No Progress Bar] -  Computing a bias score for each target word..."
+            )
         else:
             print("Computing a bias score for each target word...")
 

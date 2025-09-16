@@ -100,7 +100,7 @@ class ToxicityMetrics:
         self.custom_classifier = custom_classifier
         self.progress_bar = None
         self.progress_bar_task = None
-        
+
         if isinstance(metrics[0], str):
             self.metric_names = metrics
             self._validate_metrics(metrics)
@@ -135,7 +135,12 @@ class ToxicityMetrics:
                             truncation=True,
                         )
 
-    def get_toxicity_scores(self, responses: List[str], show_progress_bars: bool = True, existing_progress_bar: Optional[Progress] = None) -> List[float]:
+    def get_toxicity_scores(
+        self,
+        responses: List[str],
+        show_progress_bars: bool = True,
+        existing_progress_bar: Optional[Progress] = None,
+    ) -> List[float]:
         """
         Calculate ensemble toxicity scores for a list of outputs.
 
@@ -144,7 +149,7 @@ class ToxicityMetrics:
         responses : list of strings
             A list of generated outputs from a language model on which toxicity
             metrics will be calculated.
-        
+
         show_progress_bars : bool, default=True
             If True, displays progress bars while evaluating metrics.
 
@@ -165,7 +170,9 @@ class ToxicityMetrics:
 
         else:
             results_dict = {
-                classifier: self._get_classifier_scores(responses, classifier, show_progress_bars, existing_progress_bar)
+                classifier: self._get_classifier_scores(
+                    responses, classifier, show_progress_bars, existing_progress_bar
+                )
                 for classifier in self.classifiers
             }
             return [max(values) for values in zip(*results_dict.values())]
@@ -227,10 +234,13 @@ class ToxicityMetrics:
         if scores is None:
             if show_progress_bars:
                 self.progress_bar.add_task(
-                    "[No Progress Bar] -  Computing toxicity scores...")
+                    "[No Progress Bar] -  Computing toxicity scores..."
+                )
             else:
                 print("Computing toxicity scores...")
-            scores = self.get_toxicity_scores(responses, show_progress_bars, self.progress_bar)
+            scores = self.get_toxicity_scores(
+                responses, show_progress_bars, self.progress_bar
+            )
 
         if show_progress_bars:
             self.progress_bar.add_task("[No Progress Bar] -  Evaluating metrics...")
@@ -242,7 +252,10 @@ class ToxicityMetrics:
             result = {
                 "metrics": {
                     metric.name: metric.evaluate(
-                        data=evaluate_dict, threshold=self.toxic_threshold, show_progress_bars=show_progress_bars, existing_progress_bar=self.progress_bar
+                        data=evaluate_dict,
+                        threshold=self.toxic_threshold,
+                        show_progress_bars=show_progress_bars,
+                        existing_progress_bar=self.progress_bar,
                     )
                     for metric in self.metrics
                 }
@@ -292,7 +305,11 @@ class ToxicityMetrics:
             )
 
     def _get_classifier_scores(
-        self, responses: List[str], classifier: str, show_progress_bars: bool = True, existing_progress_bar: Optional[Progress] = None
+        self,
+        responses: List[str],
+        classifier: str,
+        show_progress_bars: bool = True,
+        existing_progress_bar: Optional[Progress] = None,
     ) -> List[float]:
         """
         Calculate toxicity scores for a list of outputs for single toxicity classifier.
@@ -316,9 +333,14 @@ class ToxicityMetrics:
         texts_partition = self._split(responses, self.batch_size)
         scores = []
         if show_progress_bars and existing_progress_bar:
-            self.progress_bar_task = existing_progress_bar.add_task(f"    -  Computing toxicity scores with {classifier} for {len(responses)} responses...", total=math.ceil(len(responses)/self.batch_size))
+            self.progress_bar_task = existing_progress_bar.add_task(
+                f"    -  Computing toxicity scores with {classifier} for {len(responses)} responses...",
+                total=math.ceil(len(responses) / self.batch_size),
+            )
         else:
-            print(f"Computing toxicity scores with {classifier} for {len(responses)} responses...")
+            print(
+                f"Computing toxicity scores with {classifier} for {len(responses)} responses..."
+            )
         if classifier == "roberta-hate-speech-dynabench-r4-target":
             for t in texts_partition:
                 scores.extend(

@@ -87,7 +87,7 @@ class StereotypeClassifier:
             "text-classification",
             model=self._classifier_model,
             tokenizer=self._classifier_model,
-            truncation=True
+            truncation=True,
         )
 
     def get_stereotype_scores(self, responses: List[str]) -> Dict[str, Any]:
@@ -149,7 +149,7 @@ class StereotypeClassifier:
 
         return_df : bool, default=True
             Specifies whether to include a dictionary containing response-level stereotype scores in returned result.
-            
+
         show_progress_bars : bool, default=True
             If True, displays progress bars while evaluating metrics.
 
@@ -196,6 +196,14 @@ class StereotypeClassifier:
                         existing_progress_bar=self.progress_bar,
                     )
             else:
+                if show_progress_bars and self.progress_bar:
+                    self.progress_bar.add_task(
+                        "[No Progress Bar] -  Calculating Stereotype Fraction - "
+                        + category
+                        + "..."
+                    )
+                elif not existing_progress_bar:
+                    print("Calculating Stereotype Fraction - " + category + "...")
                 result["Stereotype Fraction - " + category] = (
                     Fraction().metric_function(
                         evaluation_data["stereotype_score_" + category.lower()],
