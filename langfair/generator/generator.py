@@ -342,14 +342,14 @@ class ResponseGenerator:
         if self.count == 1:
             if show_progress_bars:
                 self.progress_task = self.progress_bar.add_task(
-                    "- Generating responses...", total=len(prompts)
+                    " -  Generating responses...", total=len(prompts)
                 )
             else:
                 print("Generating responses...")
         else:
             if show_progress_bars:
                 self.progress_task = self.progress_bar.add_task(
-                    f"- Generating {self.count} responses per prompt...",
+                    f" -  Generating {self.count} responses per prompt...",
                     total=len(prompts) * self.count,
                 )
             else:

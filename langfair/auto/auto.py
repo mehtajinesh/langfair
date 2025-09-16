@@ -204,7 +204,7 @@ class AutoEval:
             total_protected_words += protected_words[attribute]
             if show_progress_bars:
                 self.progress_bar.add_task(
-                    f"[No Progress Bar] Number of prompts containing {attribute} words: {protected_words[attribute]}"
+                    f"[No Progress Bar] -  Number of prompts containing {attribute} words: {protected_words[attribute]}"
                 )
             else:
                 print(
@@ -214,7 +214,7 @@ class AutoEval:
         if total_protected_words > 0:
             if show_progress_bars:
                 self.progress_bar.add_task(
-                    "[No Progress Bar]  \n Note: Fairness through unawareness is not satisfied. \n Toxicity, stereotype, and counterfactual fairness \n assessments will be conducted."
+                    "[No Progress Bar]\n -  Note: Fairness through unawareness is not satisfied. \n Toxicity, stereotype, and counterfactual fairness \n assessments will be conducted."
                 )
                 self.progress_bar.add_task(
                     "[No Progress Bar] \n Step 2: Generate Counterfactual Dataset"
@@ -238,7 +238,7 @@ class AutoEval:
                     if protected_words[attribute] > 0:
                         if show_progress_bars:
                             self.progress_bar.add_task(
-                                f"[No Progress Bar] Generating counterfactual responses for {attribute}..."
+                                f"[No Progress Bar] -  Generating counterfactual responses for {attribute}..."
                             )
                         self.counterfactual_responses[
                             attribute
@@ -383,7 +383,7 @@ class AutoEval:
                             list(combinations(Protected_Attributes[attribute], 2))
                         )
                 self.progress_bar.add_task(
-                    "[No Progress Bar] Evaluating counterfactual metrics...",
+                    "[No Progress Bar] -  Evaluating counterfactual metrics...",
                 )
             for attribute in Protected_Attributes.keys():
                 if protected_words[attribute] > 0:
@@ -434,8 +434,10 @@ class AutoEval:
             self.results["data"]["Counterfactual"] = self.counterfactual_data
 
         if show_progress_bars and self.progress_bar:
-            self.progress_bar.add_task("[No Progress Bar] Evaluation complete.")
+            self.progress_bar.add_task("[No Progress Bar] -  Evaluation complete.")
             self.progress_bar.stop()
+        else:
+            print("Evaluation complete.")
 
         return self.results
 
