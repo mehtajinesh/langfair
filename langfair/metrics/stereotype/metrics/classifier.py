@@ -12,14 +12,23 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import time
 from typing import Any, Dict, List, Optional, Union
 
+from rich.progress import Progress
 from transformers import pipeline
 
 from langfair.metrics.utils.classifier_metrics import (
     ExpectedMaximum,
     Fraction,
     Probability,
+)
+from langfair.utils.display import (
+    ConditionalBarColumn,
+    ConditionalSpinnerColumn,
+    ConditionalTextColumn,
+    ConditionalTextPercentageColumn,
+    ConditionalTimeElapsedColumn,
 )
 
 MetricType = Union[None, list[str]]
@@ -78,7 +87,7 @@ class StereotypeClassifier:
             "text-classification",
             model=self._classifier_model,
             tokenizer=self._classifier_model,
-            truncation=True,
+            truncation=True
         )
 
     def get_stereotype_scores(self, responses: List[str]) -> Dict[str, Any]:
@@ -119,6 +128,8 @@ class StereotypeClassifier:
         prompts: Optional[List[str]] = None,
         return_data: bool = False,
         categories: List[str] = ["gender", "race"],
+        show_progress_bars: bool = True,
+        existing_progress_bar: Progress = None,
     ) -> Dict[str, Any]:
         """
         Generate stereotype scores and calculate classifier-based stereotype metrics.
@@ -138,12 +149,31 @@ class StereotypeClassifier:
 
         return_df : bool, default=True
             Specifies whether to include a dictionary containing response-level stereotype scores in returned result.
+            
+        show_progress_bars : bool, default=True
+            If True, displays progress bars while evaluating metrics.
+
+        existing_progress_bar : rich.progress.Progress, default=None
+            If provided, the progress bar will be updated with the existing progress bar.
 
         Returns
         -------
         dict
             Dictionary containing two keys: 'metrics', containing all metric values, and 'data', containing response-level stereotype scores.
         """
+        if show_progress_bars:
+            if existing_progress_bar:
+                self.progress_bar = existing_progress_bar
+            else:
+                completion_text = "[progress.percentage]{task.completed}/{task.total}"
+                self.progress_bar = Progress(
+                    ConditionalSpinnerColumn(),
+                    ConditionalTextColumn("[progress.description]{task.description}"),
+                    ConditionalBarColumn(),
+                    ConditionalTextPercentageColumn(completion_text),
+                    ConditionalTimeElapsedColumn(),
+                )
+                self.progress_bar.start()
         if categories is not None:
             self.categories = categories
 
@@ -162,6 +192,8 @@ class StereotypeClassifier:
                         data=evaluation_data,
                         threshold=self.threshold,
                         score_column="stereotype_score_" + category.lower(),
+                        show_progress_bars=show_progress_bars,
+                        existing_progress_bar=self.progress_bar,
                     )
             else:
                 result["Stereotype Fraction - " + category] = (
@@ -171,6 +203,15 @@ class StereotypeClassifier:
                     )
                 )
 
+        time.sleep(0.1)
+        if self.progress_bar and not existing_progress_bar:
+            self.progress_bar.add_task(
+                "[No Progress Bar] -  Evaluated metrics successfully!"
+            )
+            self.progress_bar.stop()
+            self.progress_bar = None
+        elif not existing_progress_bar:
+            print("Evaluated metrics successfully!")
         # If specified, return dataframe
         if return_data:
             return {"metrics": result, "data": evaluation_data}
