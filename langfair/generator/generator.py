@@ -368,7 +368,7 @@ class ResponseGenerator:
 
         if self.progress_bar and not existing_progress_bar:
             self.progress_bar.add_task(
-                "[No Progress Bar]- Responses successfully generated!"
+                "[No Progress Bar] -  Responses successfully generated!"
             )
             self.progress_bar.stop()
             self.progress_bar = None
