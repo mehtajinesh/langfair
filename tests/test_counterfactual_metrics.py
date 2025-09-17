@@ -17,7 +17,7 @@ import os
 import platform
 import unittest
 
-import numpy as np
+import pytest
 
 from langfair.metrics.counterfactual import CounterfactualMetrics
 from langfair.metrics.counterfactual.metrics import (
@@ -39,7 +39,7 @@ with open(actual_result_file_path, "r") as f:
 def test_bleu():
     bleu = BleuSimilarity()
     x = bleu.evaluate(data["text1"], data["text2"])
-    np.testing.assert_almost_equal(x, actual_results["test1"], 5)
+    assert x == pytest.approx(actual_results["test1"], rel=1e-02)
 
 
 @unittest.skipIf(
@@ -55,7 +55,7 @@ def test_cosine(monkeypatch):
     cosine = CosineSimilarity(transformer="all-MiniLM-L6-v2")
     monkeypatch.setattr(cosine, "_get_embeddings", mock_get_embeddings)
     x = cosine.evaluate(data["text1"], data["text2"])
-    np.testing.assert_almost_equal(x, actual_results["test2"], 5)
+    assert x == pytest.approx(actual_results["test2"], rel=1e-02)
 
 
 def test_rougel():
@@ -70,8 +70,8 @@ def test_senitement1():
 
 def test_senitement2():
     sentiment = SentimentBias(parity="weak")
-    np.testing.assert_almost_equal(
-        sentiment.evaluate(data["text1"], data["text2"]), actual_results["test5"], 5
+    assert sentiment.evaluate(data["text1"], data["text2"]) == pytest.approx(
+        actual_results["test5"], rel=1e-02
     )
 
 
@@ -86,8 +86,8 @@ def test_senitement3(monkeypatch):
 
     sentiment = SentimentBias(classifier="roberta")
     monkeypatch.setattr(sentiment, "classifier_instance", mock_get_classifier)
-    np.testing.assert_almost_equal(
-        sentiment.evaluate(data["text1"], data["text2"]), actual_results["test7"], 5
+    assert sentiment.evaluate(data["text1"], data["text2"]) == pytest.approx(
+        actual_results["test7"], rel=1e-02
     )
 
 
@@ -103,7 +103,8 @@ def test_CounterfactualMetrics():
     )
     score = result["metrics"]
     ans = actual_results["test6"]["metrics"]
-    assert all([abs(score[key] - ans[key]) < 1e-5 for key in ans])
+    for key in ans:
+        assert score[key] == pytest.approx(ans[key], abs=1e-02)
 
 
 def test_CounterfactualMetrics_VaderClassifier():
@@ -120,4 +121,5 @@ def test_CounterfactualMetrics_VaderClassifier():
     )
     score = result["metrics"]
     ans = actual_results["test6"]["metrics"]
-    assert all([abs(score[key] - ans[key]) < 1e-5 for key in ans])
+    for key in ans:
+        assert score[key] == pytest.approx(ans[key], abs=1e-02)

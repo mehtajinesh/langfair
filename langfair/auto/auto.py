@@ -236,36 +236,25 @@ class AutoEval:
                 self.counterfactual_response_metadata = {}
                 for attribute in protected_words.keys():
                     if protected_words[attribute] > 0:
-                        if show_progress_bars:
-                            self.progress_bar.add_task(
-                                f"[No Progress Bar] -  Generating counterfactual responses for {attribute}..."
+                        try:
+                            self.counterfactual_responses[
+                                attribute
+                            ] = await self.cf_generator_object.generate_responses(
+                                count=count, prompts=self.prompts, attribute=attribute
                             )
-                        self.counterfactual_responses[
-                            attribute
-                        ] = await self.cf_generator_object.generate_responses(
-                            count=count,
-                            prompts=self.prompts,
-                            attribute=attribute,
-                            show_progress_bars=True,
-                            existing_progress_bar=self.progress_bar,
-                        )
+                        except AssertionError as e:
+                            # Handle case where prompts don't contain the specific attribute words
+                            print(
+                                f"Warning: Could not generate counterfactual responses for {attribute}: {e}"
+                            )
+                            # Remove this attribute from protected_words to prevent KeyError later
+                            protected_words[attribute] = 0
         else:
-            if show_progress_bars:
-                self.progress_bar.add_task(
-                    "[No Progress Bar] Fairness through unawareness is satisfied. \nToxicity and stereotype assessments will be conducted."
-                )
-                self.progress_bar.add_task(
-                    "[No Progress Bar] \n(Skipping) Step 2: Generate Counterfactual Dataset"
-                )
-                self.progress_bar.add_task(
-                    "[No Progress Bar] --------------------------------------------------"
-                )
-            else:
-                print(
-                    "Fairness through unawareness is satisfied. Toxicity and stereotype assessments will be conducted."
-                )
-                print("\n(Skipping) Step 2: Generate Counterfactual Dataset")
-                print("--------------------------------------------------")
+            print(
+                "Fairness through unawareness is satisfied. Toxicity and stereotype assessments will be conducted."
+            )
+            print("\n\033[1m(Skipping) Step 2: Generate Counterfactual Dataset\033[0m")
+            print("--------------------------------------------------")
 
         # 3. Generate responses for toxicity and stereotype evaluation (if responses not provided)
         if self.responses is None:
@@ -355,8 +344,8 @@ class AutoEval:
         self.stereotype_scores = stereotype_results["data"]
         del stereotype_results
 
-        # 6. Calculate CF metrics (if FTU not satisfied)
-        if total_protected_words > 0:
+        # 6. Calculate CF metrics (if FTU not satisfied and counterfactual metrics requested)
+        if total_protected_words > 0 and "counterfactual" in self.metrics:
             if show_progress_bars:
                 self.progress_bar.add_task(
                     "[No Progress Bar] \n Step 6: Evaluate Counterfactual Metrics"
@@ -386,7 +375,10 @@ class AutoEval:
                     "[No Progress Bar] -  Evaluating counterfactual metrics...",
                 )
             for attribute in Protected_Attributes.keys():
-                if protected_words[attribute] > 0:
+                if (
+                    protected_words[attribute] > 0
+                    and attribute in self.counterfactual_responses
+                ):
                     for group1, group2 in combinations(
                         Protected_Attributes[attribute], 2
                     ):
@@ -427,6 +419,8 @@ class AutoEval:
             else:
                 print("\n (Skipping) Step 6: Evaluate Counterfactual Metrics")
                 print("--------------------------------------------------")
+            # Initialize empty counterfactual_data when metrics are skipped
+            self.counterfactual_data = {}
 
         if return_data:
             self.results["data"]["Toxicity"] = self.toxicity_data
